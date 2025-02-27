@@ -1,0 +1,1952 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+
+<script>
+    (function(){
+        if(''){
+          const hostname = window.location.hostname;
+          if (!(hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192"))) {
+            // console.log("The website is not running on localhost.");
+            // alert('此文章并不公开, 输入文章密码方可阅读');
+            var password = prompt('此文章并不公开, 输入文章密码方可阅读');
+            if (password !== ''){
+              if (password != null) // 如果用户点击了确认而且密码错误的时候, 因为当password == null的时候说明用户点了取消
+              {
+                alert('Error!');
+              }
+              if (history.length > 1)
+              {
+                history.back();
+              }
+              else
+              {
+                window.location.href = "about:blank";
+              }
+            }
+          }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="It is recommended to use Chrome/Firefox/Safari to read this blog.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="烫">
+<meta property="og:url" content="https://hulinhong.com/page/33/index.html">
+<meta property="og:site_name" content="烫">
+<meta property="og:description" content="It is recommended to use Chrome/Firefox/Safari to read this blog.">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="烫">
+<meta name="twitter:description" content="It is recommended to use Chrome/Firefox/Safari to read this blog.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"scrollpercent":true,"onmobile":true,"dimmer":true,"body_content_height":0,"display_duration":150},
+    local_search: {"enable":true,"trigger":"auto","top_n_per_article":1},
+    fancybox: false,
+    mediumzoom: true,
+    darkmode_js: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"duration":222,"transition":{"header":"slideDownIn","menu":"slideDownIn","logo":"slideDownIn","post_block_else":"slideDownIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"slideDownIn","footer":"slideDownIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+
+  <title>烫 - 烫烫烫烫烫</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+   page-home 
+ ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">烫</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">烫烫烫烫烫</p>
+      
+  </div>
+
+  <div class="menu-item sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="menu-item site-search">
+    
+  
+  <form class="site-search-form">
+    <span class="search-icon fa fa-search"></span>
+    <input type="text" id="local-search-input" class="st-search-input">
+    <i id="local-search-close">×</i>
+  </form>
+
+
+<script type="text/javascript" id="local.search.active">
+    var inputArea       = document.querySelector("#local-search-input");
+    inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+    inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script>
+
+
+
+  </div>
+  <div id="local-search-result-pc" class="local-search-result-cls"></div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+       
+    </ul>
+  
+
+  
+    
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <div id="local-search-result-mobile" class="local-search-result-cls"></div>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2017/01/22/deterministic_lockstep/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wasp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/22/deterministic_lockstep/" itemprop="url">网络物理模拟三之具有确定性的帧同步</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-22T11:13:35+00:00">
+                2017-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GS/" itemprop="url" rel="index">
+                    <span itemprop="name">GS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          <h1 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h1><p>帧同步要点如下 : </p>
+<ul>
+<li><strong>确定性</strong> : 去除随机数</li>
+<li><strong>缓冲</strong> : 因为数据包并不是均匀地到达, 所以要做一个缓冲区, 然后再均匀地取出</li>
+<li><strong>不用TCP</strong> : 因为我们的数据对时间非常敏感, 不接受到第n个输入包就无法继续模拟第n帧, 而TCP的确认机制以及重传机制当我们丢包时, 我们只能暂停等待它重发造成卡顿</li>
+<li><strong>用UDP</strong> :<ul>
+<li><strong>发送冗余数据</strong> : 因为帧同步只发送玩家input数据, 而input包是很小的, 所以发冗余也不会很大</li>
+<li><strong>增量包</strong> : 加一个bit来标志跟上一个包的比较结果, 如果这个包跟上个包一致则只发送一个1, 如果不一致则发送0和这个包的完整数据</li>
+</ul>
+</li>
+<li><strong>帧同步的缺点</strong> : <ul>
+<li><strong>等的人太多</strong> : 因为你要收到所有玩家对应帧的输入才能对这一帧进行模拟.在实践中，这意味着每个人必须等待最滞后的那个玩家.人越多等得越久, 所以帧同步不适合mmo.</li>
+<li><strong>比较耗性能</strong> : 因为帧同步技术的话, 在客户端中，每个对象都要执行所有的物理之类的运算; 而状态同步可以只同步当前玩家周围对象的状态, 不需要同步所有对象</li>
+</ul>
+</li>
+</ul>
+<p><strong>. . .</strong>
+          <!--noindex-->
+          
+          <!--/noindex-->
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2017/01/21/网络物理模拟二之网络物理部分的视频演示/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wasp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/21/网络物理模拟二之网络物理部分的视频演示/" itemprop="url">网络物理模拟二之网络物理部分的视频演示</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-21T11:13:35+00:00">
+                2017-01-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GS/" itemprop="url" rel="index">
+                    <span itemprop="name">GS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://gafferongames.com/post/introduction_to_networked_physics/" target="_blank" rel="noopener">原文出处</a></p>
+<h1 id="introduction-to-networked-physics">Introduction to Networked Physics</h1>
+
+<hr>
+<p></p><h2 id="introduction">Introduction</h2><p></p>
+<p>Hi, I&rsquo;m <a href="https://gafferongames.com/about" target="_blank" rel="noopener">Glenn Fiedler</a> and welcome to the first article in <strong><a href="https://gafferongames.com/categories/networked-physics/" target="_blank" rel="noopener">Networked Physics</a></strong>.</p><br><p>In this article series we&rsquo;re going to network a physics simulation three different ways: deterministic lockstep, snapshot interpolation and state synchronization.</p><br><p>But before we get to this, let&rsquo;s spend some time exploring the physics simulation we’re going to network in this article series:</p><br><video preload="auto" loop="loop" width="100%" controls="controls"><br><source src="/img/intro_network_physics_1.mp4" type="video/mp4"><br>Your browser does not support the video tag.<br></video><br><p>Here I’ve setup a simple simulation of a cube in the open source physics engine <a href="http://www.ode.org" target="_blank" rel="noopener">ODE</a>. The player moves around by applying forces at its center of mass. The physics simulation takes this linear motion and calculates friction as the cube collides with the ground, inducing a rolling and tumbling motion.</p><br><p>This is why I chose a cube instead a sphere. I <em>want</em> this complex, unpredictable motion because rigid bodies in general move in interesting ways according to their shape.</p><br><h2 id="an-interactive-world">An Interactive World</h2><br><p>Networked physics get interesting when the player interacts with other physically simulated objects, <em>especially</em> when those objects push back and affect the motion of the player.</p><br><p>So let&rsquo;s add some more cubes to the simulation:</p><br><video preload="auto" loop="loop" width="100%" controls="controls"><br><source src="/img/intro_network_physics_2.mp4" type="video/mp4"><br>Your browser does not support the video tag.<br></video><br><p>When the player interacts with a cube it turns red. When that cube comes to rest it turns back to grey (non-interacting).</p><br><p>While it’s cool to roll around and interact with other cubes, what I really wanted was a way to push <em>lots</em> of cubes around. What I came up with is this:</p><br><video preload="auto" loop="loop" width="100%" controls="controls"><br><source src="/img/intro_network_physics_3.mp4" type="video/mp4"><br>Your browser does not support the video tag.<br></video><br><p>As you can see, interactions aren’t just direct. Red cubes pushed around by the player turn other cubes they touch red as well. This way, interactions fan out to cover all affected objects.</p><br><h2 id="a-complicated-case">A Complicated Case</h2><br><p>I also wanted a very complex coupled motion between the player and non-player cubes such they become one system: a group of rigid bodies joined together by constraints.</p><br><p>To implement this I thought it would be cool if the player could roll around and create a ball of cubes, like in one of my favorite games <a href="https://en.wikipedia.org/wiki/Katamari_Damacy" target="_blank" rel="noopener">Katamari Damacy</a>.</p><br><video preload="auto" loop="loop" width="100%" controls="controls"><br><source src="/img/intro_network_physics_4.mp4" type="video/mp4"><br>Your browser does not support the video tag.<br></video><br><p>Cubes within a certain distance of the player have a force applied towards the center of the cube. These cubes remain physically simulated while in the katamari ball, they are not just “stuck” to the player like in the original game.</p><br><p>This is a very difficult situation for networked physics!</p>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2017/01/20/网络物理模拟一之网络物理部分的简介/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wasp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/20/网络物理模拟一之网络物理部分的简介/" itemprop="url">网络物理模拟一之网络物理部分的简介</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-20T11:13:35+00:00">
+                2017-01-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GS/" itemprop="url" rel="index">
+                    <span itemprop="name">GS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <div class="WordSection1"><p class="MsoNormal" align="left" style="line-height: 21pt;"><span style="font-family:微软雅黑;"><span style="font-size: 12pt; color: rgb(34, 34, 34);">译者：陈敬凤（<span>nunu</span>）<span>   </span></span><span style="font-size: 12pt; color: rgb(34, 34, 34);"> </span><span style="font-size: 12pt; color: rgb(34, 34, 34);">审校：崔国军（飞扬<span>971</span>）</span></span></p><p class="MsoNormal" align="left" style="line-height: 21pt;"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;"><br></span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;">大家好，我是格伦·菲德勒，是一位来自洛杉矶的职业游戏开发者。</span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;">我作为一名职业游戏开发者已经有<span>15</span>年了。而在这其中的十年时光里，我都是专门做网络编程的。在这期间我大部分的业余时间一直致力于研究网络物理模拟方面的问题。在这个系列文章中我的目标是分享我已经知道的一切有关网络物理模拟方面的知识。</span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;">写这些文章是一个工作量很大的工作，而且我完全是在我的业余时间里面来做这些事情的。如果有了你们的支持，我可以找时间来继续写这个系列的文章。如果可以的话，请通过 <span><a rel="noopener" href="https://www.patreon.com/gafferongames" target="_blank">patreon</a> </span>支持我的工作。</span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;"><br></span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;"><br></span></span></p><p class="MsoNormal" align="left"><span style="font-family:微软雅黑;"><span style="font-size: 12pt; color: rgb(34, 34, 34);">网络物理部分的入门是相当困难的</span><span style="font-size: 12pt; color: rgb(34, 34, 34);">。</span><span style="font-size: 12pt; color: rgb(34, 34, 34);">你可能想知道你的物理模拟是否需要确定性以便可以进行网络传输和通信？你应该通过网络来发送物体的物理状态么？或者你应该通过网络来发送一些诸如碰撞时间或者物体相互作用力这些东西么？你到底是应该通过<span>UDP</span>还是<span>TCP</span>来传送数据？你应该使用客户端<span>/</span>服务器通信模型还是点对点的通信模型？ 你是否需要一个专门的服务器？如何隐藏播放动作的时候的延迟？如何不让玩家作弊？</span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;"><br></span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;"><br></span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;">人们经常问我这些问题。大多数情况下这些问题的正确答案依赖于他们所选用的网络模型。你可能甚至不知道你正在使用或计划使用的网络模型是什么，但事实是你必须选择一个网络模型并且你选择的这个网络模型会使某些事情变得容易，并使得另外一些事情变得困难。</span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;">在这个系列文章中我们将使用三种不同的方式来构建一个网络物理模拟的例子，并通过这些例子来对不同的网络模型展开一个讨论。我把这些基本技术称为<span>“</span>同步策略<span>”</span>。他们是：《确定性的帧同步》、《快照插值》和《状态同步》。</span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;"><br></span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;"><br></span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;">带宽是网络物理部分的另外一个重要方面。我该怎么做才能对所有这些对象进行同步状态？因此，我们打算花一整篇文章来进行介绍一个带宽优化的案例，向你展示如何将快照插值技术的带宽从每秒<span>18m</span>减少到每秒<span>256k</span>。</span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;">在选择了合适的同步策略以及合理的优化完带宽以后，我们现在准备讨论客户机<span>/</span>服务器与点对点对等网络之间的优劣性了。除了讨论利弊以外，我还将分享在艰苦的发布使用客户机<span>/</span>服务器网络模型的游戏和点对点对等网络模型的游戏的过程中学到的那些经验和教训。这篇文章会有你在其他地方找不到的非常具体、务实的信息。</span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;"><br></span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;">最后，我们讨论构建在基本同步策略上的不同网络模型，这些网络模型的细节各有不同。在这里。你会发现你的网络物理模拟可以有许多不同的选择：《确定性帧同步网络模型》、《分布式权威网络模型》和《带有客户端预测的服务器仲裁网络模型》。</span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;">所以系上安全带准备出发了。我们还有一大堆材料需要学习！</span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;"><br></span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;">接下来的这篇文章是：《物理模拟》</span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;"><br></span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;">为什么格伦·菲德勒在<span>Patreon</span>上寻求自助？</span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;">嘿，大家好，我是格伦·菲德勒，网站<span>gafferongames.com</span>的作者。在过去的<span>10</span>年，我给大家分享了许多游戏开发方面的文章：《如何解决你的时间戳》、《整合基础》、《<span>UDP</span>与<span>TCP</span>》、《每个程序员都需要了解游戏开发网络方面的知识》以及其他一些文章。我还分享了《物理编程技巧》、《网络游戏编程的基础知识》和我的个人项目虚拟围棋。我想继续新的系列文章《网络物理模拟》以及《构建一个游戏网络协议》，但是我需要你的帮助！托管代码和文章需要费用，写这些文章需要花费大量的时间去研究和写作。如果你喜欢<span>gafferongames.com</span>上面的文章，请向我展现出你对我的支持并鼓励我写更多的文章并开放更多的源代码！</span></span></p><p class="MsoNormal" align="left" style="line-height: 18pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;"><br></span></span></p><p class="MsoNormal" align="left" style="line-height: 18pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;">【版权声明】</span></span></p><p class="MsoNormal"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;">原文作者未做权利声明，视为共享知识产权进入公共领域，自动获得授权。</span></span></p><p class="MsoNormal"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;">如果你觉得这篇文章有价值，请在 <span><a rel="noopener" href="https://www.patreon.com/gafferongames" target="_blank">patreon </a></span>上支持原作者。</span></span></p><p class="MsoNormal" align="left"><span style="font-size: 12pt; color: rgb(34, 34, 34);"><span style="font-family:微软雅黑;"> </span></span></p><p class="MsoNormal"><span><span style="font-family:微软雅黑;"> </span></span></p></div>                    <br>                
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2017/01/12/5分钟上手boost.asio/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wasp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/12/5分钟上手boost.asio/" itemprop="url">5分钟上手boost.asio</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-12T23:26:16+00:00">
+                2017-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NP/" itemprop="url" rel="index">
+                    <span itemprop="name">NP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          <h1 id="Boost-Asio入门"><a href="#Boost-Asio入门" class="headerlink" title="Boost.Asio入门"></a>Boost.Asio入门</h1><p>首先，让我们先来了解一下什么是Boost.Asio？怎么编译它？</p>
+<p>linux下直接 : sudo apt-get install libboost-all-dev</p>
+<h1 id="什么是Boost-Asio"><a href="#什么是Boost-Asio" class="headerlink" title="什么是Boost.Asio"></a>什么是Boost.Asio</h1><p>简单来说，Boost.Asio是一个跨平台的、主要用于网络和其他一些底层输入/输出编程的C++库。</p>
+<p><strong>. . .</strong>
+          <!--noindex-->
+          
+          <!--/noindex-->
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2017/01/10/分布式具体实现重要组件之RPC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wasp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/10/分布式具体实现重要组件之RPC/" itemprop="url">分布式具体实现重要组件之RPC</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-10T13:18:12+00:00">
+                2017-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NP/" itemprop="url" rel="index">
+                    <span itemprop="name">NP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+
+      
+      
+
+      
+        
+          
+            <h1 id="RPC-是什么？"><a href="#RPC-是什么？" class="headerlink" title="RPC 是什么？"></a>RPC 是什么？</h1><p>RPC 的全称是 Remote Procedure Call 是一种进程间通信方式。它允许程序调用另一个地址空间（通常是共享网络的另一台机器上）的过程或函数，而不用程序员显式编码这个远程调用的细节。即程序员无论是调用本地的还是远程的，本质上编写的调用代码基本相同。 像腾讯的<a href="https://github.com/Tencent/phxrpc" target="_blank" rel="noopener">phxrpc框架</a>是使用Protobuf作为IDL用于描述RPC接口以及通信数据结构</p>
+<h1 id="c-RPC的实现"><a href="#c-RPC的实现" class="headerlink" title="c++ RPC的实现"></a>c++ RPC的实现</h1><ul>
+<li><p>1、一套完善的序列化框架；在不同的进程间传输数据，序列化是第一步，如何可靠且方便地将对象转化为二进制（或者其他格式），在对端则是如何正确且安全地将其从二进制恢复为对象。</p>
+</li>
+<li><p>2、完善的底层通信协议；其需要提供合适的语义抽象：服务端支持怎样的并发，是单客户单访问，还是多访问；而客户端的并发模型由服务端决定。当然，还需要健壮且足够的接口抽象，毕竟分布式环境，“一切皆有可能”，需要应对各种问题。</p>
+</li>
+<li><p>3、一个可用的反射系统。是的，需要在C++环境下建立一个反射系统。这一步是最为关键的，其由C++11支持。因为，我们需要注册一个类的各种信息，以供RPC调用。</p>
+</li>
+</ul>
+
+          
+        
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/32/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><a class="page-number" href="/page/27/">27</a><a class="page-number" href="/page/28/">28</a><a class="page-number" href="/page/29/">29</a><a class="page-number" href="/page/30/">30</a><a class="page-number" href="/page/31/">31</a><a class="page-number" href="/page/32/">32</a><span class="page-number current">33</span><a class="page-number" href="/page/34/">34</a><a class="page-number" href="/page/35/">35</a><a class="page-number" href="/page/36/">36</a><a class="page-number" href="/page/37/">37</a><a class="page-number" href="/page/38/">38</a><a class="page-number" href="/page/39/">39</a><a class="page-number" href="/page/40/">40</a><a class="page-number" href="/page/41/">41</a><a class="page-number" href="/page/42/">42</a><a class="page-number" href="/page/43/">43</a><span class="space">&hellip;</span><a class="page-number" href="/page/56/">56</a><a class="extend next" rel="next" href="/page/34/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  
+
+  <aside id="sidebar" class="sidebar">
+
+    
+      
+        <div id="sidebar-dimmer"></div>
+      
+    
+
+    <div class="sidebar-inner">
+    
+      <div class="sidebar-toggle-inside motion-element">
+        <div class="sidebar-toggle-line-wrap">
+          <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+        </div>
+      </div>
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <a href="/" class="site-author-image" rel="start" style="border:none">
+            <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Wasp">
+          </a>
+          <p class="site-author-name" itemprop="name">Wasp</p>
+           
+              <p class="site-description motion-element" itemprop="description">It is recommended to use Chrome/Firefox/Safari to read this blog.</p>
+          
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">278</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">102</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+          <div class="site-state-item site-state-about">
+            <a href="/about/">
+              <span class="site-state-item-about fa fa-fw fa-user"></span>
+              <span class="site-state-item-name">about</span>
+            </a>
+          </div>
+          
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+          
+          <!-- 网易云音乐 -->
+            <!-- <div class="netease-cloud-music"> -->
+              <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=110 src="//music.163.com/outchain/player?type=0&id=992743594&auto=0&height=90"></iframe> -->
+            <!-- </div> -->
+          <!-- 网易云音乐 -->
+
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              friendship links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://119.23.17.57" title="ksun的博客" target="_blank">ksun的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://mp.weixin.qq.com/mp/homepage?__biz=MzU3MTUyNzg0NQ==&hid=1&sn=7a3ae61b7af714f75d68e7ae826a2d2c&scene=18#wechat_redirect" title="你有图么我有故事" target="_blank">你有图么我有故事</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wasp</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <!--
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      
+        <span id="scrollpercent"><span>0</span>%</span>
+      
+    </div>
+    -->
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/mediumzoom/medium-zoom.js?v=1.1.0"></script>
+
+
+
+
+  
+
+
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+  
+  
+
+  
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+
+    var is_load_xml_finished = 0;
+    var keywords = [];
+    var curDate = new Date();
+    var xml_resp_cache = null;
+    var temp_keyword = "";
+
+    var searchFunc = function (path, search_id, content_id) {
+      // 0x00. environment initialization
+      'use strict';
+
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+
+      /* loading css1 : Dot Css Loader*/
+      var DotLoader = "<div class='loader'>Loading...</div>";
+
+      /* loading css2 : Pure Css Loader - Square */
+      var SquareLoader = 
+        "<div class='loader'>" +
+          "<div class='square' ></div>" +
+          "<div class='square'></div>" +
+          "<div class='square last'></div>" +
+          "<div class='square clear'></div>" +
+          "<div class='square'></div>" +
+          "<div class='square last'></div>" +
+          "<div class='square clear'></div>" +
+          "<div class='square '></div>" +
+          "<div class='square last'></div>" +
+        "</div>";
+
+      var ProgressBar = 
+          "<div class='progress-bar'>" +
+            "<div class='progress-bar-charge'></div>" +
+          "</div>";
+
+      var str = "";
+
+      // 是否为第一个字母被键入的标志位
+      var first_char_flag = 0;
+
+      // 因为在移动设备上, 点击搜索之后会 scroll 到页面顶部, 所以需要记录之前的页面x, y坐标值, 以便于搜索完点击 close 按钮之后 scroll 回原来的页面坐标值.
+      var last_page_x = 0;
+      var last_page_y = 0;
+
+      var local_search_tips = 
+            "<span class='local-search-empty'>" + "第一次搜索可能较慢, 先思考一个经典算法问题, 跳台阶:" + "</span>" +
+            "<span class='local-search-empty'>" + "一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个6级的台阶总共有多少种跳法?n级呢?" + "</span>";
+
+      function CloseLocalSearch()
+      {
+          setTimeout(function() {  // 这个setTimeout的目的是为了解决当使用中文输入法输入英文的时候敲下enter键的那一瞬间发生从有文字到没文字又到有文字, 而下方window.scrollTo这个还没执行到, 会导致页面scroll乱滚; 加了这个timeout之后就可以检测是否属于这种情况
+              if (temp_keyword.length > 0) {
+                  return;
+              }
+              first_char_flag = 0;
+              $('#local-search-input').val('');
+              $('#local-search-close').hide();
+              // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownOut', 200);
+              $('#' + content_id).attr("headroom_special_attr","true"); 
+              if (isMobile())
+              {
+                  // $('body').scrollTop(last_page_y);  // scrollTop 有兼容性问题
+                  // $('#' + content_id).hide();
+                  $('#' + content_id).velocity('stop').velocity( 'transition.slideUpOut', 600);
+                  setTimeout(function() {
+                      // scrollTo(last_page_x, last_page_y);
+                      window.scrollTo({
+                          top: last_page_y,
+                          left: last_page_x,
+                          behavior: "smooth",
+                          duration: 300 // 滚动动画持续x毫秒
+                      });
+                  }, 150);
+              }
+              else
+              {
+                  $('#' + content_id).velocity('stop').velocity( 'transition.bounceOut', 800);
+                  // $('#' + content_id).velocity('stop').velocity( 'transition.slideUpBigOut', 1000);
+                  // $('#' + content_id).velocity('stop').velocity( 'transition.bounceUpOut', 1000);
+                  // $('#' + content_id).velocity('stop').velocity( 'transition.expandOut', 600);
+                  // $('#' + content_id).velocity('stop').velocity( 'transition.whirlOut', 600);
+                  // $('#' + content_id).velocity('stop').velocity( 'transition.shrinkOut', 600);
+                  // $('#' + content_id).velocity('stop').velocity( 'transition.swoopOut', 1000);
+                  // $('#' + content_id).velocity('stop').velocity( 'transition.flipBounceXOut', 600);
+                  // $('#' + content_id).velocity('stop').velocity( 'transition.fadeOut', 600);
+              }
+          }, 150);
+      }
+
+      async function handleSearch()
+      {
+        if (keywords.length <= 0) {
+            return;
+        }
+        $resultContent.innerHTML = "";
+        $('#local-search-close').show();
+
+        // 0x04. perform local searching
+        if (is_load_xml_finished == 0)
+        {
+            $resultContent.innerHTML = 
+                "<ul class='local-search-empty-ul'>" + 
+                local_search_tips +
+                ProgressBar;
+        }
+        else
+        {
+          // Retrieve the object from local storage
+          var xml_resp = await retrieve_search_xml()
+
+          xml_resp.forEach(function (data) {
+            var isMatch = true;
+            var content_index = [];
+            if (!data.title || data.title.trim() === '') {
+              data.title = "Untitled";
+            }
+            var is_encrypted = data.encrypted.trim() == '1'
+            var is_sensitive = CONFIG.local_search.sensitive_word && data_content.indexOf(CONFIG.local_search.sensitive_word) >= 0
+            var orig_data_title = data.title.trim();
+            var data_title = orig_data_title.toLowerCase();
+            var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+            var data_content = orig_data_content.toLowerCase();
+            var data_url = decodeURIComponent(data.url);
+            var index_title = -1;
+            var index_content = -1;
+            var first_occur = -1;
+            // only match artiles with not empty contents
+            if (data_content !== '') {
+              keywords.forEach(function (keyword, i) {
+                index_title = data_title.indexOf(keyword);
+                // index_content = (is_sensitive || is_encrypted) ? -1 : data_content.indexOf(keyword);  // 不能搜加密文章,
+                index_content = data_content.indexOf(keyword); //  这样可以搜加密了的文章, 但是搜索结果框不显示正文只显示标题
+
+                if (index_title < 0 && index_content < 0) {
+                  isMatch = false;
+                } else {
+                  if (index_content < 0) {
+                    index_content = 0;
+                  }
+                  if (i == 0) {
+                    first_occur = index_content;
+                  }
+                  // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                }
+              });
+            } else {
+              isMatch = false;
+            }
+            // 0x05. show search results
+            if (isMatch) {
+              var content = orig_data_content;
+              if (first_occur >= 0) {
+                var match_content = "";
+                
+                const hostname = window.location.hostname;
+                if ((!is_sensitive && !is_encrypted) || (hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192")))
+                {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+                  if (start < 0) {
+                    start = 0;
+                  }
+                  if (start == 0) {
+                    end = 100;
+                  }
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+                  match_content = content.substr(start, end);
+                }
+                // highlight all keywords
+                var regS = "";
+                if (match_content != "")
+                {
+                  keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                  });
+                }
+                else
+                {
+                  keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                  });
+                }
+                str += "<li><a href='" + data_url + "' class='search-result-title' target='_blank'>" + orig_data_title + "</a>";
+                str += "<p class=\"search-result\">" + match_content + "...</p>"
+              }
+              str += "</li>";
+            }
+          });
+
+          str += "</ul>";
+          if (str.indexOf('<li>') === -1) {
+            return $resultContent.innerHTML = 
+              "<ul class='local-search-empty-ul'><span class='local-search-empty'>找不到, 换个搜索关键字试一哈.<span></ul>";
+          }
+          $resultContent.innerHTML = str;
+        }
+      }
+
+      $input.addEventListener('input', function () {
+        // 0x03. parse query to keywords list
+        str = '<ul class=\"search-result-list\">';
+        temp_keyword = this.value.trim();
+        if (temp_keyword.length <= 0) {
+            CloseLocalSearch();
+            return;
+        }
+
+        keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
+        handleSearch();
+
+        // 当用户键入第一个字母的时候的动画处理逻辑 : 
+        // 当 first_char_flag 为 0 的时候, 
+        // 要播放一个动画
+        if (first_char_flag == 0)
+        {
+            // $('body').scrollTop(0);
+          if (isMobile())
+          {
+              last_page_x = window.scrollX;
+              last_page_y = window.scrollY;
+              scrollTo(0,0);
+            // $('body').scrollTop(0);
+
+          }
+          first_char_flag = 1;
+          $('#' + content_id).removeAttr("headroom_special_attr");
+
+          if (isMobile()) {
+            $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', 600);
+          } else {
+                $('#' + content_id).velocity('stop').velocity('transition.bounceIn', 800);
+              //   $('.local-search-result-cls ul li').velocity('stop').velocity('transition.bounceUpIn', 1200);
+          }
+          $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownBigIn', 1000);
+        }
+      });
+
+      // 如果输入框有文字, 等待下载 xml完毕之后再弹出结果
+      // var local_search_xml_data = localStorage.getItem('local_search_xml_data');
+      // if (!local_search_xml_data) {
+      //   $.ajax({
+      //     // 0x01. load xml file
+      //     url: path,
+      //     dataType: "xml",
+      //     success: function (xmlResponse) {
+      //       store_search_xml(xmlResponse);
+
+      //       // setTimeout(function(){
+      //       //   is_load_xml_finished = 1;
+
+      //       //   handleSearch();
+      //       //   $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownIn', 800);
+      //       // }, 2000);
+            
+      //       // is_load_xml_finished = 1;
+
+      //       handleSearch();
+      //       $('.local-search-result-cls ul li').velocity('stop').velocity('transition.swoopIn', 1200);
+      //     }
+      //   });
+      // }
+
+      $(document).on('click', '#local-search-close', function() {
+          temp_keyword = "";
+          CloseLocalSearch();
+      });
+
+      // 你的代码在 document 上监听 click 事件，并检查点击的目标是否在 content_id 指定的元素内部。如果点击的目标不在该元素内，则执行 CloseLocalSearch()。
+      $(document).click(function(event) {
+          if (isMobile()) {
+              return;
+          }
+          if (!$(event.target).closest('#' + content_id).length) {
+              temp_keyword = "";
+              CloseLocalSearch();
+          }
+      });
+
+      $(document).keyup(function(event){
+        switch(event.keyCode) {
+          case 27:
+            // alert("ESC");
+            temp_keyword = "";
+            CloseLocalSearch();
+        }
+      });
+
+      // $(document).on('blur', '#local-search-input', function(e) {
+      //   // console.log(document.activeElement.getAttribute('class'));
+        
+      //   if (isMobile() == false)
+      //   {
+      //        temp_keyword = ""
+      //     CloseLocalSearch();
+      //   }
+      // });
+    }
+
+    function isMobile() {
+      // console.log(document.body.clientWidth);
+      return document.body.clientWidth < 768
+    }
+
+    {/* function store_search_xml(xmlResponse) {
+        var entries = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // Put the object into storage
+        localStorage.setItem('local_search_xml_data', JSON.stringify(entries));
+        localStorage.setItem('last_store_local_search_date', curDate.getDate());
+        is_load_xml_finished = 1;
+        console.log("[local search] - store search.xml finished.");
+    } */}
+
+    function ajax_store_search_xml() {
+        console.log("[local search] - ajax downloading search.xml ...");
+        $.ajax({
+            url: "/search.xml",
+            dataType: "xml",
+            success: function (xmlResponse) {
+                setLocalSearchXMLData(xmlResponse);
+                // 如果输入框有文字, 等待下载 xml完毕之后再弹出结果
+                if (temp_keyword.length > 0) {
+                    handleSearch();
+                    $('.local-search-result-cls ul li').velocity('stop').velocity('transition.swoopIn', 1200);
+                }
+            }
+        });
+    }
+
+    async function retrieve_search_xml() {
+        // // Retrieve the object from local storage
+        // var retrievedObject = localStorage.getItem('local_search_xml_data');
+        // var xml_resp = JSON.parse(retrievedObject)
+        // return xml_resp
+
+        if (xml_resp_cache) {
+          return xml_resp_cache;
+        }
+        // Retrieve the object from indexedDB
+        xml_resp_cache = await getLocalSearchXMLData();
+        return xml_resp_cache;
+    }
+
+    var getSearchFile = function(){
+        var path = "/search.xml";
+        var local_search_result_name = isMobile() ? "local-search-result-mobile" : "local-search-result-pc";
+        searchFunc(path, 'local-search-input', local_search_result_name);
+    }
+
+
+    let db; // 全局数据库变量
+
+    function openDatabase() {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open("myDatabase", 1); // 设置为版本号 1, 用indexedDB替代localStorage, 因为indexedDB可以存储大量数据（几百 MB 到几 GB）, 而localStorage只能5MB左右, 
+            request.onupgradeneeded = function(event) {
+                db = event.target.result;
+                if (!db.objectStoreNames.contains("searchData")) {
+                    const objectStore = db.createObjectStore("searchData", { keyPath: "id" });
+                    // 可以创建索引以便于查询
+                    objectStore.createIndex("xmlDataIndex", "xml_data", { unique: false });
+                }
+            };
+            request.onsuccess = function(event) {
+                db = event.target.result;
+                console.log("[local search] - Database opened successfully.");
+                resolve(db);
+            };
+            request.onerror = function(event) {
+                console.error("[local search] - Database open error:", event.target.error);
+                reject(event.target.error);
+            };
+        });
+    }
+
+    async function setLocalSearchXMLData(xmlResponse) {
+        if (!db) {
+            await openDatabase();  // 确保数据库已打开
+        }
+        var transaction = db.transaction(["searchData"], "readwrite");
+        var objectStore = transaction.objectStore("searchData");
+
+        var xml_data = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // 存储数据，主键为 "id"，这里我们将 "id" 设为 "local_search_xml_data"
+        var data = { id: "local_search_xml_data", xml_data: xml_data };
+
+        var request = objectStore.put(data);  // 使用 put 可以插入或者更新数据
+        request.onsuccess = function() {
+            console.log("[local search] - Data successfully stored in indexedDB.");
+            localStorage.setItem('last_store_local_search_date', curDate.getDate());
+            is_load_xml_finished = 1;
+        };
+        request.onerror = function(event) {
+            console.log("[local search] - Error storing data: ", event.target.error);
+        };
+    }
+
+    // 封装 IndexedDB 操作为 Promise
+    function getLocalSearchXMLData() {
+        return new Promise((resolve, reject) => {
+            if (!db) {
+                reject("[local search] - Database is not initialized.");
+                return;
+            }
+            var transaction = db.transaction(["searchData"], "readonly");
+            var objectStore = transaction.objectStore("searchData");
+            var request = objectStore.get("local_search_xml_data");  // 使用 id 获取数据
+            request.onsuccess = function(event) {
+                if (request.result) {
+                    // 数据存在，成功处理
+                    resolve(request.result.xml_data);  // 解析成功并返回结果
+                } else {
+                    // 数据未找到，返回失败
+                    reject("Data not found");  // 抛出错误
+                }
+            };
+            request.onerror = function(event) {
+                // 错误处理
+                console.log("[local search] - Error retrieving data: ", event.target.error);
+                reject(event.target.error);  // 抛出错误
+            };
+        });
+    }
+
+    // 使用 async/await 来调用这个函数
+    async function loadSearchData() {
+        try {
+            if (!db) {
+                await openDatabase();  // 确保数据库已打开
+            }
+            await getLocalSearchXMLData();  // 等待结果
+            is_load_xml_finished = 1;
+            console.log("[local search] - load search.xml finished.");
+            // console.log("Retrieved data: ", result);
+        } catch (error) {
+            // console.error("Error: ", error);
+            console.log("[local search] - load search.xml not found.");
+            ajax_store_search_xml();
+        }
+    }
+
+    // var local_search_xml_data = localStorage.getItem('local_search_xml_data');
+    // if (local_search_xml_data) {
+    //     is_load_xml_finished = 1;
+    //     console.log("[local search] - load search.xml finished.");
+    // }
+    var last_store_local_search_date = localStorage.getItem('last_store_local_search_date');
+    // 只有在 localStorage 没有 search.xml数据或者 距离上次使用local search已经超过一天了才去取search.xml
+    // 节省流量
+    if (last_store_local_search_date != curDate.getDate()) {
+        // download search.xml
+        ajax_store_search_xml();
+    } else {
+        // 调用异步函数
+        loadSearchData();
+    }
+    
+
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/lib/wobble_window/wobblewindow.js"> </script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+<script type="text/javascript" src="/js/src/headroom.js"></script> 
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
