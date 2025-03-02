@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+
+<script>
+    (function(){
+        if(''){
+          const hostname = window.location.hostname;
+          if (!(hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192"))) {
+            // console.log("The website is not running on localhost.");
+            // alert('此文章并不公开, 输入文章密码方可阅读');
+            var password = prompt('此文章并不公开, 输入文章密码方可阅读');
+            if (password !== ''){
+              if (password != null) // 如果用户点击了确认而且密码错误的时候, 因为当password == null的时候说明用户点了取消
+              {
+                alert('Error!');
+              }
+              if (history.length > 1)
+              {
+                history.back();
+              }
+              else
+              {
+                window.location.href = "about:blank";
+              }
+            }
+          }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="GabrielGambetta,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="原文出处 Fast-Paced Multiplayer (Part I): Client-Server Game Architecture   Introduction This is the first in a series of articles exploring the techniques and algorithms that make fast-paced multiplayer">
+<meta name="keywords" content="GabrielGambetta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多人快节奏游戏一之C&#x2F;S游戏架构">
+<meta property="og:url" content="https://hulinhong.com/2016/07/16/多人快节奏游戏一之CS游戏架构/index.html">
+<meta property="og:site_name" content="烫">
+<meta property="og:description" content="原文出处 Fast-Paced Multiplayer (Part I): Client-Server Game Architecture   Introduction This is the first in a series of articles exploring the techniques and algorithms that make fast-paced multiplayer">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://hulinhong.com/img/fpm1-01.png">
+<meta property="og:updated_time" content="2025-03-02T14:31:49.051Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="多人快节奏游戏一之C&#x2F;S游戏架构">
+<meta name="twitter:description" content="原文出处 Fast-Paced Multiplayer (Part I): Client-Server Game Architecture   Introduction This is the first in a series of articles exploring the techniques and algorithms that make fast-paced multiplayer">
+<meta name="twitter:image" content="https://hulinhong.com/img/fpm1-01.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"scrollpercent":true,"onmobile":true,"dimmer":true,"body_content_height":0,"display_duration":150},
+    local_search: {"enable":true,"trigger":"auto","top_n_per_article":1},
+    fancybox: false,
+    mediumzoom: true,
+    darkmode_js: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"duration":222,"transition":{"header":"slideDownIn","menu":"slideDownIn","logo":"slideDownIn","post_block_else":"slideDownIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"slideDownIn","footer":"slideDownIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+
+  <title>多人快节奏游戏一之C/S游戏架构 | 烫</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">烫</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">烫烫烫烫烫</p>
+      
+  </div>
+
+  <div class="menu-item sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="menu-item site-search">
+    
+  
+  <div class="site-search-div">
+    <button class="search-icon fa fa-search" id="search-button"></button>
+    <input type="text" id="local-search-input" class="st-search-input">
+    <i id="local-search-close">×</i>
+  </div>
+
+
+<script type="text/javascript" id="local.search.active">
+    {/* var inputArea       = document.querySelector("#local-search-input");
+    inputArea.onclick   = function(){ getSearchFile(); this.focus(); }
+    inputArea.onkeydown = function(){ if(event.keyCode == 13) return false } */}
+</script>
+
+
+
+  </div>
+  <div id="local-search-result-pc" class="local-search-result-cls"></div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+       
+    </ul>
+  
+
+  
+    
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <div id="local-search-result-mobile" class="local-search-result-cls"></div>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/07/16/多人快节奏游戏一之CS游戏架构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wasp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">多人快节奏游戏一之C/S游戏架构</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-16T22:20:34+00:00">
+                2016-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GS/" itemprop="url" rel="index">
+                    <span itemprop="name">GS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <div class="post-tags">
+              
+                <a href="/tags/GabrielGambetta/" rel="tag"><i class="fa fa-tag"></i> GabrielGambetta</a>
+              
+            </div>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/11/游戏服务端常用架构三/" rel="next" title="游戏服务端常用架构三">
+                <i class="fa fa-chevron-left"></i> 
+                <p class="post-nav-pre-next-title">
+                  游戏服务端常用架构三
+                </p> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/17/多人快节奏游戏二之客户端预测与服务器修正/" rel="prev" title="多人快节奏游戏二之客户端预测与服务器修正">
+              <p class="post-nav-pre-next-title">
+                  多人快节奏游戏二之客户端预测与服务器修正
+              </p> 
+              <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+
+      
+      
+
+      
+        <p><a href="http://www.gabrielgambetta.com/client-server-game-architecture.html" target="_blank" rel="noopener">原文出处</a></p>
+<h1 class="title">Fast-Paced Multiplayer (Part I): Client-Server Game Architecture</h1>
+
+<hr>
+<p></p><h2 id="introduction">Introduction</h2><p></p>
+<p>This is the first in a series of articles exploring the techniques and algorithms that make fast-paced multiplayer games possible. If you’re familiar with the concepts behind multiplayer games, you can safely skip to the next article – what follows is an introductory discussion.</p><br><p>Developing any kind of game is itself challenging; multiplayer games, however, add a completely new set of problems to be dealt with. Interestingly enough, the core problems are human nature and physics!</p><br><h2 id="the-problem-of-cheating">The problem of cheating</h2><br><p>It all starts with cheating.</p><br><p>As a game developer, you usually don’t care whether a player cheats in your single-player game – his actions don’t affect anyone but him. A cheating player may not experience the game exactly as you planned, but since it’s their game, they have the right to play it in any way they please.</p><br><p>Multiplayer games are different, though. In any competitive game, a cheating player isn’t just making the experience better for himself, he’s also making the experience worse for the other players. As the developer, you probably want to avoid that, since it tends to drive players away from your game.</p><br><p>There are many things that can be done to prevent cheating, but the most important one (and probably the only really meaningful one) is simple : <em>don’t trust the player</em>. Always assume the worst – that players <em>will</em> try to cheat.</p><br><h2 id="authoritative-servers-and-dumb-clients">Authoritative servers and dumb clients</h2><br><p>This leads to a seemingly simple solution – you make everything in your game happen in a central server under your control, and make the clients just privileged spectators of the game. In other words, your game client sends inputs (key presses, commands) to the server, the server runs the game, and you send the results back to the clients. This is usually called using an <em>authoritative server</em>, because the one and only authority regarding everything that happens in the world is the server.</p><br><p>Of course, your server can be exploited for vulnerabilities, but that’s out of the scope of this series of articles. Using an authoritative server does prevent a wide range of hacks, though. For example, you don’t trust the client with the health of the player; a hacked client can modify its local copy of that value and tell the player it has 10000% health, but the server <em>knows</em> it only has 10% – when the player is attacked it will die, regardless of what a hacked client may think.</p><br><p>You also don’t trust the player with its position in the world. If you did, a hacked client would tell the server “<strong>I’m at (10,10)</strong>” and a second later “<strong>I’m at (20,10)</strong>”, possibly going through a wall or moving faster than the other players. Instead, the server <em>knows</em> the player is at (10,10), the client tells the server “<strong>I want to move one square to the right</strong>”, the server updates its internal state with the new player position at (11,10), and then replies to the player “<strong>You’re at (11, 10)</strong>”:</p><br><figure><br><img src="/img/fpm1-01.png" alt="Effect of network delays."><figcaption>Effect of network delays.</figcaption><br></figure><br><p>In summary: the game state is managed by the server alone. Clients send their actions to the server. The server updates the game state periodically, and then sends the new game state back to clients, who just render it on the screen.</p><br><h2 id="dealing-with-networks">Dealing with networks</h2><br><p>The dumb client scheme works fine for slow turn based games, for example strategy games or poker. It would also work in a LAN setting, where communications are, for all practical purposes, instantaneous. But this breaks down when used for a fast-paced game over a network such as the internet.</p><br><p>Let’s talk physics. Suppose you’re in San Francisco, connected to a server in the NY. That’s approximately 4,000 km, or 2,500 miles (that’s roughly the distance between Lisbon and Moscow). Nothing can travel faster than light, not even bytes on the Internet (which at the lower level are pulses of light, electrons in a cable, or electromagnetic waves). Light travels at approximately 300,000 km/s, so it takes 13 ms to travel 4,000 km.</p><br><p>This may sound quite fast, but it’s actually a very optimistic setup – it assumes data travels at the speed of light in a straight path, with is most likely not the case. In real life, data goes through a series of jumps (called <em>hops</em> in networking terminology) from router to router, most of which aren’t done at lightspeed; routers themselve introduce a bit of delay, since packets must be copied, inspected, and rerouted.</p><br><p>For the sake of the argument, let’s assume data takes 50 ms from client to server. This is close to a best-case scenario – what happens if you’re in NY connected to a server in Tokyo? What if there’s network congestion for some reason? Delays of 100, 200, even 500 ms are not unheard of.</p><br><p>Back to our example, your client sends some input to the server (“<strong>I pressed the right arrow</strong>”). The server gets it 50 ms later. Let’s say the server processes the request and sends back the updated state immediately. Your client gets the new game state (“<strong>You’re now at (1, 0)</strong>”) 50 ms later.</p><br><p>From your point of view, what happened is that you pressed the right arrow but nothing happened for a tenth of a second; then your character finally moved one square to the right. This perceived <em>lag</em> between your inputs and its consequences may not sound like much, but it’s noticeable – and of course, a lag of half a second isn’t just noticeable, it actually makes the game unplayable.</p><br><h2 id="summary">Summary</h2><br><p>Networked multiplayer games are incredibly fun, but introduce a whole new class of challenges. The authoritative server architecture is pretty good at stopping most cheats, but a straightforward implementation may make games quite unresponsive to the player.</p><br><p>In the following articles, we’ll explore how can we build a system based on an authoritative server, while minimizing the delay experienced by the players, to the point of making it almost indistinguishable from local or single player games.</p>
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/GabrielGambetta/" rel="tag"><i class="fa fa-tag"></i> GabrielGambetta</a>
+            
+          </div>
+        
+
+        
+        
+        
+
+        
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2016/07/11/游戏服务端常用架构三/" rel="next" title="游戏服务端常用架构三">
+                  <i class="fa fa-chevron-left"></i> 
+                  <p class="post-nav-pre-next-title">
+                    游戏服务端常用架构三
+                  </p> 
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2016/07/17/多人快节奏游戏二之客户端预测与服务器修正/" rel="prev" title="多人快节奏游戏二之客户端预测与服务器修正">
+                <p class="post-nav-pre-next-title">
+                    多人快节奏游戏二之客户端预测与服务器修正
+                </p> 
+                <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+
+        
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  
+
+  <aside id="sidebar" class="sidebar">
+
+    
+      
+        <div id="sidebar-dimmer"></div>
+      
+    
+
+    <div class="sidebar-inner">
+    
+      <div class="sidebar-toggle-inside motion-element">
+        <div class="sidebar-toggle-line-wrap">
+          <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+        </div>
+      </div>
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <a href="/" class="site-author-image" rel="start" style="border:none">
+            <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Wasp">
+          </a>
+          <p class="site-author-name" itemprop="name">Wasp</p>
+           
+              <p class="site-description motion-element" itemprop="description">It is recommended to use Chrome/Firefox/Safari to read this blog.</p>
+          
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">279</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">102</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+          <div class="site-state-item site-state-about">
+            <a href="/about/">
+              <span class="site-state-item-about fa fa-fw fa-user"></span>
+              <span class="site-state-item-name">about</span>
+            </a>
+          </div>
+          
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+          
+          <!-- 网易云音乐 -->
+            <!-- <div class="netease-cloud-music"> -->
+              <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=110 src="//music.163.com/outchain/player?type=0&id=992743594&auto=0&height=90"></iframe> -->
+            <!-- </div> -->
+          <!-- 网易云音乐 -->
+
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              friendship links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://119.23.17.57" title="ksun的博客" target="_blank">ksun的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://mp.weixin.qq.com/mp/homepage?__biz=MzU3MTUyNzg0NQ==&hid=1&sn=7a3ae61b7af714f75d68e7ae826a2d2c&scene=18#wechat_redirect" title="你有图么我有故事" target="_blank">你有图么我有故事</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Fast-Paced%20Multiplayer%20(Part%20I):%20Client-Server%20Game%20Architecture"><span class="nav-text">Fast-Paced Multiplayer (Part I): Client-Server Game Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#the-problem-of-cheating"><span class="nav-text">The problem of cheating</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#authoritative-servers-and-dumb-clients"><span class="nav-text">Authoritative servers and dumb clients</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dealing-with-networks"><span class="nav-text">Dealing with networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#summary"><span class="nav-text">Summary</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wasp</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <!--
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      
+        <span id="scrollpercent"><span>0</span>%</span>
+      
+    </div>
+    -->
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/mediumzoom/medium-zoom.js?v=1.1.0"></script>
+
+
+
+
+  
+
+
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+
+    let db; // 全局数据库变量
+    var is_load_xml_finished = 0;
+    var keywords = [];
+    var curDate = new Date();
+    var xml_resp_cache = null;
+    var temp_keyword = "";
+
+    'use strict';
+
+    var content_id = isMobile() ? "local-search-result-mobile" : "local-search-result-pc";
+    var input_box = document.getElementById('local-search-input');
+    var resultContent = document.getElementById(content_id);
+    const searchButton = document.getElementById('search-button');
+    const closeButton = document.getElementById('local-search-close');
+
+    var str = "";
+
+    // 是否为第一个字母被键入的标志位
+    var first_char_flag = 0;
+
+    // 因为在移动设备上, 点击搜索之后会 scroll 到页面顶部, 所以需要记录之前的页面x, y坐标值, 以便于搜索完点击 close 按钮之后 scroll 回原来的页面坐标值.
+    var last_page_x = 0;
+    var last_page_y = 0;
+
+    function CloseLocalSearch(when_delete_all_on_mobile=false)
+    {
+        setTimeout(function() {  // 这个setTimeout的目的是为了解决当使用中文输入法输入英文的时候敲下enter键的那一瞬间发生从有文字到没文字又到有文字, 而下方window.scrollTo这个还没执行到, 会导致页面scroll乱滚; 加了这个timeout之后就可以检测是否属于这种情况
+            if (temp_keyword.length > 0) {
+                return;
+            }
+            first_char_flag = 0;
+            $('#local-search-input').val('');
+            // $('#local-search-close').hide();
+            closeButton.classList.remove("show");
+
+            // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownOut', 200);
+            if (isMobile())
+            {
+              // $('body').scrollTop(last_page_y);  // scrollTop 有兼容性问题
+              // $('#' + content_id).hide();
+
+                $('#' + content_id).velocity('stop').velocity( 'transition.slideUpOut', 300);
+
+                if (!when_delete_all_on_mobile) {
+                    input_box.blur();
+                    // setTimeout(() => {
+                    //     closeButton.classList.remove("move");
+                    // }, 1000);
+                    input_box.classList.remove('expanded');
+                } else {
+                    return;
+                }
+                const element = document.getElementById('local-search-result-mobile');
+                let bottomY = element.offsetTop + element.offsetHeight;  // local search result底部相对于整个页面的 Y 坐标
+                if (bottomY == 0) {  // 说明 local search result底部 比当前页面还要长
+                    scrollTo(last_page_x, last_page_y);
+                    return;
+                }
+                // console.log("rrrrrrretrn " + bottomY);
+                // console.log("rrrrrrretrnyyy " + window.scrollY);
+                if (window.scrollY > bottomY) {  // 如果用户滚动到比 local search result的底部还要低, 那说明他不想回到他search之前的位置了
+                    return;
+                }
+                setTimeout(function() {
+                    // scrollTo(last_page_x, last_page_y);
+                    window.scrollTo({
+                        top: last_page_y,
+                        left: last_page_x,
+                        behavior: "smooth",
+                        duration: 150 // 滚动动画持续x毫秒
+                    });
+                }, 150);
+            }
+            else
+            {
+                $('#' + content_id).attr("headroom_special_attr","true");   //headroom_special_attr是用来, 当页面滚动的时候local search的结果页面也会跟着一起被收起, 当不写这行代码的时候, 空的result会在页面往上滚的时候出现 ...
+                resultContent.classList.remove("smooth-transition");  // 这个是为了"当页面滚动的时候local search的结果页面也会跟着一起被收起"的时候有一个平滑滚动的动画, 这个不能直接写在css里, 不然会影响 velocity的动画
+
+                $('#' + content_id).velocity('stop').velocity( 'transition.slideUpOut', 800);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.bounceOut', 800);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.slideUpBigOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.bounceUpOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.expandOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.whirlOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.shrinkOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.swoopOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.flipBounceXOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.fadeOut', 600);
+            }
+        }, 150);
+    }
+
+    async function handleSearch()
+    {
+        if (keywords.length <= 0) {
+            return;
+        }
+        resultContent.innerHTML = "";
+    //   $('#local-search-close').show();
+    
+        closeButton.classList.add("show");
+
+        // 0x04. perform local searching
+        if (is_load_xml_finished == 0)
+        {
+            var local_search_tips = 
+                "<span class='local-search-empty'>" + "第一次搜索可能较慢, 先思考一个经典算法问题, 跳台阶:" + "</span>" +
+                "<span class='local-search-empty'>" + "一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个6级的台阶总共有多少种跳法?n级呢?" + "</span>";
+            var ProgressBar = 
+                "<div class='progress-bar'>" +
+                    "<div class='progress-bar-charge'></div>" +
+                "</div>";
+            resultContent.innerHTML = 
+                "<ul class='local-search-empty-ul'>" + 
+                local_search_tips +
+                ProgressBar;
+        }
+        else
+        {
+            // Retrieve the object from local storage
+            var xml_resp = await retrieve_search_xml()
+
+            xml_resp.forEach(function (data) {
+            var isMatch = true;
+            var content_index = [];
+            if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+            }
+            var is_encrypted = data.encrypted.trim() == '1'
+            var is_sensitive = CONFIG.local_search.sensitive_word && data_content.indexOf(CONFIG.local_search.sensitive_word) >= 0
+            var orig_data_title = data.title.trim();
+            var data_title = orig_data_title.toLowerCase();
+            var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+            var data_content = orig_data_content.toLowerCase();
+            var data_url = decodeURIComponent(data.url);
+            var index_title = -1;
+            var index_content = -1;
+            var first_occur = -1;
+            // only match artiles with not empty contents
+            if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                index_title = data_title.indexOf(keyword);
+                // index_content = (is_sensitive || is_encrypted) ? -1 : data_content.indexOf(keyword);  // 不能搜加密文章,
+                index_content = data_content.indexOf(keyword); //  这样可以搜加密了的文章, 但是搜索结果框不显示正文只显示标题
+
+                if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                } else {
+                    if (index_content < 0) {
+                    index_content = 0;
+                    }
+                    if (i == 0) {
+                    first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                }
+                });
+            } else {
+                isMatch = false;
+            }
+            // 0x05. show search results
+            if (isMatch) {
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                var match_content = "";
+                
+                const hostname = window.location.hostname;
+                if ((!is_sensitive && !is_encrypted) || (hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192")))
+                {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if (start < 0) {
+                    start = 0;
+                    }
+                    if (start == 0) {
+                    end = 100;
+                    }
+                    if (end > content.length) {
+                    end = content.length;
+                    }
+                    match_content = content.substr(start, end);
+                }
+                // highlight all keywords
+                var regS = "";
+                if (match_content != "")
+                {
+                    keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    });
+                }
+                else
+                {
+                    keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    });
+                }
+                str += "<li><a href='" + data_url + "' class='search-result-title' target='_blank'>" + orig_data_title + "</a>";
+                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+            }
+            });
+
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+            return resultContent.innerHTML = 
+                "<ul class='local-search-empty-ul'><span class='local-search-empty'>404.<span></ul>";
+            }
+            resultContent.innerHTML = str;
+      }
+    }
+
+    input_box.addEventListener('input', function () {
+        // 0x03. parse query to keywords list
+        str = '<ul class=\"search-result-list\">';
+        temp_keyword = this.value.trim();
+        if (temp_keyword.length <= 0) {
+            CloseLocalSearch(true);
+            return;
+        }
+
+        keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
+        handleSearch();
+
+        // 当用户键入第一个字母的时候的动画处理逻辑 : 
+        // 当 first_char_flag 为 0 的时候, 
+        // 要播放一个动画
+        if (first_char_flag == 0)
+        {
+            // $('body').scrollTop(0);
+            let duration = 600;
+            if (isMobile())
+            {
+                last_page_x = window.scrollX;
+                last_page_y = window.scrollY;
+                scrollTo(0,0);
+              // $('body').scrollTop(0);
+            } else {
+                $('#' + content_id).removeAttr("headroom_special_attr");  // headroom_special_attr是用来 当页面滚动的时候local search的结果页面也会跟着一起被收起, 当不写这行代码的时候, 空的result会在页面往上滚的时候出现 ...
+                  setTimeout(()=>{
+                      resultContent.classList.add("smooth-transition"); // 这个是为了"当页面滚动的时候local search的结果页面也会跟着一起被收起"的时候有一个平滑滚动的动画, 这个不能直接写在css里, 不然会影响 velocity
+                  }, duration + 200); 
+            }
+            first_char_flag = 1;
+
+            if (isMobile()) {
+                $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', duration);
+            } else {
+                $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', duration);
+                  // $('#' + content_id).velocity('stop').velocity('transition.bounceIn', 800);
+                //   $('.local-search-result-cls ul li').velocity('stop').velocity('transition.bounceUpIn', 1200);
+            }
+          // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownBigIn', 1000);
+        }
+    });
+
+    // 这里要不要用 click 要用 pointerup, 不然 mac safari 触摸板 tap 得tap两次才能触发这里
+    $(document).on('pointerup', '#local-search-close', function(event) {
+        temp_keyword = "";
+        CloseLocalSearch();
+    });
+
+    if (isMobile()) {
+        input_box.addEventListener("blur", function() {  // when input lose the focus
+            $('#local-search-input').val('');
+            if (temp_keyword.length > 0) {
+                if (str.indexOf('<li>') === -1) {  // 说明local search 没搜到东西
+                    window.scrollTo({
+                        top: last_page_y,
+                        left: last_page_x,
+                        behavior: "smooth",
+                        duration: 150 // 滚动动画持续x毫秒
+                    });
+                }
+                // closeButton.classList.add("move");
+                setTimeout(function() {
+                    input_box.classList.remove('expanded');
+                }, 450);
+            } else {
+                window.scrollTo({  // 当失焦的时候且输入框没文字的时候就滚回原来的位置
+                    top: last_page_y,
+                    left: last_page_x,
+                    behavior: "smooth",
+                    duration: 150 // 滚动动画持续x毫秒
+                });
+                input_box.classList.remove('expanded');
+            }
+            setTimeout(()=> {
+                searchButton.disabled = false;
+            }, 600);
+            // console.log("输入框失去焦点");
+        });
+    }
+
+    // 给按钮添加点击事件
+    if (isMobile()) {
+        searchButton.addEventListener('click', function() {  // 这里要用click不要用 pointerup, 不然ios可能弹不出键盘
+            // 使输入框渐变显示
+            searchButton.disabled = true;  // 点击之后就禁用, 直到input失焦
+            input_box.focus();
+            if (temp_keyword.length > 0) {
+                // closeButton.classList.remove("move");
+                // setTimeout(function() {
+                    input_box.classList.add('expanded');
+                    setTimeout(function() {
+                        $('#local-search-input').val(temp_keyword);
+                    }, 200);
+                // }, 450);
+            } else {
+                // setTimeout(()=> {
+                    input_box.classList.add('expanded');
+                // }, 80);
+            }
+        });
+    }
+
+    // 你的代码在 document 上监听 click 事件，并检查点击的目标是否在 content_id 指定的元素内部。如果点击的目标不在该元素内，则执行 CloseLocalSearch()。
+    // $(document).click(function(event) {
+    //     if (isMobile()) {
+    //         return;
+    //     } else {
+    //         if (!$(event.target).closest('#' + content_id).length) {
+    //             temp_keyword = "";
+    //             CloseLocalSearch();
+    //         }
+    //     }
+    // });
+
+    $(document).keyup(function(event){
+      switch(event.keyCode) {
+        case 27:
+          // alert("ESC");
+          temp_keyword = "";
+          CloseLocalSearch();
+      }
+    });
+
+    function isMobile() {
+      // console.log(document.body.clientWidth);
+      return document.body.clientWidth < 768
+    }
+
+    {/* function store_search_xml(xmlResponse) {
+        var entries = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // Put the object into storage
+        localStorage.setItem('local_search_xml_data', JSON.stringify(entries));
+        localStorage.setItem('last_store_local_search_date', curDate.getDate());
+        is_load_xml_finished = 1;
+        console.log("[local search] - store search.xml finished.");
+    } */}
+
+    function ajax_store_search_xml() {
+        console.log("[local search] - ajax downloading search.xml ...");
+        $.ajax({
+            url: "/search.xml",
+            dataType: "xml",
+            success: function (xmlResponse) {
+                setLocalSearchXMLData(xmlResponse);
+                // 如果输入框有文字, 等待下载 xml完毕之后再弹出结果
+                if (temp_keyword.length > 0) {
+                    handleSearch();
+                    $('.local-search-result-cls ul li').velocity('stop').velocity('transition.swoopIn', 1200);
+                }
+            }
+        });
+    }
+
+    async function retrieve_search_xml() {
+        // // Retrieve the object from local storage
+        // var retrievedObject = localStorage.getItem('local_search_xml_data');
+        // var xml_resp = JSON.parse(retrievedObject)
+        // return xml_resp
+
+        if (xml_resp_cache) {
+          return xml_resp_cache;
+        }
+        // Retrieve the object from indexedDB
+        xml_resp_cache = await getLocalSearchXMLData();
+        return xml_resp_cache;
+    }
+
+    function openDatabase() {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open("myDatabase", 1); // 设置为版本号 1, 用indexedDB替代localStorage, 因为indexedDB可以存储大量数据（几百 MB 到几 GB）, 而localStorage只能5MB左右, 
+            request.onupgradeneeded = function(event) {
+                db = event.target.result;
+                if (!db.objectStoreNames.contains("searchData")) {
+                    const objectStore = db.createObjectStore("searchData", { keyPath: "id" });
+                    // 可以创建索引以便于查询
+                    objectStore.createIndex("xmlDataIndex", "xml_data", { unique: false });
+                }
+            };
+            request.onsuccess = function(event) {
+                db = event.target.result;
+                console.log("[local search] - Database opened successfully.");
+                resolve(db);
+            };
+            request.onerror = function(event) {
+                console.error("[local search] - Database open error:", event.target.error);
+                reject(event.target.error);
+            };
+        });
+    }
+
+    async function setLocalSearchXMLData(xmlResponse) {
+        if (!db) {
+            await openDatabase();  // 确保数据库已打开
+        }
+        var transaction = db.transaction(["searchData"], "readwrite");
+        var objectStore = transaction.objectStore("searchData");
+
+        var xml_data = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // 存储数据，主键为 "id"，这里我们将 "id" 设为 "local_search_xml_data"
+        var data = { id: "local_search_xml_data", xml_data: xml_data };
+
+        var request = objectStore.put(data);  // 使用 put 可以插入或者更新数据
+        request.onsuccess = function() {
+            console.log("[local search] - Data successfully stored in indexedDB.");
+            localStorage.setItem('last_store_local_search_date', curDate.getDate());
+            is_load_xml_finished = 1;
+        };
+        request.onerror = function(event) {
+            console.log("[local search] - Error storing data: ", event.target.error);
+        };
+    }
+
+    // 封装 IndexedDB 操作为 Promise
+    function getLocalSearchXMLData() {
+        return new Promise((resolve, reject) => {
+            if (!db) {
+                reject("[local search] - Database is not initialized.");
+                return;
+            }
+            var transaction = db.transaction(["searchData"], "readonly");
+            var objectStore = transaction.objectStore("searchData");
+            var request = objectStore.get("local_search_xml_data");  // 使用 id 获取数据
+            request.onsuccess = function(event) {
+                if (request.result) {
+                    // 数据存在，成功处理
+                    resolve(request.result.xml_data);  // 解析成功并返回结果
+                } else {
+                    // 数据未找到，返回失败
+                    reject("Data not found");  // 抛出错误
+                }
+            };
+            request.onerror = function(event) {
+                // 错误处理
+                console.log("[local search] - Error retrieving data: ", event.target.error);
+                reject(event.target.error);  // 抛出错误
+            };
+        });
+    }
+
+    // 使用 async/await 来调用这个函数
+    async function loadSearchData() {
+        try {
+            if (!db) {
+                await openDatabase();  // 确保数据库已打开
+            }
+            await getLocalSearchXMLData();  // 等待结果
+            is_load_xml_finished = 1;
+            console.log("[local search] - load search.xml finished.");
+            // console.log("Retrieved data: ", result);
+        } catch (error) {
+            // console.error("Error: ", error);
+            console.log("[local search] - load search.xml not found.");
+            ajax_store_search_xml();
+        }
+    }
+
+    // var local_search_xml_data = localStorage.getItem('local_search_xml_data');
+    // if (local_search_xml_data) {
+    //     is_load_xml_finished = 1;
+    //     console.log("[local search] - load search.xml finished.");
+    // }
+    var last_store_local_search_date = localStorage.getItem('last_store_local_search_date');
+    // 只有在 localStorage 没有 search.xml数据或者 距离上次使用local search已经超过一天了才去取search.xml
+    // 节省流量
+    if (last_store_local_search_date != curDate.getDate()) {
+        // download search.xml
+        ajax_store_search_xml();
+    } else {
+        // 调用异步函数
+        loadSearchData();
+    }
+    
+
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/lib/wobble_window/wobblewindow.js"> </script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+<script type="text/javascript" src="/js/src/headroom.js"></script> 
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>

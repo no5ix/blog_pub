@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+
+<script>
+    (function(){
+        if(''){
+          const hostname = window.location.hostname;
+          if (!(hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192"))) {
+            // console.log("The website is not running on localhost.");
+            // alert('此文章并不公开, 输入文章密码方可阅读');
+            var password = prompt('此文章并不公开, 输入文章密码方可阅读');
+            if (password !== ''){
+              if (password != null) // 如果用户点击了确认而且密码错误的时候, 因为当password == null的时候说明用户点了取消
+              {
+                alert('Error!');
+              }
+              if (history.length > 1)
+              {
+                history.back();
+              }
+              else
+              {
+                window.location.href = "about:blank";
+              }
+            }
+          }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="It is recommended to use Chrome/Firefox/Safari to read this blog.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="烫">
+<meta property="og:url" content="https://hulinhong.com/archives/2015/page/2/index.html">
+<meta property="og:site_name" content="烫">
+<meta property="og:description" content="It is recommended to use Chrome/Firefox/Safari to read this blog.">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="烫">
+<meta name="twitter:description" content="It is recommended to use Chrome/Firefox/Safari to read this blog.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"scrollpercent":true,"onmobile":true,"dimmer":true,"body_content_height":0,"display_duration":150},
+    local_search: {"enable":true,"trigger":"auto","top_n_per_article":1},
+    fancybox: false,
+    mediumzoom: true,
+    darkmode_js: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"duration":222,"transition":{"header":"slideDownIn","menu":"slideDownIn","logo":"slideDownIn","post_block_else":"slideDownIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"slideDownIn","footer":"slideDownIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+
+  <title>Archive | 烫</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left  page-archive  ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">烫</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">烫烫烫烫烫</p>
+      
+  </div>
+
+  <div class="menu-item sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="menu-item site-search">
+    
+  
+  <div class="site-search-div">
+    <button class="search-icon fa fa-search" id="search-button"></button>
+    <input type="text" id="local-search-input" class="st-search-input">
+    <i id="local-search-close">×</i>
+  </div>
+
+
+<script type="text/javascript" id="local.search.active">
+    {/* var inputArea       = document.querySelector("#local-search-input");
+    inputArea.onclick   = function(){ getSearchFile(); this.focus(); }
+    inputArea.onkeydown = function(){ if(event.keyCode == 13) return false } */}
+</script>
+
+
+
+  </div>
+  <div id="local-search-result-pc" class="local-search-result-cls"></div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+       
+    </ul>
+  
+
+  
+    
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <div id="local-search-result-mobile" class="local-search-result-cls"></div>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
+
+      <span class="archive-page-counter">
+        
+        
+         
+          
+        Excellent! 279 posts in total. Keep on posting.
+      </span>
+
+      
+
+        
+        
+        
+
+        
+          
+          <div class="collection-title">
+            <h2 class="archive-year motion-element" id="archive-year-2015">2015</h2>
+          </div>
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/04/11/linux_gcc_atomic/" itemprop="url">
+              
+                <span itemprop="name">GCC的原子操作函数</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-04-11T12:26:26+00:00" content="2015-04-11">
+          04-11
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/04/11/smart_pointer_note/" itemprop="url">
+              
+                <span itemprop="name">智能指针笔记</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-04-11T12:26:26+00:00" content="2015-04-11">
+          04-11
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/03/18/linux_directory_permission/" itemprop="url">
+              
+                <span itemprop="name">linux一些不要想当然的事(一)之目录权限</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-03-18T17:11:52+00:00" content="2015-03-18">
+          03-18
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/03/11/linux_command_df_free_top/" itemprop="url">
+              
+                <span itemprop="name">Linux常用运维命令(df和free和top)笔记整理(三)</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-03-11T12:16:56+00:00" content="2015-03-11">
+          03-11
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/03/09/linux_command_netstat_lsof/" itemprop="url">
+              
+                <span itemprop="name">Linux常用运维命令(netstat和lsof)笔记整理(二)</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-03-09T23:16:16+00:00" content="2015-03-09">
+          03-09
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/03/07/linux_command_iostat/" itemprop="url">
+              
+                <span itemprop="name">Linux常用运维命令(iostat)笔记整理(一)</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-03-07T19:46:26+00:00" content="2015-03-07">
+          03-07
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/03/02/python的struct模块/" itemprop="url">
+              
+                <span itemprop="name">python的struct模块</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-03-02T21:49:19+00:00" content="2015-03-02">
+          03-02
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/03/02/MySQL入门二/" itemprop="url">
+              
+                <span itemprop="name">MySQL入门二之一些小注意点</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-03-02T01:51:11+00:00" content="2015-03-02">
+          03-02
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/02/27/MySQL入门一之增删查改与关联/" itemprop="url">
+              
+                <span itemprop="name">MySQL入门一之增删查改与关联</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-02-27T22:51:11+00:00" content="2015-02-27">
+          02-27
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/02/23/protobuf_tutorial/" itemprop="url">
+              
+                <span itemprop="name">ProtoBuf的安装与使用</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-02-23T12:06:56+00:00" content="2015-02-23">
+          02-23
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/02/21/cpp_object_model_conclusion/" itemprop="url">
+              
+                <span itemprop="name">C++对象模型之虚函数实例讲解</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-02-21T17:49:01+00:00" content="2015-02-21">
+          02-21
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/02/10/python中的__name__和__main()__/" itemprop="url">
+              
+                <span itemprop="name">python中的__name__和__main()__</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-02-10T22:19:29+00:00" content="2015-02-10">
+          02-10
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/02/09/条件编译指令之if和ifdef和ifdefined之间的区别/" itemprop="url">
+              
+                <span itemprop="name">条件编译指令之#if和#ifdef和#if defined之间的区别</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-02-09T17:24:19+00:00" content="2015-02-09">
+          02-09
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/02/03/lua_special_part/" itemprop="url">
+              
+                <span itemprop="name">Lua特别之处笔记</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-02-03T18:12:15+00:00" content="2015-02-03">
+          02-03
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/02/02/gdb_tutorial/" itemprop="url">
+              
+                <span itemprop="name">GDB基础教程</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-02-02T12:18:54+00:00" content="2015-02-02">
+          02-02
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/02/02/singleton_pattern/" itemprop="url">
+              
+                <span itemprop="name">单例模式的析构问题和线程安全问题</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-02-02T12:18:54+00:00" content="2015-02-02">
+          02-02
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/01/22/new和delete详解/" itemprop="url">
+              
+                <span itemprop="name">new和delete详解</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-01-22T00:05:48+00:00" content="2015-01-22">
+          01-22
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/01/10/distributed_system_design_note_four/" itemprop="url">
+              
+                <span itemprop="name">分布式系统设计概要笔记-四</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-01-10T23:58:12+00:00" content="2015-01-10">
+          01-10
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/01/07/distributed_system_design_note_three/" itemprop="url">
+              
+                <span itemprop="name">分布式系统设计概要笔记-三</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-01-07T13:28:22+00:00" content="2015-01-07">
+          01-07
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/01/07/factory_pattern/" itemprop="url">
+              
+                <span itemprop="name">工厂模式</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-01-07T12:18:54+00:00" content="2015-01-07">
+          01-07
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/01/07/observer_pattern/" itemprop="url">
+              
+                <span itemprop="name">观察者模式</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-01-07T12:18:54+00:00" content="2015-01-07">
+          01-07
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/01/05/distributed_system_design_note_two/" itemprop="url">
+              
+                <span itemprop="name">分布式系统设计概要笔记-二</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-01-05T23:28:22+00:00" content="2015-01-05">
+          01-05
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/01/04/distributed_system_design_note_one/" itemprop="url">
+              
+                <span itemprop="name">分布式系统设计概要笔记-一</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-01-04T01:28:42+00:00" content="2015-01-04">
+          01-04
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2015/01/02/why_not_recursion_and_what_is_tail_recursion/" itemprop="url">
+              
+                <span itemprop="name">为什么不推荐递归以及什么是尾递归</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2015-01-02T12:18:54+00:00" content="2015-01-02">
+          01-02
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+    </div>
+  </div>
+  
+  
+  
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/archives/2015/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2015/">1</a><span class="page-number current">2</span>
+  </nav>
+
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  
+
+  <aside id="sidebar" class="sidebar">
+
+    
+      
+        <div id="sidebar-dimmer"></div>
+      
+    
+
+    <div class="sidebar-inner">
+    
+      <div class="sidebar-toggle-inside motion-element">
+        <div class="sidebar-toggle-line-wrap">
+          <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+        </div>
+      </div>
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <a href="/" class="site-author-image" rel="start" style="border:none">
+            <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Wasp">
+          </a>
+          <p class="site-author-name" itemprop="name">Wasp</p>
+           
+              <p class="site-description motion-element" itemprop="description">It is recommended to use Chrome/Firefox/Safari to read this blog.</p>
+          
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">279</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">102</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+          <div class="site-state-item site-state-about">
+            <a href="/about/">
+              <span class="site-state-item-about fa fa-fw fa-user"></span>
+              <span class="site-state-item-name">about</span>
+            </a>
+          </div>
+          
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+          
+          <!-- 网易云音乐 -->
+            <!-- <div class="netease-cloud-music"> -->
+              <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=110 src="//music.163.com/outchain/player?type=0&id=992743594&auto=0&height=90"></iframe> -->
+            <!-- </div> -->
+          <!-- 网易云音乐 -->
+
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              friendship links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://119.23.17.57" title="ksun的博客" target="_blank">ksun的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://mp.weixin.qq.com/mp/homepage?__biz=MzU3MTUyNzg0NQ==&hid=1&sn=7a3ae61b7af714f75d68e7ae826a2d2c&scene=18#wechat_redirect" title="你有图么我有故事" target="_blank">你有图么我有故事</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wasp</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <!--
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      
+        <span id="scrollpercent"><span>0</span>%</span>
+      
+    </div>
+    -->
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/mediumzoom/medium-zoom.js?v=1.1.0"></script>
+
+
+
+
+  
+
+
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+  
+  
+
+  
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+
+    let db; // 全局数据库变量
+    var is_load_xml_finished = 0;
+    var keywords = [];
+    var curDate = new Date();
+    var xml_resp_cache = null;
+    var temp_keyword = "";
+
+    'use strict';
+
+    var content_id = isMobile() ? "local-search-result-mobile" : "local-search-result-pc";
+    var input_box = document.getElementById('local-search-input');
+    var resultContent = document.getElementById(content_id);
+    const searchButton = document.getElementById('search-button');
+    const closeButton = document.getElementById('local-search-close');
+
+    var str = "";
+
+    // 是否为第一个字母被键入的标志位
+    var first_char_flag = 0;
+
+    // 因为在移动设备上, 点击搜索之后会 scroll 到页面顶部, 所以需要记录之前的页面x, y坐标值, 以便于搜索完点击 close 按钮之后 scroll 回原来的页面坐标值.
+    var last_page_x = 0;
+    var last_page_y = 0;
+
+    function CloseLocalSearch(when_delete_all_on_mobile=false)
+    {
+        setTimeout(function() {  // 这个setTimeout的目的是为了解决当使用中文输入法输入英文的时候敲下enter键的那一瞬间发生从有文字到没文字又到有文字, 而下方window.scrollTo这个还没执行到, 会导致页面scroll乱滚; 加了这个timeout之后就可以检测是否属于这种情况
+            if (temp_keyword.length > 0) {
+                return;
+            }
+            first_char_flag = 0;
+            $('#local-search-input').val('');
+            // $('#local-search-close').hide();
+            closeButton.classList.remove("show");
+
+            // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownOut', 200);
+            if (isMobile())
+            {
+              // $('body').scrollTop(last_page_y);  // scrollTop 有兼容性问题
+              // $('#' + content_id).hide();
+
+                $('#' + content_id).velocity('stop').velocity( 'transition.slideUpOut', 300);
+
+                if (!when_delete_all_on_mobile) {
+                    input_box.blur();
+                    // setTimeout(() => {
+                    //     closeButton.classList.remove("move");
+                    // }, 1000);
+                    input_box.classList.remove('expanded');
+                } else {
+                    return;
+                }
+                const element = document.getElementById('local-search-result-mobile');
+                let bottomY = element.offsetTop + element.offsetHeight;  // local search result底部相对于整个页面的 Y 坐标
+                if (bottomY == 0) {  // 说明 local search result底部 比当前页面还要长
+                    scrollTo(last_page_x, last_page_y);
+                    return;
+                }
+                // console.log("rrrrrrretrn " + bottomY);
+                // console.log("rrrrrrretrnyyy " + window.scrollY);
+                if (window.scrollY > bottomY) {  // 如果用户滚动到比 local search result的底部还要低, 那说明他不想回到他search之前的位置了
+                    return;
+                }
+                setTimeout(function() {
+                    // scrollTo(last_page_x, last_page_y);
+                    window.scrollTo({
+                        top: last_page_y,
+                        left: last_page_x,
+                        behavior: "smooth",
+                        duration: 150 // 滚动动画持续x毫秒
+                    });
+                }, 150);
+            }
+            else
+            {
+                $('#' + content_id).attr("headroom_special_attr","true");   //headroom_special_attr是用来, 当页面滚动的时候local search的结果页面也会跟着一起被收起, 当不写这行代码的时候, 空的result会在页面往上滚的时候出现 ...
+                resultContent.classList.remove("smooth-transition");  // 这个是为了"当页面滚动的时候local search的结果页面也会跟着一起被收起"的时候有一个平滑滚动的动画, 这个不能直接写在css里, 不然会影响 velocity的动画
+
+                $('#' + content_id).velocity('stop').velocity( 'transition.slideUpOut', 800);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.bounceOut', 800);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.slideUpBigOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.bounceUpOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.expandOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.whirlOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.shrinkOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.swoopOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.flipBounceXOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.fadeOut', 600);
+            }
+        }, 150);
+    }
+
+    async function handleSearch()
+    {
+        if (keywords.length <= 0) {
+            return;
+        }
+        resultContent.innerHTML = "";
+    //   $('#local-search-close').show();
+    
+        closeButton.classList.add("show");
+
+        // 0x04. perform local searching
+        if (is_load_xml_finished == 0)
+        {
+            var local_search_tips = 
+                "<span class='local-search-empty'>" + "第一次搜索可能较慢, 先思考一个经典算法问题, 跳台阶:" + "</span>" +
+                "<span class='local-search-empty'>" + "一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个6级的台阶总共有多少种跳法?n级呢?" + "</span>";
+            var ProgressBar = 
+                "<div class='progress-bar'>" +
+                    "<div class='progress-bar-charge'></div>" +
+                "</div>";
+            resultContent.innerHTML = 
+                "<ul class='local-search-empty-ul'>" + 
+                local_search_tips +
+                ProgressBar;
+        }
+        else
+        {
+            // Retrieve the object from local storage
+            var xml_resp = await retrieve_search_xml()
+
+            xml_resp.forEach(function (data) {
+            var isMatch = true;
+            var content_index = [];
+            if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+            }
+            var is_encrypted = data.encrypted.trim() == '1'
+            var is_sensitive = CONFIG.local_search.sensitive_word && data_content.indexOf(CONFIG.local_search.sensitive_word) >= 0
+            var orig_data_title = data.title.trim();
+            var data_title = orig_data_title.toLowerCase();
+            var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+            var data_content = orig_data_content.toLowerCase();
+            var data_url = decodeURIComponent(data.url);
+            var index_title = -1;
+            var index_content = -1;
+            var first_occur = -1;
+            // only match artiles with not empty contents
+            if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                index_title = data_title.indexOf(keyword);
+                // index_content = (is_sensitive || is_encrypted) ? -1 : data_content.indexOf(keyword);  // 不能搜加密文章,
+                index_content = data_content.indexOf(keyword); //  这样可以搜加密了的文章, 但是搜索结果框不显示正文只显示标题
+
+                if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                } else {
+                    if (index_content < 0) {
+                    index_content = 0;
+                    }
+                    if (i == 0) {
+                    first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                }
+                });
+            } else {
+                isMatch = false;
+            }
+            // 0x05. show search results
+            if (isMatch) {
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                var match_content = "";
+                
+                const hostname = window.location.hostname;
+                if ((!is_sensitive && !is_encrypted) || (hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192")))
+                {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if (start < 0) {
+                    start = 0;
+                    }
+                    if (start == 0) {
+                    end = 100;
+                    }
+                    if (end > content.length) {
+                    end = content.length;
+                    }
+                    match_content = content.substr(start, end);
+                }
+                // highlight all keywords
+                var regS = "";
+                if (match_content != "")
+                {
+                    keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    });
+                }
+                else
+                {
+                    keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    });
+                }
+                str += "<li><a href='" + data_url + "' class='search-result-title' target='_blank'>" + orig_data_title + "</a>";
+                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+            }
+            });
+
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+            return resultContent.innerHTML = 
+                "<ul class='local-search-empty-ul'><span class='local-search-empty'>404.<span></ul>";
+            }
+            resultContent.innerHTML = str;
+      }
+    }
+
+    input_box.addEventListener('input', function () {
+        // 0x03. parse query to keywords list
+        str = '<ul class=\"search-result-list\">';
+        temp_keyword = this.value.trim();
+        if (temp_keyword.length <= 0) {
+            CloseLocalSearch(true);
+            return;
+        }
+
+        keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
+        handleSearch();
+
+        // 当用户键入第一个字母的时候的动画处理逻辑 : 
+        // 当 first_char_flag 为 0 的时候, 
+        // 要播放一个动画
+        if (first_char_flag == 0)
+        {
+            // $('body').scrollTop(0);
+            let duration = 600;
+            if (isMobile())
+            {
+                last_page_x = window.scrollX;
+                last_page_y = window.scrollY;
+                scrollTo(0,0);
+              // $('body').scrollTop(0);
+            } else {
+                $('#' + content_id).removeAttr("headroom_special_attr");  // headroom_special_attr是用来 当页面滚动的时候local search的结果页面也会跟着一起被收起, 当不写这行代码的时候, 空的result会在页面往上滚的时候出现 ...
+                  setTimeout(()=>{
+                      resultContent.classList.add("smooth-transition"); // 这个是为了"当页面滚动的时候local search的结果页面也会跟着一起被收起"的时候有一个平滑滚动的动画, 这个不能直接写在css里, 不然会影响 velocity
+                  }, duration + 200); 
+            }
+            first_char_flag = 1;
+
+            if (isMobile()) {
+                $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', duration);
+            } else {
+                $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', duration);
+                  // $('#' + content_id).velocity('stop').velocity('transition.bounceIn', 800);
+                //   $('.local-search-result-cls ul li').velocity('stop').velocity('transition.bounceUpIn', 1200);
+            }
+          // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownBigIn', 1000);
+        }
+    });
+
+    // 这里要不要用 click 要用 pointerup, 不然 mac safari 触摸板 tap 得tap两次才能触发这里
+    $(document).on('pointerup', '#local-search-close', function(event) {
+        temp_keyword = "";
+        CloseLocalSearch();
+    });
+
+    if (isMobile()) {
+        input_box.addEventListener("blur", function() {  // when input lose the focus
+            $('#local-search-input').val('');
+            if (temp_keyword.length > 0) {
+                if (str.indexOf('<li>') === -1) {  // 说明local search 没搜到东西
+                    window.scrollTo({
+                        top: last_page_y,
+                        left: last_page_x,
+                        behavior: "smooth",
+                        duration: 150 // 滚动动画持续x毫秒
+                    });
+                }
+                // closeButton.classList.add("move");
+                setTimeout(function() {
+                    input_box.classList.remove('expanded');
+                }, 450);
+            } else {
+                window.scrollTo({  // 当失焦的时候且输入框没文字的时候就滚回原来的位置
+                    top: last_page_y,
+                    left: last_page_x,
+                    behavior: "smooth",
+                    duration: 150 // 滚动动画持续x毫秒
+                });
+                input_box.classList.remove('expanded');
+            }
+            setTimeout(()=> {
+                searchButton.disabled = false;
+            }, 600);
+            // console.log("输入框失去焦点");
+        });
+    }
+
+    // 给按钮添加点击事件
+    if (isMobile()) {
+        searchButton.addEventListener('click', function() {  // 这里要用click不要用 pointerup, 不然ios可能弹不出键盘
+            // 使输入框渐变显示
+            searchButton.disabled = true;  // 点击之后就禁用, 直到input失焦
+            input_box.focus();
+            if (temp_keyword.length > 0) {
+                // closeButton.classList.remove("move");
+                // setTimeout(function() {
+                    input_box.classList.add('expanded');
+                    setTimeout(function() {
+                        $('#local-search-input').val(temp_keyword);
+                    }, 200);
+                // }, 450);
+            } else {
+                // setTimeout(()=> {
+                    input_box.classList.add('expanded');
+                // }, 80);
+            }
+        });
+    }
+
+    // 你的代码在 document 上监听 click 事件，并检查点击的目标是否在 content_id 指定的元素内部。如果点击的目标不在该元素内，则执行 CloseLocalSearch()。
+    // $(document).click(function(event) {
+    //     if (isMobile()) {
+    //         return;
+    //     } else {
+    //         if (!$(event.target).closest('#' + content_id).length) {
+    //             temp_keyword = "";
+    //             CloseLocalSearch();
+    //         }
+    //     }
+    // });
+
+    $(document).keyup(function(event){
+      switch(event.keyCode) {
+        case 27:
+          // alert("ESC");
+          temp_keyword = "";
+          CloseLocalSearch();
+      }
+    });
+
+    function isMobile() {
+      // console.log(document.body.clientWidth);
+      return document.body.clientWidth < 768
+    }
+
+    {/* function store_search_xml(xmlResponse) {
+        var entries = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // Put the object into storage
+        localStorage.setItem('local_search_xml_data', JSON.stringify(entries));
+        localStorage.setItem('last_store_local_search_date', curDate.getDate());
+        is_load_xml_finished = 1;
+        console.log("[local search] - store search.xml finished.");
+    } */}
+
+    function ajax_store_search_xml() {
+        console.log("[local search] - ajax downloading search.xml ...");
+        $.ajax({
+            url: "/search.xml",
+            dataType: "xml",
+            success: function (xmlResponse) {
+                setLocalSearchXMLData(xmlResponse);
+                // 如果输入框有文字, 等待下载 xml完毕之后再弹出结果
+                if (temp_keyword.length > 0) {
+                    handleSearch();
+                    $('.local-search-result-cls ul li').velocity('stop').velocity('transition.swoopIn', 1200);
+                }
+            }
+        });
+    }
+
+    async function retrieve_search_xml() {
+        // // Retrieve the object from local storage
+        // var retrievedObject = localStorage.getItem('local_search_xml_data');
+        // var xml_resp = JSON.parse(retrievedObject)
+        // return xml_resp
+
+        if (xml_resp_cache) {
+          return xml_resp_cache;
+        }
+        // Retrieve the object from indexedDB
+        xml_resp_cache = await getLocalSearchXMLData();
+        return xml_resp_cache;
+    }
+
+    function openDatabase() {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open("myDatabase", 1); // 设置为版本号 1, 用indexedDB替代localStorage, 因为indexedDB可以存储大量数据（几百 MB 到几 GB）, 而localStorage只能5MB左右, 
+            request.onupgradeneeded = function(event) {
+                db = event.target.result;
+                if (!db.objectStoreNames.contains("searchData")) {
+                    const objectStore = db.createObjectStore("searchData", { keyPath: "id" });
+                    // 可以创建索引以便于查询
+                    objectStore.createIndex("xmlDataIndex", "xml_data", { unique: false });
+                }
+            };
+            request.onsuccess = function(event) {
+                db = event.target.result;
+                console.log("[local search] - Database opened successfully.");
+                resolve(db);
+            };
+            request.onerror = function(event) {
+                console.error("[local search] - Database open error:", event.target.error);
+                reject(event.target.error);
+            };
+        });
+    }
+
+    async function setLocalSearchXMLData(xmlResponse) {
+        if (!db) {
+            await openDatabase();  // 确保数据库已打开
+        }
+        var transaction = db.transaction(["searchData"], "readwrite");
+        var objectStore = transaction.objectStore("searchData");
+
+        var xml_data = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // 存储数据，主键为 "id"，这里我们将 "id" 设为 "local_search_xml_data"
+        var data = { id: "local_search_xml_data", xml_data: xml_data };
+
+        var request = objectStore.put(data);  // 使用 put 可以插入或者更新数据
+        request.onsuccess = function() {
+            console.log("[local search] - Data successfully stored in indexedDB.");
+            localStorage.setItem('last_store_local_search_date', curDate.getDate());
+            is_load_xml_finished = 1;
+        };
+        request.onerror = function(event) {
+            console.log("[local search] - Error storing data: ", event.target.error);
+        };
+    }
+
+    // 封装 IndexedDB 操作为 Promise
+    function getLocalSearchXMLData() {
+        return new Promise((resolve, reject) => {
+            if (!db) {
+                reject("[local search] - Database is not initialized.");
+                return;
+            }
+            var transaction = db.transaction(["searchData"], "readonly");
+            var objectStore = transaction.objectStore("searchData");
+            var request = objectStore.get("local_search_xml_data");  // 使用 id 获取数据
+            request.onsuccess = function(event) {
+                if (request.result) {
+                    // 数据存在，成功处理
+                    resolve(request.result.xml_data);  // 解析成功并返回结果
+                } else {
+                    // 数据未找到，返回失败
+                    reject("Data not found");  // 抛出错误
+                }
+            };
+            request.onerror = function(event) {
+                // 错误处理
+                console.log("[local search] - Error retrieving data: ", event.target.error);
+                reject(event.target.error);  // 抛出错误
+            };
+        });
+    }
+
+    // 使用 async/await 来调用这个函数
+    async function loadSearchData() {
+        try {
+            if (!db) {
+                await openDatabase();  // 确保数据库已打开
+            }
+            await getLocalSearchXMLData();  // 等待结果
+            is_load_xml_finished = 1;
+            console.log("[local search] - load search.xml finished.");
+            // console.log("Retrieved data: ", result);
+        } catch (error) {
+            // console.error("Error: ", error);
+            console.log("[local search] - load search.xml not found.");
+            ajax_store_search_xml();
+        }
+    }
+
+    // var local_search_xml_data = localStorage.getItem('local_search_xml_data');
+    // if (local_search_xml_data) {
+    //     is_load_xml_finished = 1;
+    //     console.log("[local search] - load search.xml finished.");
+    // }
+    var last_store_local_search_date = localStorage.getItem('last_store_local_search_date');
+    // 只有在 localStorage 没有 search.xml数据或者 距离上次使用local search已经超过一天了才去取search.xml
+    // 节省流量
+    if (last_store_local_search_date != curDate.getDate()) {
+        // download search.xml
+        ajax_store_search_xml();
+    } else {
+        // 调用异步函数
+        loadSearchData();
+    }
+    
+
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/lib/wobble_window/wobblewindow.js"> </script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+<script type="text/javascript" src="/js/src/headroom.js"></script> 
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>

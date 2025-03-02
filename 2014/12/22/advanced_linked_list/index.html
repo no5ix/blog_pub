@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+
+<script>
+    (function(){
+        if(''){
+          const hostname = window.location.hostname;
+          if (!(hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192"))) {
+            // console.log("The website is not running on localhost.");
+            // alert('此文章并不公开, 输入文章密码方可阅读');
+            var password = prompt('此文章并不公开, 输入文章密码方可阅读');
+            if (password !== ''){
+              if (password != null) // 如果用户点击了确认而且密码错误的时候, 因为当password == null的时候说明用户点了取消
+              {
+                alert('Error!');
+              }
+              if (history.length > 1)
+              {
+                history.back();
+              }
+              else
+              {
+                window.location.href = "about:blank";
+              }
+            }
+          }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="CPP,DataStructure,Algo,noodle,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="只谈一下单链表, 链表实在是太重要, 是前面两篇说算法博客的基础, 了解了其应用和衍生, 再去了解其本身就有动力了 存储结构12345typedef struct Node&amp;#123;	DataType data;	struct Node *next;&amp;#125;Node, *Node_Ptr;   链表中第一个结点的存储位置叫做头指针 头指针和头结点不同，头结点即第一个结点，头指针是指向第一个结">
+<meta name="keywords" content="CPP,DataStructure,Algo,noodle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构四之链表进阶">
+<meta property="og:url" content="https://hulinhong.com/2014/12/22/advanced_linked_list/index.html">
+<meta property="og:site_name" content="烫">
+<meta property="og:description" content="只谈一下单链表, 链表实在是太重要, 是前面两篇说算法博客的基础, 了解了其应用和衍生, 再去了解其本身就有动力了 存储结构12345typedef struct Node&amp;#123;	DataType data;	struct Node *next;&amp;#125;Node, *Node_Ptr;   链表中第一个结点的存储位置叫做头指针 头指针和头结点不同，头结点即第一个结点，头指针是指向第一个结">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://hulinhong.com/2014/12/22/advanced_linked_list/advanced_linked_list_1.png">
+<meta property="og:updated_time" content="2025-03-02T14:31:48.989Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构四之链表进阶">
+<meta name="twitter:description" content="只谈一下单链表, 链表实在是太重要, 是前面两篇说算法博客的基础, 了解了其应用和衍生, 再去了解其本身就有动力了 存储结构12345typedef struct Node&amp;#123;	DataType data;	struct Node *next;&amp;#125;Node, *Node_Ptr;   链表中第一个结点的存储位置叫做头指针 头指针和头结点不同，头结点即第一个结点，头指针是指向第一个结">
+<meta name="twitter:image" content="https://hulinhong.com/2014/12/22/advanced_linked_list/advanced_linked_list_1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"scrollpercent":true,"onmobile":true,"dimmer":true,"body_content_height":0,"display_duration":150},
+    local_search: {"enable":true,"trigger":"auto","top_n_per_article":1},
+    fancybox: false,
+    mediumzoom: true,
+    darkmode_js: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"duration":222,"transition":{"header":"slideDownIn","menu":"slideDownIn","logo":"slideDownIn","post_block_else":"slideDownIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"slideDownIn","footer":"slideDownIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+
+  <title>数据结构四之链表进阶 | 烫</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">烫</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">烫烫烫烫烫</p>
+      
+  </div>
+
+  <div class="menu-item sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="menu-item site-search">
+    
+  
+  <div class="site-search-div">
+    <button class="search-icon fa fa-search" id="search-button"></button>
+    <input type="text" id="local-search-input" class="st-search-input">
+    <i id="local-search-close">×</i>
+  </div>
+
+
+<script type="text/javascript" id="local.search.active">
+    {/* var inputArea       = document.querySelector("#local-search-input");
+    inputArea.onclick   = function(){ getSearchFile(); this.focus(); }
+    inputArea.onkeydown = function(){ if(event.keyCode == 13) return false } */}
+</script>
+
+
+
+  </div>
+  <div id="local-search-result-pc" class="local-search-result-cls"></div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+       
+    </ul>
+  
+
+  
+    
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <div id="local-search-result-mobile" class="local-search-result-cls"></div>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2014/12/22/advanced_linked_list/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wasp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烫">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构四之链表进阶</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-12-22T23:19:21+00:00">
+                2014-12-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algo/" itemprop="url" rel="index">
+                    <span itemprop="name">Algo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <div class="post-tags">
+              
+                <a href="/tags/CPP/" rel="tag"><i class="fa fa-tag"></i> CPP</a>
+              
+                <a href="/tags/DataStructure/" rel="tag"><i class="fa fa-tag"></i> DataStructure</a>
+              
+                <a href="/tags/Algo/" rel="tag"><i class="fa fa-tag"></i> Algo</a>
+              
+                <a href="/tags/noodle/" rel="tag"><i class="fa fa-tag"></i> noodle</a>
+              
+            </div>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/12/13/SVN的UpdateItemToThisRevision和RevertToThisRevision和UpdateItemToRevision的区别/" rel="next" title="SVN的UpdateItemToThisRevision和RevertToThisRevision和UpdateItemToRevision的区别">
+                <i class="fa fa-chevron-left"></i> 
+                <p class="post-nav-pre-next-title">
+                  SVN的UpdateItemToThisRevision和RevertToThisRevision和UpdateItemToRevision的区别
+                </p> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/01/02/why_not_recursion_and_what_is_tail_recursion/" rel="prev" title="为什么不推荐递归以及什么是尾递归">
+              <p class="post-nav-pre-next-title">
+                  为什么不推荐递归以及什么是尾递归
+              </p> 
+              <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+
+      
+      
+
+      
+        <p>只谈一下单链表, 链表实在是太重要, 是前面两篇说算法博客的基础, 了解了其应用和衍生, 再去了解其本身就有动力了</p>
+<h1 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">typedef struct Node</span><br><span class="line">&#123;</span><br><span class="line">	DataType data;</span><br><span class="line">	struct Node *next;</span><br><span class="line">&#125;Node, *Node_Ptr;</span><br></pre></td></tr></table></figure>
+<img src="/2014/12/22/advanced_linked_list/advanced_linked_list_1.png">
+<ul>
+<li>链表中第一个结点的存储位置叫做头指针</li>
+<li>头指针和头结点不同，头结点即第一个结点，头指针是指向第一个结点的指针。链表中可以没有头结点，但不能没有头指针。</li>
+<li>如果链表有头结点，那么头指针就是指向头结点数据域的指针。</li>
+<li>单链表也可以没有头结点</li>
+</ul>
+<p><strong>头结点的优点: </strong></p>
+<ul>
+<li>头结点是为了操作的统一与方便而设立的，放在第一个元素结点之前，其数据域一般无意义（当然有些情况下也可存放链表的长度、用做监视哨等等）。</li>
+<li>有了头结点后，对在第一个元素结点前插入结点和删除第一个结点，其操作与对其它结点的操作统一了。</li>
+</ul>
+<h2 id="有头结点和无头结点的建立链表方法头插法"><a href="#有头结点和无头结点的建立链表方法头插法" class="headerlink" title="有头结点和无头结点的建立链表方法头插法"></a>有头结点和无头结点的建立链表方法头插法</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">include &lt;stdio.h&gt;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Link</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span>  elem;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Link</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;link;</span><br><span class="line"><span class="comment">//无头结点链表的头插法实现函数</span></span><br><span class="line"><span class="function">link * <span class="title">creatLink</span><span class="params">(<span class="keyword">int</span> * arc, <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="comment">//最初状态下，头指针 H 没有任何结点，所以，插入第一个元素，就相当于是创建结点 H</span></span><br><span class="line">    link * H =(link*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(link));</span><br><span class="line">    H-&gt;elem = arc[<span class="number">0</span>];</span><br><span class="line">    H-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="comment">//如果采用头插法插入超过 1 个元素，则可添加到第一个结点 H 之前</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i&lt;length; i++) &#123;</span><br><span class="line">        link * a = (link*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(link));</span><br><span class="line">        a-&gt;elem = arc[i];</span><br><span class="line">        <span class="comment">//插入元素时，首先将插入位置后的链表链接到新结点上</span></span><br><span class="line">        a-&gt;next = H;</span><br><span class="line">        <span class="comment">//然后再链接头指针 H</span></span><br><span class="line">        H = a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> H;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//有头结点链表的头插法实现函数</span></span><br><span class="line"><span class="function">link * <span class="title">HcreatLink</span><span class="params">(<span class="keyword">int</span> * arc, <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="comment">//创建头结点 H，其链表的头指针也是 H</span></span><br><span class="line">    link * H = (link*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(link));</span><br><span class="line">    H-&gt;elem = <span class="number">0</span>;</span><br><span class="line">    H-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="comment">//采用头插法创建链表</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i&lt;length; i++) &#123;</span><br><span class="line">        link * a = (link*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(link));</span><br><span class="line">        a-&gt;elem = arc[i];</span><br><span class="line">        <span class="comment">//首先将插入位置之后的链表链接到新结点 a 上</span></span><br><span class="line">        a-&gt;next = H-&gt;next;</span><br><span class="line">        <span class="comment">//将新结点 a 插入到头结点之后的位置</span></span><br><span class="line">        H-&gt;next = a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> H;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//链表的输出函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">(link *p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (p) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, p-&gt;elem);</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">3</span>] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span> &#125;;</span><br><span class="line">    <span class="comment">//采用头插法创建无头结点链表</span></span><br><span class="line">    link * H = creatLink(a, <span class="number">3</span>);</span><br><span class="line">    display(H);</span><br><span class="line">    <span class="comment">//采用头插法创建有头结点链表</span></span><br><span class="line">    link * head = HcreatLink(a, <span class="number">3</span>);</span><br><span class="line">    display(head);</span><br><span class="line">    <span class="comment">//使用完毕后，释放即可</span></span><br><span class="line">    <span class="built_in">free</span>(H);</span><br><span class="line">    <span class="built_in">free</span>(head);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3 2 1</span><br><span class="line">0 3 2 1</span><br></pre></td></tr></table></figure></p>
+<p>提示：没有 0 的为无头结点的头插法输出结果，有 0 的为有头结点的头插法的输出结果</p>
+<p><strong>. . .</strong><a id="more"></a></p>
+<h1 id="在O-1-时间删除链表结点"><a href="#在O-1-时间删除链表结点" class="headerlink" title="在O(1)时间删除链表结点"></a>在O(1)时间删除链表结点</h1><p>给定单链表的头指针和一个结点指针, 定义一个函数在 O(1)时间删除该结点.</p>
+<p>思路 : </p>
+<p>如果要遍历找到该结点的前一个结点p, 来改变结点p的下一个结点指向的这种解法肯定是O(n)时间复杂度了.<br><strong>那是不是一定需要得到被删除的结点的前一个结点呢？</strong><br>答案是否定的。我们可以很方便地得到要删除的结点的下一个结点。如果我们把下一个结点的内容复制到需要删除的结点上覆盖原有的内容，再把下一个结点删除，那是不是就相当于把当前需要删除的结点删除了？</p>
+<h1 id="找一个单链表的中间结点"><a href="#找一个单链表的中间结点" class="headerlink" title="找一个单链表的中间结点"></a>找一个单链表的中间结点</h1><p>算法思想 : </p>
+<p>(<strong>快慢指针的使用</strong>)设置两个指针，一个每次移动两个位置，一个每次移动一个位置，当第一个指针到达尾节点时，第二个指针就达到了中间节点的位置</p>
+<h1 id="判断链表中是否有环"><a href="#判断链表中是否有环" class="headerlink" title="判断链表中是否有环"></a>判断链表中是否有环</h1><p>算法思想 : </p>
+<p>(<strong>快慢指针的使用</strong>)链表中有环，其实也就是自相交. 用两个指针pslow和pfast从头开始遍历链表，pslow每次前进一个节点，pfast每次前进两个结点，若存在环，则pslow和pfast肯定会在环中相遇，若不存在，则pslow和pfast能正常到达最后一个节点</p>
+<h1 id="判断两个链表是否相交-假设两个链表均不带环"><a href="#判断两个链表是否相交-假设两个链表均不带环" class="headerlink" title="判断两个链表是否相交, 假设两个链表均不带环"></a>判断两个链表是否相交, 假设两个链表均不带环</h1><p>算法思想 : </p>
+<p>如果两个链表相交于某一节点，那么在这个相交节点之后的所有节点都是两个链表所共有的。也就是说，如果两个链表相交，那么最后一个节点肯定是共有的。先遍历第一个链表，记住最后一个节点，然后遍历第二个链表，到最后一个节点时和第一个链表的最后一个节点做比较，如果相同，则相交，否则不相交。</p>
+<h1 id="从尾到头打印链表"><a href="#从尾到头打印链表" class="headerlink" title="从尾到头打印链表"></a>从尾到头打印链表</h1><p>有两种解法 : </p>
+<ul>
+<li><strong>反转链表解法</strong> : 反转链表之后再从头到尾打印 (这样会改变原来的链表)</li>
+<li><strong>栈存储解法</strong>(比较简单, 本文不详讲了) : 用栈存储之后再逐个出栈一一打印 (这样不会改变原来的链表)</li>
+</ul>
+<h2 id="反转链表解法"><a href="#反转链表解法" class="headerlink" title="反转链表解法"></a>反转链表解法</h2><p>比如一个链表:<br>头结点-&gt;A-&gt;B-&gt;C-&gt;D-&gt;E<br>反转成为:<br>头结点-&gt;E-&gt;D-&gt;C-&gt;B-&gt;A</p>
+<h3 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想 :"></a>算法思想 :</h3><p>第一轮 : 头结点-&gt;A-&gt;B-&gt;C-&gt;D-&gt;E<br>第二轮 : 头结点-&gt;B-&gt;A-&gt;C-&gt;D-&gt;E<br>第三轮 : 头结点-&gt;C-&gt;B-&gt;A-&gt;D-&gt;E<br>第四轮 : 头结点-&gt;D-&gt;C-&gt;B-&gt;A-&gt;E<br>第五轮 : 头结点-&gt;E-&gt;D-&gt;C-&gt;B-&gt;A</p>
+<h3 id="算法cpp实现："><a href="#算法cpp实现：" class="headerlink" title="算法cpp实现："></a>算法cpp实现：</h3><p>手写的代码， 已经跑过了，可直接用<br>下面代码中反转函数为 ReverseList ， 且有详细注释以及总结</p>
+<figure class="highlight c++"><figcaption><span>LinkedList.h</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TList</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">TList</span> *<span class="title">pNext</span>;</span></span><br><span class="line">	<span class="keyword">void</span> *pData;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">TList</span> *<span class="title">LPTLIST</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AppendElem</span><span class="params">(LPTLIST *ppstHead)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ReverseList</span><span class="params">(LPTLIST *ppstHead)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintList</span><span class="params">(LPTLIST *ppstHead)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DestroyList</span><span class="params">(LPTLIST *ppstHead)</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><figcaption><span>LinkedList.cpp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"LinkedList.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AppendElem</span><span class="params">(LPTLIST *ppstHead)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!ppstHead)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"ppstHead is null"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!*ppstHead)</span><br><span class="line">	&#123;</span><br><span class="line">		*ppstHead = <span class="keyword">new</span> TList;</span><br><span class="line">		<span class="keyword">if</span> (!*ppstHead)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"*ppstHead malloc error"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		(*ppstHead)-&gt;pData = <span class="literal">nullptr</span>;</span><br><span class="line">		(*ppstHead)-&gt;pNext = <span class="literal">nullptr</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	LPTLIST temp_elem_ptr = *ppstHead;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"input '.' to finish"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">char</span> key_data = <span class="string">'.'</span>;</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; key_data;</span><br><span class="line">		<span class="keyword">if</span> (key_data != <span class="string">'.'</span>)</span><br><span class="line">		&#123;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">char</span> * temp_key_data = <span class="keyword">new</span> <span class="keyword">char</span>;</span><br><span class="line">			<span class="keyword">if</span> (!temp_key_data)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"temp_key_data malloc error"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			*temp_key_data = key_data;</span><br><span class="line"></span><br><span class="line">			LPTLIST new_elem_ptr = <span class="keyword">new</span> TList;</span><br><span class="line">			<span class="keyword">if</span> (!new_elem_ptr)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"new_elem malloc error"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			new_elem_ptr-&gt;pData = temp_key_data;</span><br><span class="line">			new_elem_ptr-&gt;pNext = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">			temp_elem_ptr-&gt;pNext = new_elem_ptr;</span><br><span class="line">			temp_elem_ptr = new_elem_ptr;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 将单链表反转, 要求只能扫描链表一次.</span></span><br><span class="line"><span class="comment">*@param ppstHead 指向链表首节点的指针</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ReverseList</span><span class="params">(LPTLIST *ppstHead)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!ppstHead)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"ppstHead is null"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!*ppstHead)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"*ppstHead is null"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 我们只用上述算法思想中第二轮来说明一下此算法, 即为 "第二轮 : 头结点-&gt;B-&gt;A-&gt;C-&gt;D-&gt;E"</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// origin_first_elem_ptr指针一直指向着原来链表头指针后面的那个元素</span></span><br><span class="line">	<span class="comment">//（即原第一个元素， 这个指针的指向一直都不会变， 一直都是指向A）</span></span><br><span class="line">	LPTLIST origin_first_elem_ptr = (*ppstHead)-&gt;pNext; </span><br><span class="line"></span><br><span class="line">	LPTLIST temp_elem_ptr = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 需要两个判断, 不然当 origin_first_elem_ptr 为NULL的时候会出错, </span></span><br><span class="line">	<span class="comment">// 且 origin_first_elem_ptr -&gt;pNext为NULL的时候也没必要继续循环了</span></span><br><span class="line">	<span class="keyword">while</span> (origin_first_elem_ptr &amp;&amp; origin_first_elem_ptr-&gt;pNext)	 </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 临时保存一下元素A后面的后面那个元素C</span></span><br><span class="line">		temp_elem_ptr = origin_first_elem_ptr-&gt;pNext-&gt;pNext;	</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 让B指向A : B-&gt;A (第1步)</span></span><br><span class="line">		origin_first_elem_ptr-&gt;pNext-&gt;pNext = (*ppstHead)-&gt;pNext;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 把目前第一个元素A替换为原第一个元素的后面那个元素B : 头结点-&gt;B (第2步)</span></span><br><span class="line">		(*ppstHead)-&gt;pNext = origin_first_elem_ptr-&gt;pNext;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 原第一个元素A的pnext指到它后面的后面那个元素C : A-&gt;C (第3步)</span></span><br><span class="line">		origin_first_elem_ptr-&gt;pNext = temp_elem_ptr;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 综上所述只需要3步, 链表反转需要两个指针， </span></span><br><span class="line">	<span class="comment">// 见上面两个指针, 一个 origin_first_elem_ptr, 一个 temp_elem_ptr</span></span><br><span class="line">	<span class="comment">// 且要注意while条件中循环的是origin_first_elem_ptr, 而非ppstHead</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintList</span><span class="params">(LPTLIST *ppstHead)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!ppstHead)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"ppstHead is null"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!*ppstHead)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"*ppstHead is null"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	LPTLIST temp_elem_ptr = *ppstHead;</span><br><span class="line">	<span class="keyword">while</span> (temp_elem_ptr = temp_elem_ptr-&gt;pNext)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; *(<span class="keyword">char</span> *)(temp_elem_ptr-&gt;pData) &lt;&lt; <span class="string">"-&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DestroyList</span><span class="params">(LPTLIST *ppstHead)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!ppstHead)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"ppstHead is null"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!*ppstHead)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"*ppstHead is null"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	LPTLIST temp_elem_ptr = *ppstHead, temp_next_ptr = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (temp_elem_ptr)</span><br><span class="line">	&#123;</span><br><span class="line">		temp_next_ptr = temp_elem_ptr-&gt;pNext;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">delete</span> (<span class="keyword">char</span> *)(temp_elem_ptr-&gt;pData);</span><br><span class="line">		temp_elem_ptr-&gt;pData = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">delete</span> temp_elem_ptr;</span><br><span class="line">		temp_elem_ptr = temp_next_ptr;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"DestroyList finished."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><figcaption><span>main.cpp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"LinkedList.h"</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	TList *test_list = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">	AppendElem(&amp;test_list);</span><br><span class="line">	PrintList(&amp;test_list);</span><br><span class="line"></span><br><span class="line">	ReverseList(&amp;test_list);</span><br><span class="line">	PrintList(&amp;test_list);</span><br><span class="line"></span><br><span class="line">	DestroyList(&amp;test_list);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<!-- 
+## 栈存储解法
+
+``` c++
+
+#include <stack>
+#include <stdio.h>
+
+using std::stack;
+
+struct ListNode
+{
+    void *pData;
+    ListNode *pNext;
+};
+
+void AppendListNode(ListNode *pHead, void *Data)
+{
+    if (!pHead)
+    {
+        return;
+    }
+    ListNode *pEndNode = NULL;
+    ListNode *pTemp = pHead;
+    while (pTemp)
+    {
+        pEndNode = pTemp;
+        pTemp = pTemp->pNext;
+    }
+    ListNode *NewListNode = new ListNode;
+    if (!NewListNode)
+    {
+        return;
+    }
+    NewListNode->pData = Data;
+    NewListNode->pNext = NULL;
+    pEndNode->pNext = NewListNode;
+}
+
+void PrintList(ListNode *pHead)
+{
+    if (!pHead)
+    {
+        return;
+    }
+    while (pHead = pHead->pNext)
+    {
+        printf( "%d ->", *(int *)(pHead->pData) );
+    }
+}
+
+void PrintListReversingly_Iteratively(ListNode *pHead)
+{
+    if (!pHead)
+    {
+        return;
+    }
+    stack<ListNode> stackListNode;
+    while (pHead = pHead->pNext)
+    {
+        stackListNode.push(*pHead);
+    }
+
+    while (!stackListNode.empty())
+    {
+        printf("%d -> ", *((int *)(stackListNode.top().pData)));
+        stackListNode.pop();
+    }
+}
+
+int main(int argc, char* argv[])
+{
+    ListNode* TestListNode = new ListNode;
+    TestListNode->pData = NULL;
+    TestListNode->pNext = NULL;
+
+    int Data1 = 5;
+    int Data2 = 6;
+    int Data3 = 7;
+
+    AppendListNode(TestListNode, &Data1);
+    AppendListNode(TestListNode, &Data2);
+    AppendListNode(TestListNode, &Data3);
+
+    PrintListReversingly_Iteratively(TestListNode);
+
+    return 0;
+}
+
+``` -->
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/CPP/" rel="tag"><i class="fa fa-tag"></i> CPP</a>
+            
+              <a href="/tags/DataStructure/" rel="tag"><i class="fa fa-tag"></i> DataStructure</a>
+            
+              <a href="/tags/Algo/" rel="tag"><i class="fa fa-tag"></i> Algo</a>
+            
+              <a href="/tags/noodle/" rel="tag"><i class="fa fa-tag"></i> noodle</a>
+            
+          </div>
+        
+
+        
+        
+        
+
+        
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2014/12/13/SVN的UpdateItemToThisRevision和RevertToThisRevision和UpdateItemToRevision的区别/" rel="next" title="SVN的UpdateItemToThisRevision和RevertToThisRevision和UpdateItemToRevision的区别">
+                  <i class="fa fa-chevron-left"></i> 
+                  <p class="post-nav-pre-next-title">
+                    SVN的UpdateItemToThisRevision和RevertToThisRevision和UpdateItemToRevision的区别
+                  </p> 
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2015/01/02/why_not_recursion_and_what_is_tail_recursion/" rel="prev" title="为什么不推荐递归以及什么是尾递归">
+                <p class="post-nav-pre-next-title">
+                    为什么不推荐递归以及什么是尾递归
+                </p> 
+                <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+
+        
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  
+
+  <aside id="sidebar" class="sidebar">
+
+    
+      
+        <div id="sidebar-dimmer"></div>
+      
+    
+
+    <div class="sidebar-inner">
+    
+      <div class="sidebar-toggle-inside motion-element">
+        <div class="sidebar-toggle-line-wrap">
+          <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+        </div>
+      </div>
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <a href="/" class="site-author-image" rel="start" style="border:none">
+            <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Wasp">
+          </a>
+          <p class="site-author-name" itemprop="name">Wasp</p>
+           
+              <p class="site-description motion-element" itemprop="description">It is recommended to use Chrome/Firefox/Safari to read this blog.</p>
+          
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">279</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">102</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+          <div class="site-state-item site-state-about">
+            <a href="/about/">
+              <span class="site-state-item-about fa fa-fw fa-user"></span>
+              <span class="site-state-item-name">about</span>
+            </a>
+          </div>
+          
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+          
+          <!-- 网易云音乐 -->
+            <!-- <div class="netease-cloud-music"> -->
+              <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=110 src="//music.163.com/outchain/player?type=0&id=992743594&auto=0&height=90"></iframe> -->
+            <!-- </div> -->
+          <!-- 网易云音乐 -->
+
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              friendship links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://119.23.17.57" title="ksun的博客" target="_blank">ksun的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://mp.weixin.qq.com/mp/homepage?__biz=MzU3MTUyNzg0NQ==&hid=1&sn=7a3ae61b7af714f75d68e7ae826a2d2c&scene=18#wechat_redirect" title="你有图么我有故事" target="_blank">你有图么我有故事</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#存储结构"><span class="nav-text">存储结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#有头结点和无头结点的建立链表方法头插法"><span class="nav-text">有头结点和无头结点的建立链表方法头插法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在O-1-时间删除链表结点"><span class="nav-text">在O(1)时间删除链表结点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#找一个单链表的中间结点"><span class="nav-text">找一个单链表的中间结点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#判断链表中是否有环"><span class="nav-text">判断链表中是否有环</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#判断两个链表是否相交-假设两个链表均不带环"><span class="nav-text">判断两个链表是否相交, 假设两个链表均不带环</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从尾到头打印链表"><span class="nav-text">从尾到头打印链表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#反转链表解法"><span class="nav-text">反转链表解法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法思想"><span class="nav-text">算法思想 :</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法cpp实现："><span class="nav-text">算法cpp实现：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wasp</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <!--
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      
+        <span id="scrollpercent"><span>0</span>%</span>
+      
+    </div>
+    -->
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/mediumzoom/medium-zoom.js?v=1.1.0"></script>
+
+
+
+
+  
+
+
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+
+    let db; // 全局数据库变量
+    var is_load_xml_finished = 0;
+    var keywords = [];
+    var curDate = new Date();
+    var xml_resp_cache = null;
+    var temp_keyword = "";
+
+    'use strict';
+
+    var content_id = isMobile() ? "local-search-result-mobile" : "local-search-result-pc";
+    var input_box = document.getElementById('local-search-input');
+    var resultContent = document.getElementById(content_id);
+    const searchButton = document.getElementById('search-button');
+    const closeButton = document.getElementById('local-search-close');
+
+    var str = "";
+
+    // 是否为第一个字母被键入的标志位
+    var first_char_flag = 0;
+
+    // 因为在移动设备上, 点击搜索之后会 scroll 到页面顶部, 所以需要记录之前的页面x, y坐标值, 以便于搜索完点击 close 按钮之后 scroll 回原来的页面坐标值.
+    var last_page_x = 0;
+    var last_page_y = 0;
+
+    function CloseLocalSearch(when_delete_all_on_mobile=false)
+    {
+        setTimeout(function() {  // 这个setTimeout的目的是为了解决当使用中文输入法输入英文的时候敲下enter键的那一瞬间发生从有文字到没文字又到有文字, 而下方window.scrollTo这个还没执行到, 会导致页面scroll乱滚; 加了这个timeout之后就可以检测是否属于这种情况
+            if (temp_keyword.length > 0) {
+                return;
+            }
+            first_char_flag = 0;
+            $('#local-search-input').val('');
+            // $('#local-search-close').hide();
+            closeButton.classList.remove("show");
+
+            // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownOut', 200);
+            if (isMobile())
+            {
+              // $('body').scrollTop(last_page_y);  // scrollTop 有兼容性问题
+              // $('#' + content_id).hide();
+
+                $('#' + content_id).velocity('stop').velocity( 'transition.slideUpOut', 300);
+
+                if (!when_delete_all_on_mobile) {
+                    input_box.blur();
+                    // setTimeout(() => {
+                    //     closeButton.classList.remove("move");
+                    // }, 1000);
+                    input_box.classList.remove('expanded');
+                } else {
+                    return;
+                }
+                const element = document.getElementById('local-search-result-mobile');
+                let bottomY = element.offsetTop + element.offsetHeight;  // local search result底部相对于整个页面的 Y 坐标
+                if (bottomY == 0) {  // 说明 local search result底部 比当前页面还要长
+                    scrollTo(last_page_x, last_page_y);
+                    return;
+                }
+                // console.log("rrrrrrretrn " + bottomY);
+                // console.log("rrrrrrretrnyyy " + window.scrollY);
+                if (window.scrollY > bottomY) {  // 如果用户滚动到比 local search result的底部还要低, 那说明他不想回到他search之前的位置了
+                    return;
+                }
+                setTimeout(function() {
+                    // scrollTo(last_page_x, last_page_y);
+                    window.scrollTo({
+                        top: last_page_y,
+                        left: last_page_x,
+                        behavior: "smooth",
+                        duration: 150 // 滚动动画持续x毫秒
+                    });
+                }, 150);
+            }
+            else
+            {
+                $('#' + content_id).attr("headroom_special_attr","true");   //headroom_special_attr是用来, 当页面滚动的时候local search的结果页面也会跟着一起被收起, 当不写这行代码的时候, 空的result会在页面往上滚的时候出现 ...
+                resultContent.classList.remove("smooth-transition");  // 这个是为了"当页面滚动的时候local search的结果页面也会跟着一起被收起"的时候有一个平滑滚动的动画, 这个不能直接写在css里, 不然会影响 velocity的动画
+
+                $('#' + content_id).velocity('stop').velocity( 'transition.slideUpOut', 800);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.bounceOut', 800);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.slideUpBigOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.bounceUpOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.expandOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.whirlOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.shrinkOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.swoopOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.flipBounceXOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.fadeOut', 600);
+            }
+        }, 150);
+    }
+
+    async function handleSearch()
+    {
+        if (keywords.length <= 0) {
+            return;
+        }
+        resultContent.innerHTML = "";
+    //   $('#local-search-close').show();
+    
+        closeButton.classList.add("show");
+
+        // 0x04. perform local searching
+        if (is_load_xml_finished == 0)
+        {
+            var local_search_tips = 
+                "<span class='local-search-empty'>" + "第一次搜索可能较慢, 先思考一个经典算法问题, 跳台阶:" + "</span>" +
+                "<span class='local-search-empty'>" + "一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个6级的台阶总共有多少种跳法?n级呢?" + "</span>";
+            var ProgressBar = 
+                "<div class='progress-bar'>" +
+                    "<div class='progress-bar-charge'></div>" +
+                "</div>";
+            resultContent.innerHTML = 
+                "<ul class='local-search-empty-ul'>" + 
+                local_search_tips +
+                ProgressBar;
+        }
+        else
+        {
+            // Retrieve the object from local storage
+            var xml_resp = await retrieve_search_xml()
+
+            xml_resp.forEach(function (data) {
+            var isMatch = true;
+            var content_index = [];
+            if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+            }
+            var is_encrypted = data.encrypted.trim() == '1'
+            var is_sensitive = CONFIG.local_search.sensitive_word && data_content.indexOf(CONFIG.local_search.sensitive_word) >= 0
+            var orig_data_title = data.title.trim();
+            var data_title = orig_data_title.toLowerCase();
+            var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+            var data_content = orig_data_content.toLowerCase();
+            var data_url = decodeURIComponent(data.url);
+            var index_title = -1;
+            var index_content = -1;
+            var first_occur = -1;
+            // only match artiles with not empty contents
+            if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                index_title = data_title.indexOf(keyword);
+                // index_content = (is_sensitive || is_encrypted) ? -1 : data_content.indexOf(keyword);  // 不能搜加密文章,
+                index_content = data_content.indexOf(keyword); //  这样可以搜加密了的文章, 但是搜索结果框不显示正文只显示标题
+
+                if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                } else {
+                    if (index_content < 0) {
+                    index_content = 0;
+                    }
+                    if (i == 0) {
+                    first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                }
+                });
+            } else {
+                isMatch = false;
+            }
+            // 0x05. show search results
+            if (isMatch) {
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                var match_content = "";
+                
+                const hostname = window.location.hostname;
+                if ((!is_sensitive && !is_encrypted) || (hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192")))
+                {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if (start < 0) {
+                    start = 0;
+                    }
+                    if (start == 0) {
+                    end = 100;
+                    }
+                    if (end > content.length) {
+                    end = content.length;
+                    }
+                    match_content = content.substr(start, end);
+                }
+                // highlight all keywords
+                var regS = "";
+                if (match_content != "")
+                {
+                    keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    });
+                }
+                else
+                {
+                    keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    });
+                }
+                str += "<li><a href='" + data_url + "' class='search-result-title' target='_blank'>" + orig_data_title + "</a>";
+                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+            }
+            });
+
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+            return resultContent.innerHTML = 
+                "<ul class='local-search-empty-ul'><span class='local-search-empty'>404.<span></ul>";
+            }
+            resultContent.innerHTML = str;
+      }
+    }
+
+    input_box.addEventListener('input', function () {
+        // 0x03. parse query to keywords list
+        str = '<ul class=\"search-result-list\">';
+        temp_keyword = this.value.trim();
+        if (temp_keyword.length <= 0) {
+            CloseLocalSearch(true);
+            return;
+        }
+
+        keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
+        handleSearch();
+
+        // 当用户键入第一个字母的时候的动画处理逻辑 : 
+        // 当 first_char_flag 为 0 的时候, 
+        // 要播放一个动画
+        if (first_char_flag == 0)
+        {
+            // $('body').scrollTop(0);
+            let duration = 600;
+            if (isMobile())
+            {
+                last_page_x = window.scrollX;
+                last_page_y = window.scrollY;
+                scrollTo(0,0);
+              // $('body').scrollTop(0);
+            } else {
+                $('#' + content_id).removeAttr("headroom_special_attr");  // headroom_special_attr是用来 当页面滚动的时候local search的结果页面也会跟着一起被收起, 当不写这行代码的时候, 空的result会在页面往上滚的时候出现 ...
+                  setTimeout(()=>{
+                      resultContent.classList.add("smooth-transition"); // 这个是为了"当页面滚动的时候local search的结果页面也会跟着一起被收起"的时候有一个平滑滚动的动画, 这个不能直接写在css里, 不然会影响 velocity
+                  }, duration + 200); 
+            }
+            first_char_flag = 1;
+
+            if (isMobile()) {
+                $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', duration);
+            } else {
+                $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', duration);
+                  // $('#' + content_id).velocity('stop').velocity('transition.bounceIn', 800);
+                //   $('.local-search-result-cls ul li').velocity('stop').velocity('transition.bounceUpIn', 1200);
+            }
+          // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownBigIn', 1000);
+        }
+    });
+
+    // 这里要不要用 click 要用 pointerup, 不然 mac safari 触摸板 tap 得tap两次才能触发这里
+    $(document).on('pointerup', '#local-search-close', function(event) {
+        temp_keyword = "";
+        CloseLocalSearch();
+    });
+
+    if (isMobile()) {
+        input_box.addEventListener("blur", function() {  // when input lose the focus
+            $('#local-search-input').val('');
+            if (temp_keyword.length > 0) {
+                if (str.indexOf('<li>') === -1) {  // 说明local search 没搜到东西
+                    window.scrollTo({
+                        top: last_page_y,
+                        left: last_page_x,
+                        behavior: "smooth",
+                        duration: 150 // 滚动动画持续x毫秒
+                    });
+                }
+                // closeButton.classList.add("move");
+                setTimeout(function() {
+                    input_box.classList.remove('expanded');
+                }, 450);
+            } else {
+                window.scrollTo({  // 当失焦的时候且输入框没文字的时候就滚回原来的位置
+                    top: last_page_y,
+                    left: last_page_x,
+                    behavior: "smooth",
+                    duration: 150 // 滚动动画持续x毫秒
+                });
+                input_box.classList.remove('expanded');
+            }
+            setTimeout(()=> {
+                searchButton.disabled = false;
+            }, 600);
+            // console.log("输入框失去焦点");
+        });
+    }
+
+    // 给按钮添加点击事件
+    if (isMobile()) {
+        searchButton.addEventListener('click', function() {  // 这里要用click不要用 pointerup, 不然ios可能弹不出键盘
+            // 使输入框渐变显示
+            searchButton.disabled = true;  // 点击之后就禁用, 直到input失焦
+            input_box.focus();
+            if (temp_keyword.length > 0) {
+                // closeButton.classList.remove("move");
+                // setTimeout(function() {
+                    input_box.classList.add('expanded');
+                    setTimeout(function() {
+                        $('#local-search-input').val(temp_keyword);
+                    }, 200);
+                // }, 450);
+            } else {
+                // setTimeout(()=> {
+                    input_box.classList.add('expanded');
+                // }, 80);
+            }
+        });
+    }
+
+    // 你的代码在 document 上监听 click 事件，并检查点击的目标是否在 content_id 指定的元素内部。如果点击的目标不在该元素内，则执行 CloseLocalSearch()。
+    // $(document).click(function(event) {
+    //     if (isMobile()) {
+    //         return;
+    //     } else {
+    //         if (!$(event.target).closest('#' + content_id).length) {
+    //             temp_keyword = "";
+    //             CloseLocalSearch();
+    //         }
+    //     }
+    // });
+
+    $(document).keyup(function(event){
+      switch(event.keyCode) {
+        case 27:
+          // alert("ESC");
+          temp_keyword = "";
+          CloseLocalSearch();
+      }
+    });
+
+    function isMobile() {
+      // console.log(document.body.clientWidth);
+      return document.body.clientWidth < 768
+    }
+
+    {/* function store_search_xml(xmlResponse) {
+        var entries = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // Put the object into storage
+        localStorage.setItem('local_search_xml_data', JSON.stringify(entries));
+        localStorage.setItem('last_store_local_search_date', curDate.getDate());
+        is_load_xml_finished = 1;
+        console.log("[local search] - store search.xml finished.");
+    } */}
+
+    function ajax_store_search_xml() {
+        console.log("[local search] - ajax downloading search.xml ...");
+        $.ajax({
+            url: "/search.xml",
+            dataType: "xml",
+            success: function (xmlResponse) {
+                setLocalSearchXMLData(xmlResponse);
+                // 如果输入框有文字, 等待下载 xml完毕之后再弹出结果
+                if (temp_keyword.length > 0) {
+                    handleSearch();
+                    $('.local-search-result-cls ul li').velocity('stop').velocity('transition.swoopIn', 1200);
+                }
+            }
+        });
+    }
+
+    async function retrieve_search_xml() {
+        // // Retrieve the object from local storage
+        // var retrievedObject = localStorage.getItem('local_search_xml_data');
+        // var xml_resp = JSON.parse(retrievedObject)
+        // return xml_resp
+
+        if (xml_resp_cache) {
+          return xml_resp_cache;
+        }
+        // Retrieve the object from indexedDB
+        xml_resp_cache = await getLocalSearchXMLData();
+        return xml_resp_cache;
+    }
+
+    function openDatabase() {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open("myDatabase", 1); // 设置为版本号 1, 用indexedDB替代localStorage, 因为indexedDB可以存储大量数据（几百 MB 到几 GB）, 而localStorage只能5MB左右, 
+            request.onupgradeneeded = function(event) {
+                db = event.target.result;
+                if (!db.objectStoreNames.contains("searchData")) {
+                    const objectStore = db.createObjectStore("searchData", { keyPath: "id" });
+                    // 可以创建索引以便于查询
+                    objectStore.createIndex("xmlDataIndex", "xml_data", { unique: false });
+                }
+            };
+            request.onsuccess = function(event) {
+                db = event.target.result;
+                console.log("[local search] - Database opened successfully.");
+                resolve(db);
+            };
+            request.onerror = function(event) {
+                console.error("[local search] - Database open error:", event.target.error);
+                reject(event.target.error);
+            };
+        });
+    }
+
+    async function setLocalSearchXMLData(xmlResponse) {
+        if (!db) {
+            await openDatabase();  // 确保数据库已打开
+        }
+        var transaction = db.transaction(["searchData"], "readwrite");
+        var objectStore = transaction.objectStore("searchData");
+
+        var xml_data = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // 存储数据，主键为 "id"，这里我们将 "id" 设为 "local_search_xml_data"
+        var data = { id: "local_search_xml_data", xml_data: xml_data };
+
+        var request = objectStore.put(data);  // 使用 put 可以插入或者更新数据
+        request.onsuccess = function() {
+            console.log("[local search] - Data successfully stored in indexedDB.");
+            localStorage.setItem('last_store_local_search_date', curDate.getDate());
+            is_load_xml_finished = 1;
+        };
+        request.onerror = function(event) {
+            console.log("[local search] - Error storing data: ", event.target.error);
+        };
+    }
+
+    // 封装 IndexedDB 操作为 Promise
+    function getLocalSearchXMLData() {
+        return new Promise((resolve, reject) => {
+            if (!db) {
+                reject("[local search] - Database is not initialized.");
+                return;
+            }
+            var transaction = db.transaction(["searchData"], "readonly");
+            var objectStore = transaction.objectStore("searchData");
+            var request = objectStore.get("local_search_xml_data");  // 使用 id 获取数据
+            request.onsuccess = function(event) {
+                if (request.result) {
+                    // 数据存在，成功处理
+                    resolve(request.result.xml_data);  // 解析成功并返回结果
+                } else {
+                    // 数据未找到，返回失败
+                    reject("Data not found");  // 抛出错误
+                }
+            };
+            request.onerror = function(event) {
+                // 错误处理
+                console.log("[local search] - Error retrieving data: ", event.target.error);
+                reject(event.target.error);  // 抛出错误
+            };
+        });
+    }
+
+    // 使用 async/await 来调用这个函数
+    async function loadSearchData() {
+        try {
+            if (!db) {
+                await openDatabase();  // 确保数据库已打开
+            }
+            await getLocalSearchXMLData();  // 等待结果
+            is_load_xml_finished = 1;
+            console.log("[local search] - load search.xml finished.");
+            // console.log("Retrieved data: ", result);
+        } catch (error) {
+            // console.error("Error: ", error);
+            console.log("[local search] - load search.xml not found.");
+            ajax_store_search_xml();
+        }
+    }
+
+    // var local_search_xml_data = localStorage.getItem('local_search_xml_data');
+    // if (local_search_xml_data) {
+    //     is_load_xml_finished = 1;
+    //     console.log("[local search] - load search.xml finished.");
+    // }
+    var last_store_local_search_date = localStorage.getItem('last_store_local_search_date');
+    // 只有在 localStorage 没有 search.xml数据或者 距离上次使用local search已经超过一天了才去取search.xml
+    // 节省流量
+    if (last_store_local_search_date != curDate.getDate()) {
+        // download search.xml
+        ajax_store_search_xml();
+    } else {
+        // 调用异步函数
+        loadSearchData();
+    }
+    
+
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/lib/wobble_window/wobblewindow.js"> </script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+<script type="text/javascript" src="/js/src/headroom.js"></script> 
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
