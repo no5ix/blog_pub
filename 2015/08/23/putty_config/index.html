@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+
+<script>
+    (function(){
+        if(''){
+			function checkPassword(password) {
+				password = password.trim();
+				if (password !== ''){
+					if (password != null) // 如果用户点击了确认而且密码错误的时候, 因为当password == null的时候说明用户点了取消
+					{
+						alert('Error!');
+					}
+					if (history.length > 1)
+					{
+						history.back();
+					}
+					else
+					{
+						window.location.href = "about:blank";
+					}
+				}
+			}
+
+			var password_verify_on_local = false;
+			const hostname = window.location.hostname;
+			if (password_verify_on_local || (!(hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192")))) {
+				
+				// if (window.innerWidth < 768) {
+
+				// 	window.onload = function () {
+				// 		// 创建遮罩层
+				// 		const overlay = document.createElement("div");
+				// 		// 创建输入框容器
+				// 		overlay.innerHTML = `
+				// 			<div class="password-input-box">
+				// 				<p>Open Sesame</p>
+				// 				<input type="password" id="passwordInput" style="padding: 10px; width: 200px;">
+				// 				<div style="margin-top: 10px;">
+				// 				<button id="confirmBtn">ok</button>
+				// 				<button id="cancelBtn" style="margin-left: 10px;">cancel</button>
+				// 				</div>
+				// 			</div>
+				// 			`;
+				// 		overlay.classList.add("password-overlay");
+				// 		document.body.style.overflow = "hidden"; // 禁止body滚动
+				// 		document.body.appendChild(overlay);
+
+				// 		setTimeout(() => {
+				// 			const input = document.getElementById("passwordInput");
+				// 			input.focus(); // 自动弹出键盘, 经测试, 手机上弹不出来, 所以放弃
+				// 			// console.log("asdfasdfa??tantantan");
+
+				// 			function confirmPassword() {
+				// 				const password = input.value;
+				// 				if (password) {
+				// 					alert("你输入的密码是: " + password);
+				// 					document.body.removeChild(overlay);
+				// 				} else {
+				// 					alert("请输入密码");
+				// 				}
+				// 			}
+
+				// 			// 按回车确认
+				// 			input.addEventListener("keydown", function (event) {
+				// 				if (event.key === "Enter") {
+				// 					confirmPassword();
+				// 				}
+				// 			});
+				// 			// 点击确定按钮
+				// 			document.getElementById("confirmBtn").onclick = confirmPassword;
+				// 			// 点击取消按钮
+				// 			document.getElementById("cancelBtn").onclick = function () {
+				// 				document.body.removeChild(overlay);
+				// 			};
+				// 		}, 1000);
+				// 	};
+
+				// } else {
+					var password = prompt('Open Sesame');
+					checkPassword(password);
+				// }
+
+			}
+
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="VBox,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="平时工作学习必须要使用Windows，在SSH远程连接软件里Putty算是用得比较顺手的，而且很小巧。但是每次输入密码很麻烦，还容易输错，OpenSSH可以利用密钥来自动登陆，如此一来方便了不少。配置过程分为三步：1、生成公钥和私钥先要下载一个叫puttygen的软件（下载见附件），在Windows端生成公钥和私钥。点击Generate开始生成在生成过程中用鼠标在进度条下面的空白处乱晃几下，产生随">
+<meta name="keywords" content="VBox">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Putty配置">
+<meta property="og:url" content="https://hulinhong.com/2015/08/23/putty_config/index.html">
+<meta property="og:site_name" content="🚙">
+<meta property="og:description" content="平时工作学习必须要使用Windows，在SSH远程连接软件里Putty算是用得比较顺手的，而且很小巧。但是每次输入密码很麻烦，还容易输错，OpenSSH可以利用密钥来自动登陆，如此一来方便了不少。配置过程分为三步：1、生成公钥和私钥先要下载一个叫puttygen的软件（下载见附件），在Windows端生成公钥和私钥。点击Generate开始生成在生成过程中用鼠标在进度条下面的空白处乱晃几下，产生随">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://hulinhong.com/img/putty_auto_login_ssh/113555117.png">
+<meta property="og:image" content="https://hulinhong.com/img/putty_auto_login_ssh/113555442.png">
+<meta property="og:image" content="https://hulinhong.com/img/putty_auto_login_ssh/113555424.png">
+<meta property="og:image" content="https://hulinhong.com/img/putty_auto_login_ssh/131658317.png">
+<meta property="og:image" content="https://hulinhong.com/img/putty_auto_login_ssh/131248930.png">
+<meta property="og:image" content="https://hulinhong.com/img/putty_auto_login_ssh/131401631.png">
+<meta property="og:image" content="https://hulinhong.com/img/putty_auto_login_ssh/131535572.png">
+<meta property="og:image" content="https://hulinhong.com/img/putty_auto_login_ssh/131534643.png">
+<meta property="og:image" content="https://hulinhong.com/img/putty_auto_login_ssh/132022649.png">
+<meta property="og:image" content="http://s3.51cto.com/wyfs02/M01/12/E8/wKiom1MP7Wfh2XdgAABhqqyu7f4525.png">
+<meta property="og:image" content="https://hulinhong.com/img/putty_auto_login_ssh/keep_alive.jpg">
+<meta property="og:updated_time" content="2025-03-04T14:11:12.049Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Putty配置">
+<meta name="twitter:description" content="平时工作学习必须要使用Windows，在SSH远程连接软件里Putty算是用得比较顺手的，而且很小巧。但是每次输入密码很麻烦，还容易输错，OpenSSH可以利用密钥来自动登陆，如此一来方便了不少。配置过程分为三步：1、生成公钥和私钥先要下载一个叫puttygen的软件（下载见附件），在Windows端生成公钥和私钥。点击Generate开始生成在生成过程中用鼠标在进度条下面的空白处乱晃几下，产生随">
+<meta name="twitter:image" content="https://hulinhong.com/img/putty_auto_login_ssh/113555117.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"scrollpercent":true,"onmobile":true,"dimmer":true,"body_content_height":0,"display_duration":150},
+    local_search: {"enable":true,"trigger":"auto","top_n_per_article":1},
+    fancybox: false,
+    mediumzoom: true,
+    darkmode_js: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"duration":222,"transition":{"header":"slideDownIn","menu":"slideDownIn","logo":"slideDownIn","post_block_else":"slideDownIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"slideDownIn","footer":"slideDownIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+
+  <title>Putty配置 | 🚙</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">🚙</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">💨 💨 💨</p>
+      
+  </div>
+
+  <div class="menu-item sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="menu-item site-search">
+    
+  
+  <div class="site-search-div">
+    <button class="search-icon" id="search-button">
+      <i class="fa fa-search"></i>
+    </button>
+    <input type="text" id="local-search-input" class="st-search-input">
+    <i id="local-search-close">×</i>
+  </div>
+
+
+<script type="text/javascript" id="local.search.active">
+    {/* var inputArea       = document.querySelector("#local-search-input");
+    inputArea.onclick   = function(){ getSearchFile(); this.focus(); }
+    inputArea.onkeydown = function(){ if(event.keyCode == 13) return false } */}
+</script>
+
+
+
+  </div>
+  <div id="local-search-result-pc" class="local-search-result-cls"></div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+       
+    </ul>
+  
+
+  
+    
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <div id="local-search-result-mobile" class="local-search-result-cls"></div>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/08/23/putty_config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wasp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="🚙">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Putty配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-08-23T15:11:26+00:00">
+                2015-08-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Misc/" itemprop="url" rel="index">
+                    <span itemprop="name">Misc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <div class="post-tags">
+              
+                <a href="/tags/VBox/" rel="tag"><i class="fa fa-tag"></i> VBox</a>
+              
+            </div>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/04/Linux 常用SIG信号及其键值/" rel="next" title="Linux 常用SIG信号及其键值">
+                <i class="fa fa-chevron-left"></i> 
+                <p class="post-nav-pre-next-title">
+                  Linux 常用SIG信号及其键值
+                </p> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/31/gdb_multi_thread_and_multi_process/" rel="prev" title="GDB多进程多线程调试实战">
+              <p class="post-nav-pre-next-title">
+                  GDB多进程多线程调试实战
+              </p> 
+              <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+
+      
+      
+
+      
+        <div class="con editor-preview-side"><p>平时工作学习必须要使用Windows，在SSH远程连接软件里Putty算是用得比较顺手的，而且很小巧。</p><p><a href="/img/putty_auto_login_ssh/113555117.png" target="_blank"><img src="/img/putty_auto_login_ssh/113555117.png" style="float:none;" title="2013-12-05_111750.png" alt="113555117.png"></a></p><p><br></p><p>但是每次输入密码很麻烦，还容易输错，OpenSSH可以利用密钥来自动登陆，如此一来方便了不少。配置过程分为三步：</p><p><strong>1、生成公钥和私钥</strong></p><p>先要下载一个叫puttygen的软件（下载见附件），在Windows端生成公钥和私钥。</p><p>点击Generate开始生成</p><p><a href="/img/putty_auto_login_ssh/113555442.png" target="_blank"><img src="/img/putty_auto_login_ssh/113555442.png" style="float:none;" title="2013-12-05_111133.png" alt="113555442.png"></a></p><p>在生成过程中用鼠标在进度条下面的<span style="color:#ff0000;">空白处乱晃</span>几下，产生随机性：</p><p><a href="/img/putty_auto_login_ssh/113555424.png" target="_blank"><img src="/img/putty_auto_login_ssh/113555424.png" title="2013-12-05_111207.png" style="float:none;" alt="113555424.png"></a></p><p>生成完毕，将私钥保存起来：</p><p><a href="/img/putty_auto_login_ssh/131658317.png" target="_blank"><img src="/img/putty_auto_login_ssh/131658317.png" title="67.png" alt="131658317.png"></a></p><p>然后将公钥全选复制。<br></p><p><a href="/img/putty_auto_login_ssh/131248930.png" target="_blank"><img src="/img/putty_auto_login_ssh/131248930.png" title="78.png" alt="131248930.png"></a></p><p><br></p><p><strong>2、远程主机配置</strong></p><p>我这里使用的是CentOS6.4，已经安装了OpenSSH，如果远程主机没有安装的，先要安装。</p><p>先连接上远程主机，然后输入命令</p><pre class="brush:bash;toolbar:false;">mkdir .ssh</pre><pre class="brush:bash;toolbar:false;">chmod 700 .ssh</pre><pre class="brush:bash;toolbar:false;">vim ~/.ssh/authorized_keys</pre><p>按“i”键进入编辑模式（用过vi/vim的都应该知道吧），然后点鼠标右键将刚才复制的公钥粘贴进去，然后按“Esc”，输入wq&lt;Enter&gt;保存。</p><p><a href="/img/putty_auto_login_ssh/131401631.png" target="_blank"><img src="/img/putty_auto_login_ssh/131401631.png" title="89.png" alt="131401631.png"></a></p><p>安全起见，设置验证文件为只读：</p><p><br></p><pre class="brush:bash;toolbar:false;">chmod 400 ~/.ssh/authorized_keys</pre><p><span style="font-family:consolas, 'bitstream vera sans mono', 'courier new', courier, monospace;"><span style="line-height:17.59375px;"><br></span></span></p><p><strong><span style="font-family:consolas, 'bitstream vera sans mono', 'courier new', courier, monospace;"><span style="line-height:17.59375px;">3、Putty端配置</span></span></strong></p><p><strong><span style="font-family:consolas, 'bitstream vera sans mono', 'courier new', courier, monospace;"><span style="line-height:17.59375px;"><br></span></span></strong></p><p><span style="line-height:17.59375px;font-family:consolas, 'bitstream vera sans mono', 'courier new', courier, monospace;">先到Connection-Data项设置自己的登陆用户名，如图（我的是root）：</span></p><p><span style="line-height:17.59375px;font-family:consolas, 'bitstream vera sans mono', 'courier new', courier, monospace;"></span></p><p><a href="/img/putty_auto_login_ssh/131535572.png" style="font-family:consolas, 'bitstream vera sans mono', 'courier new', courier, monospace;line-height:17.59375px;" target="_blank"><img src="/img/putty_auto_login_ssh/131535572.png" title="99.png" alt="131535572.png" style="float:none;"></a></p><p><br></p><p><span style="line-height:17.59375px;font-family:consolas, 'bitstream vera sans mono', 'courier new', courier, monospace;">再点SSH项下面的Auth，添加第一步保存的私钥</span></p><p><span style="line-height:17.59375px;font-family:consolas, 'bitstream vera sans mono', 'courier new', courier, monospace;"><a href="/img/putty_auto_login_ssh/131534643.png" target="_blank"><img src="/img/putty_auto_login_ssh/131534643.png" title="100.png" alt="131534643.png" style="float:none;"></a></span></p><p><br></p><p><span style="line-height:17.59375px;font-family:consolas, 'bitstream vera sans mono', 'courier new', courier, monospace;">然后很重要的是要回去Session项里<span style="line-height:17.59375px;font-family:consolas, 'bitstream vera sans mono', 'courier new', courier, monospace;color:#ff0000;">保存！！！</span>不然下次又得重新添加一遍</span></p><p><span style="line-height:17.59375px;font-family:consolas, 'bitstream vera sans mono', 'courier new', courier, monospace;"><a href="/img/putty_auto_login_ssh/132022649.png" target="_blank"><img src="/img/putty_auto_login_ssh/132022649.png" title="110.png" alt="132022649.png"></a></span></p><p><br></p><p>然后再双击Default Settings里保存的任务，就直接登陆进去了：</p><p><a href="http://s3.51cto.com/wyfs02/M01/12/E8/wKiom1MP7Wfh2XdgAABhqqyu7f4525.png" target="_blank"><img src="http://s3.51cto.com/wyfs02/M01/12/E8/wKiom1MP7Wfh2XdgAABhqqyu7f4525.png" title="捕获.PNG" alt="wKiom1MP7Wfh2XdgAABhqqyu7f4525.png"></a></p><p>是不是很棒~</p><p><br></p><p>最后再优化一下显示设置（转过来的）：</p><div style="font-family:'microsoft yahei ui', 'microsoft yahei', simsun, 'segoe ui', tahoma, helvetica, sans-serif, 'microsoft yahei', georgia, helvetica, arial, sans-serif, '宋体', pmingliu, serif;font-size:14px;line-height:21px;"><span style="font-size:14px;">字体大小设置</span></div><div style="font-family:'microsoft yahei ui', 'microsoft yahei', simsun, 'segoe ui', tahoma, helvetica, sans-serif, 'microsoft yahei', georgia, helvetica, arial, sans-serif, '宋体', pmingliu, serif;font-size:14px;line-height:21px;"></div><div style="font-family:'microsoft yahei ui', 'microsoft yahei', simsun, 'segoe ui', tahoma, helvetica, sans-serif, 'microsoft yahei', georgia, helvetica, arial, sans-serif, '宋体', pmingliu, serif;font-size:14px;line-height:21px;"><span style="font-size:14px;">Window-&gt;Appearance-&gt;Font settings—&gt;Change按钮设置（我的设置为12）</span></div><div style="font-family:'microsoft yahei ui', 'microsoft yahei', simsun, 'segoe ui', tahoma, helvetica, sans-serif, 'microsoft yahei', georgia, helvetica, arial, sans-serif, '宋体', pmingliu, serif;font-size:14px;line-height:21px;"></div><div style="font-family:'microsoft yahei ui', 'microsoft yahei', simsun, 'segoe ui', tahoma, helvetica, sans-serif, 'microsoft yahei', georgia, helvetica, arial, sans-serif, '宋体', pmingliu, serif;font-size:14px;line-height:21px;"><span style="font-size:14px;">字体颜色设置</span></div><div style="font-family:'microsoft yahei ui', 'microsoft yahei', simsun, 'segoe ui', tahoma, helvetica, sans-serif, 'microsoft yahei', georgia, helvetica, arial, sans-serif, '宋体', pmingliu, serif;font-size:14px;line-height:21px;"></div><div style="font-family:'microsoft yahei ui', 'microsoft yahei', simsun, 'segoe ui', tahoma, helvetica, sans-serif, 'microsoft yahei', georgia, helvetica, arial, sans-serif, '宋体', pmingliu, serif;font-size:14px;line-height:21px;"><span style="font-size:14px;">Window-&gt;Colours-&gt;Default Foreground-&gt;Modify设置（我喜欢绿色设置：R:0 G:255 B:64）</span></div><div style="font-family:'microsoft yahei ui', 'microsoft yahei', simsun, 'segoe ui', tahoma, helvetica, sans-serif, 'microsoft yahei', georgia, helvetica, arial, sans-serif, '宋体', pmingliu, serif;font-size:14px;line-height:21px;"></div><div style="font-family:'microsoft yahei ui', 'microsoft yahei', simsun, 'segoe ui', tahoma, helvetica, sans-serif, 'microsoft yahei', georgia, helvetica, arial, sans-serif, '宋体', pmingliu, serif;font-size:14px;line-height:21px;"><span style="font-size:14px;">此外在默认的黑色背景下 蓝色看不太清楚，可以把Window-&gt;Colours-&gt;ANSI Blue 更改一下设置（我设置为R：255 G：0 B：128）</span></div><div style="font-family:'microsoft yahei ui', 'microsoft yahei', simsun, 'segoe ui', tahoma, helvetica, sans-serif, 'microsoft yahei', georgia, helvetica, arial, sans-serif, '宋体', pmingliu, serif;font-size:14px;line-height:21px;"></div><div style="font-family:'microsoft yahei ui', 'microsoft yahei', simsun, 'segoe ui', tahoma, helvetica, sans-serif, 'microsoft yahei', georgia, helvetica, arial, sans-serif, '宋体', pmingliu, serif;font-size:14px;line-height:21px;"><span style="font-size:14px;">全屏/退出全屏的快捷键设置</span></div><div style="font-family:'microsoft yahei ui', 'microsoft yahei', simsun, 'segoe ui', tahoma, helvetica, sans-serif, 'microsoft yahei', georgia, helvetica, arial, sans-serif, '宋体', pmingliu, serif;font-size:14px;line-height:21px;"></div><div style="font-family:'microsoft yahei ui', 'microsoft yahei', simsun, 'segoe ui', tahoma, helvetica, sans-serif, 'microsoft yahei', georgia, helvetica, arial, sans-serif, '宋体', pmingliu, serif;font-size:14px;line-height:21px;"><span style="font-size:14px;">Window-&gt;Behaviour最下面有个Full screen on Alt-Enter 勾上就可以了。</span></div>
+
+<h1 id="putty配置导出的方法"><a href="#putty配置导出的方法" class="headerlink" title="putty配置导出的方法"></a>putty配置导出的方法</h1><p>PuTTY 是一款小巧的开源 Telnet/SSH 客户端，但是它不提供设置的导入导出工具，PuTTY 将设置都保存在注册表中，所以要备份主要就是要备份注册表里的资料。</p>
+<p>下面是备份步骤，实质上就是导出相应的注册表键值：</p>
+<ol>
+<li>开始-&gt;运行(Win+R)-&gt;regedit</li>
+<li>找到 HKEY_CURRENT_USER\Software\SimonTatham</li>
+<li>在 SimonTatham 这个节点上点击右键，选择导出，保存。</li>
+</ol>
+<p>如果你想恢复配置信息，只需要双击保存的这个文件，导入注册表信息即可。</p>
+<p>说明：注册表PuTTY下的Sessions中保存设置连接的项目和设定值，SshHostKeys保存设置过的Remote Host Public Key。</p>
+<h1 id="KeepAlive"><a href="#KeepAlive" class="headerlink" title="KeepAlive"></a>KeepAlive</h1><p>很多远程主机当你一段时间没有输入, 他就会把你踢下线, 所以需要 KeepAlive 功能, </p>
+<p><img src="/img/putty_auto_login_ssh/keep_alive.jpg" alt="KeepAlive"></p>
+<p>如果填写 0 , 就表示不需要 KeepAlive 功能,<br>填写大于 0 的数, 比如 4, 就意味着每 4 秒就会发送一个空包到远程主机来 KeepAlive .<br>所以建议填写8秒左右的数.</p>
+<h1 id="SSH-证书登陆配置"><a href="#SSH-证书登陆配置" class="headerlink" title="SSH 证书登陆配置"></a>SSH 证书登陆配置</h1><p><code>sudo vi /etc/ssh/sshd_config</code></p>
+<p>取消注释 : #AuthorizedKeysFile .ssh/authorized_keys<br>禁止密码登录 : 修改yes-&gt;no : <code>PasswordAuthentication no</code></p>
+<p>然后重启ssh : <code>sudo service sshd restart</code></p>
+<h1 id="Putty-server-refused-our-key的三种原因和解决方法"><a href="#Putty-server-refused-our-key的三种原因和解决方法" class="headerlink" title="Putty server refused our key的三种原因和解决方法"></a>Putty server refused our key的三种原因和解决方法</h1><p>server refused our key 是非常容易遇到的错误</p>
+<h2 id="1、-ssh文件夹权限错或authorized-keys权限错"><a href="#1、-ssh文件夹权限错或authorized-keys权限错" class="headerlink" title="1、.ssh文件夹权限错或authorized_keys权限错"></a>1、.ssh文件夹权限错或authorized_keys权限错</h2><p>.ssh 以及其父文件夹（root为/root，普通用户为Home目录）都应该设置为只有该用户可写（比如700）。<br>且 设置 authorized_keys 的权限为 400</p>
+<pre><code>chmod 700 .ssh
+chmod 400 ~/.ssh/authorized_keys
+</code></pre><p>以下为原因：<br>ssh服务器的key方式登录对权限要求严格。</p>
+<ul>
+<li>对于客户端: 私钥必须为600权限或者更严格权限(400), 一旦其他用户可读, 私钥就不起作用(如640), 表现为系统认为不存在私钥</li>
+<li>对于服务器端: 要求必须公钥其他用户不可写, 一旦其他用户可写(如660), 就无法用key登录, 表现为:Permission denied (publickey).</li>
+</ul>
+<p>同时要求.ssh目录其他用户不可写,一旦其他用户可写(如770), 就无法使用key登录, 表现为:Permission denied (publickey).</p>
+<h2 id="2、SElinux导致"><a href="#2、SElinux导致" class="headerlink" title="2、SElinux导致"></a>2、SElinux导致</h2><p>密钥文件不能通过SElinux认证，解决方法如下：</p>
+<p><code># restorecon -R -v /home #root用户为/root</code></p>
+<p>我遇到的就是这种情况，找了好久还找到是这个原因，因为是新装的虚拟机，SElinux还没关闭。<br>这篇博文详细得说明了原因：<a href="http://www.toxingwang.com/linux-unix/linux-basic/846.html" target="_blank" rel="noopener">http://www.toxingwang.com/linux-unix/linux-basic/846.html</a></p>
+<h2 id="3、sshd配置不正确"><a href="#3、sshd配置不正确" class="headerlink" title="3、sshd配置不正确"></a>3、sshd配置不正确</h2><p>正确配置方法如下：<br>/etc/ssh/sshd_config </p>
+<p>1、找到 #StrictModes yes 改成 StrictModes no （去掉注释后改成 no） </p>
+<p>2、找到 #PubkeyAuthentication yes 改成 PubkeyAuthentication yes （去掉注释） </p>
+<p>3、找到 #AuthorizedKeysFile .ssh/authorized_keys 改成 AuthorizedKeysFile .ssh/authorized_keys （去掉注释） </p>
+<p>4、保存 5、/etc/rc.d/init.d/sshd reload 重新加载</p>
+</div>
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/VBox/" rel="tag"><i class="fa fa-tag"></i> VBox</a>
+            
+          </div>
+        
+
+        
+        
+        
+
+        
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2015/08/04/Linux 常用SIG信号及其键值/" rel="next" title="Linux 常用SIG信号及其键值">
+                  <i class="fa fa-chevron-left"></i> 
+                  <p class="post-nav-pre-next-title">
+                    Linux 常用SIG信号及其键值
+                  </p> 
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2015/08/31/gdb_multi_thread_and_multi_process/" rel="prev" title="GDB多进程多线程调试实战">
+                <p class="post-nav-pre-next-title">
+                    GDB多进程多线程调试实战
+                </p> 
+                <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+
+        
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  
+
+  <aside id="sidebar" class="sidebar">
+
+    
+      
+        <div id="sidebar-dimmer"></div>
+      
+    
+
+    <div class="sidebar-inner">
+    
+      <div class="sidebar-toggle-inside motion-element">
+        <div class="sidebar-toggle-line-wrap">
+          <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+        </div>
+      </div>
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <a href="/" class="site-author-image" rel="start" style="border:none">
+            <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Wasp">
+          </a>
+          <p class="site-author-name" itemprop="name">Wasp</p>
+           
+              <p class="site-description motion-element" itemprop="description">🚗 💨 It is recommended to use Chrome, Safari, or Edge to read this blog since this blog was developed on Edge (Chromium kernel version) and tested on Safari.</p>
+          
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">280</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">102</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+          <div class="site-state-item site-state-about">
+            <a href="/about/">
+              <span class="site-state-item-about fa fa-fw fa-user"></span>
+              <span class="site-state-item-name">about</span>
+            </a>
+          </div>
+          
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/no5ix" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://open.spotify.com/user/313duq77ekebrfyak3xijqewzss4?si=e7653b829a9747bf" target="_blank" title="Spotify">
+                  
+                    <i class="fa fa-fw fa-spotify"></i>
+                  
+                    
+                      Spotify
+                    
+                </a>
+              </span>
+            
+          
+          
+          <!-- 网易云音乐 -->
+            <!-- <div class="netease-cloud-music"> -->
+              <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=110 src="//music.163.com/outchain/player?type=0&id=992743594&auto=0&height=90"></iframe> -->
+            <!-- </div> -->
+          <!-- 网易云音乐 -->
+
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#putty配置导出的方法"><span class="nav-text">putty配置导出的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#KeepAlive"><span class="nav-text">KeepAlive</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSH-证书登陆配置"><span class="nav-text">SSH 证书登陆配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Putty-server-refused-our-key的三种原因和解决方法"><span class="nav-text">Putty server refused our key的三种原因和解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、-ssh文件夹权限错或authorized-keys权限错"><span class="nav-text">1、.ssh文件夹权限错或authorized_keys权限错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、SElinux导致"><span class="nav-text">2、SElinux导致</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、sshd配置不正确"><span class="nav-text">3、sshd配置不正确</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wasp</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <!--
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      
+        <span id="scrollpercent"><span>0</span>%</span>
+      
+    </div>
+    -->
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/mediumzoom/medium-zoom.js?v=1.1.0"></script>
+
+
+
+
+  
+
+
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    let db; // 全局数据库变量
+    var is_load_xml_finished = 0;
+    var keywords = [];
+    var curDate = new Date();
+    var xml_resp_cache = null;
+    var temp_keyword = "";
+
+    'use strict';
+
+    var content_id = isMobile() ? "local-search-result-mobile" : "local-search-result-pc";
+    var input_box = document.getElementById('local-search-input');
+    var resultContent = document.getElementById(content_id);
+    const searchButton = document.getElementById('search-button');
+    const closeButton = document.getElementById('local-search-close');
+
+    var str = "";
+
+    // 是否为第一个字母被键入的标志位
+    var first_char_flag = 0;
+
+    // 因为在移动设备上, 点击搜索之后会 scroll 到页面顶部, 所以需要记录之前的页面x, y坐标值, 以便于搜索完点击 close 按钮之后 scroll 回原来的页面坐标值.
+    var last_page_x = 0;
+    var last_page_y = 0;
+
+    var overlay = document.createElement("div");
+    overlay.classList.add("local-search-overlay");
+    document.body.appendChild(overlay);
+
+    function CloseLocalSearch(when_delete_all_on_mobile=false)
+    {
+        setTimeout(function() {  // 这个setTimeout的目的是为了解决当使用中文输入法输入英文的时候敲下enter键的那一瞬间发生从有文字到没文字又到有文字, 而下方window.scrollTo这个还没执行到, 会导致页面scroll乱滚以及velocity动画重复播放; 加了这个timeout之后就可以检测是否属于这种情况
+            if (temp_keyword.length > 0) {
+                return;
+            }
+            first_char_flag = 0;
+            $('#local-search-input').val('');
+            // $('#local-search-close').hide();
+            closeButton.classList.remove("show");
+
+            // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownOut', 200);
+            if (isMobile())
+            {
+              // $('body').scrollTop(last_page_y);  // scrollTop 有兼容性问题
+              // $('#' + content_id).hide();
+
+                $('#' + content_id).velocity('stop').velocity( 'transition.slideUpOut', 300);
+
+                if (!when_delete_all_on_mobile) {
+                    input_box.blur();
+                    // setTimeout(() => {
+                    //     closeButton.classList.remove("move");
+                    // }, 1000);
+                    input_box.classList.remove('expanded');
+                    document.body.style.overflow = ""; // 恢复body滚动
+                    overlay.classList.remove("show");
+                } else {
+                    return;
+                }
+                // const element = document.getElementById('local-search-result-mobile');
+                // let bottomY = element.offsetTop + element.offsetHeight;  // local search result底部相对于整个页面的 Y 坐标
+                // // console.log("bottttt= " + bottomY);
+                // if (bottomY == 0) {  // 说明 local search result底部 比当前页面还要长
+                //     scrollTo(last_page_x, last_page_y);
+                // } else {
+                //     // console.log("rrrrrrretrn " + bottomY);
+                //     // console.log("rrrrrrretrnyyy " + window.scrollY);
+                //     if (window.scrollY > bottomY) {  // 如果用户滚动到比 local search result的底部还要低, 那说明他不想回到他search之前的位置了
+                //         // console.log("4bottttt222= " + last_page_x);
+                //     } else {
+                //         // setTimeout(function() {
+                //             // scrollTo(last_page_x, last_page_y);
+                //             window.scrollTo({
+                //                 top: last_page_y,
+                //                 left: last_page_x,
+                //                 behavior: "smooth",
+                //                 duration: 150 // 滚动动画持续x毫秒
+                //             });
+                //         // }, 150);
+                //     }
+                // }
+                // last_page_x = 0;
+                // last_page_y = 0;
+            }
+            else
+            {
+                $('#' + content_id).attr("headroom_special_attr","true");   //headroom_special_attr是用来, 当页面滚动的时候local search的结果页面也会跟着一起被收起, 当不写这行代码的时候, 空的result会在页面往上滚的时候出现 ...
+                resultContent.classList.remove("smooth-transition");  // 这个是为了"当页面滚动的时候local search的结果页面也会跟着一起被收起"的时候有一个平滑滚动的动画, 这个不能直接写在css里, 不然会影响 velocity的动画
+
+                $('#' + content_id).velocity('stop').velocity( 'transition.slideUpOut', 800);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.bounceOut', 800);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.slideUpBigOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.bounceUpOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.expandOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.whirlOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.shrinkOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.swoopOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.flipBounceXOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.fadeOut', 600);
+            }
+        }, 150);
+    }
+
+    async function handleSearch()
+    {
+        if (keywords.length <= 0) {
+            return;
+        }
+        resultContent.innerHTML = "";
+    //   $('#local-search-close').show();
+    
+        closeButton.classList.add("show");
+
+        // 0x04. perform local searching
+        if (is_load_xml_finished == 0)
+        {
+            var local_search_tips = 
+                "<span class='local-search-empty'>" + "第一次搜索可能较慢, 先思考一个经典算法问题, 跳台阶:" + "</span>" +
+                "<span class='local-search-empty'>" + "一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个6级的台阶总共有多少种跳法?n级呢?" + "</span>";
+            var ProgressBar = 
+                "<div class='progress-bar'>" +
+                    "<div class='progress-bar-charge'></div>" +
+                "</div>";
+            resultContent.innerHTML = 
+                "<ul class='local-search-empty-ul'>" + 
+                local_search_tips +
+                ProgressBar;
+        }
+        else
+        {
+            // Retrieve the object from local storage
+            var xml_resp = await retrieve_search_xml()
+
+            xml_resp.forEach(function (data) {
+            var isMatch = true;
+            var content_index = [];
+            if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+            }
+            var is_encrypted = data.encrypted.trim() == '1'
+            var is_sensitive = CONFIG.local_search.sensitive_word && data_content.indexOf(CONFIG.local_search.sensitive_word) >= 0
+            var orig_data_title = data.title.trim();
+            var data_title = orig_data_title.toLowerCase();
+            var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+            var data_content = orig_data_content.toLowerCase();
+            var data_url = decodeURIComponent(data.url);
+            var index_title = -1;
+            var index_content = -1;
+            var first_occur = -1;
+            // only match artiles with not empty contents
+            if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                index_title = data_title.indexOf(keyword);
+                // index_content = (is_sensitive || is_encrypted) ? -1 : data_content.indexOf(keyword);  // 不能搜加密文章,
+                index_content = data_content.indexOf(keyword); //  这样可以搜加密了的文章, 但是搜索结果框不显示正文只显示标题
+
+                if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                } else {
+                    if (index_content < 0) {
+                    index_content = 0;
+                    }
+                    if (i == 0) {
+                    first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                }
+                });
+            } else {
+                isMatch = false;
+            }
+            // 0x05. show search results
+            if (isMatch) {
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                var match_content = "";
+                
+                const hostname = window.location.hostname;
+                if ((!is_sensitive && !is_encrypted) || (hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192")))
+                {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if (start < 0) {
+                    start = 0;
+                    }
+                    if (start == 0) {
+                    end = 100;
+                    }
+                    if (end > content.length) {
+                    end = content.length;
+                    }
+                    match_content = content.substr(start, end);
+                }
+                // highlight all keywords
+                var regS = "";
+                if (match_content != "")
+                {
+                    keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    });
+                }
+                else
+                {
+                    keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    });
+                }
+                str += "<li><a href='" + data_url + "' class='search-result-title' target='_blank'>" + orig_data_title + "</a>";
+                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+            }
+            });
+
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+            return resultContent.innerHTML = 
+                "<ul class='local-search-empty-ul'><span class='local-search-empty'>404.<span></ul>";
+            }
+            resultContent.innerHTML = str;
+      }
+    }
+
+    input_box.addEventListener('input', function () {
+        // 0x03. parse query to keywords list
+        str = '<ul class=\"search-result-list\">';
+        temp_keyword = this.value.trim();
+        if (temp_keyword.length <= 0) {
+            CloseLocalSearch(true);
+            return;
+        }
+
+        keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
+        handleSearch();
+
+        // 当用户键入第一个字母的时候的动画处理逻辑 : 
+        // 当 first_char_flag 为 0 的时候, 
+        // 要播放一个动画
+        if (first_char_flag == 0)
+        {
+            // $('body').scrollTop(0);
+            let duration = 600;
+            if (isMobile())
+            {
+                // if (window.scrollY != 0) {  // 加这个判断是为了防止 清空后再输入再点x没回原位
+                //     last_page_x = window.scrollX;
+                //     last_page_y = window.scrollY;
+                //     scrollTo(0,0);
+                // }
+              // $('body').scrollTop(0);
+            } else {
+                $('#' + content_id).removeAttr("headroom_special_attr");  // headroom_special_attr是用来 当页面滚动的时候local search的结果页面也会跟着一起被收起, 当不写这行代码的时候, 空的result会在页面往上滚的时候出现 ...
+                  setTimeout(()=>{
+                      resultContent.classList.add("smooth-transition"); // 这个是为了"当页面滚动的时候local search的结果页面也会跟着一起被收起"的时候有一个平滑滚动的动画, 这个不能直接写在css里, 不然会影响 velocity
+                  }, duration + 200); 
+            }
+            first_char_flag = 1;
+
+            if (isMobile()) {
+                $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', duration);
+            } else {
+                $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', duration);
+                  // $('#' + content_id).velocity('stop').velocity('transition.bounceIn', 800);
+                //   $('.local-search-result-cls ul li').velocity('stop').velocity('transition.bounceUpIn', 1200);
+            }
+          // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownBigIn', 1000);
+        } else {
+            // if (isMobile())
+            // {
+            //     const element = document.getElementById('local-search-result-mobile');
+            //     let bottomY = element.offsetTop + element.offsetHeight;  // local search result底部相对于整个页面的 Y 坐标
+            //     if (window.scrollY > bottomY) {  // 如果用户滚动到比 local search result的底部还要低
+            //         last_page_x = window.scrollX;
+            //         last_page_y = window.scrollY;
+            //         window.scrollTo({
+            //             top: 0,
+            //             left: 0,
+            //             behavior: "smooth",
+            //             duration: 150 // 滚动动画持续x毫秒
+            //         });
+            //     }
+            // }
+        }
+    });
+
+    // 这里要不要用 click 要用 pointerup, 不然 mac safari 触摸板 tap 得tap两次才能触发这里
+    $(document).on('pointerup', '#local-search-close', function(event) {
+        temp_keyword = "";
+        CloseLocalSearch();
+    });
+
+    input_box.addEventListener("focus", function() {  // when input get the focus
+        if (isMobile()) {
+            document.body.style.overflow = "hidden"; // 禁止body滚动
+            overlay.classList.add("show");
+        }
+    });
+
+    input_box.addEventListener("blur", function() {  // when input lose the focus
+        if (isMobile()) {
+            // console.log("输入框失去焦点");
+            // $('#local-search-input').val('');
+            // if (temp_keyword.length > 0) {
+            //     if (str.indexOf('<li>') === -1) {  // 说明local search 没搜到东西
+            //         window.scrollTo({
+            //             top: last_page_y,
+            //             left: last_page_x,
+            //             behavior: "smooth",
+            //             duration: 150 // 滚动动画持续x毫秒
+            //         });
+            //     }
+            //     // closeButton.classList.add("move");
+            //     // setTimeout(function() {
+            //     //     input_box.classList.remove('expanded');
+            //     // }, 450);
+            // } else {
+            //     window.scrollTo({  // 当失焦的时候且输入框没文字的时候就滚回原来的位置
+            //         top: last_page_y,
+            //         left: last_page_x,
+            //         behavior: "smooth",
+            //         duration: 150 // 滚动动画持续x毫秒
+            //     });
+            //     input_box.classList.remove('expanded');
+            // }
+            setTimeout(()=> {
+                searchButton.disabled = false;
+            }, 600);
+
+            // console.log("输入框失去焦点2: " + temp_keyword.length);
+            if (temp_keyword.length <= 0) {
+                document.body.style.overflow = ""; // 恢复body滚动
+                overlay.classList.remove("show");
+                input_box.classList.remove('expanded');
+            }
+        }
+    });
+
+    searchButton.addEventListener('click', function() {  // 这里要用click不要用 pointerup, 不然ios可能弹不出键盘
+        if (isMobile()) {
+            // 使输入框渐变显示
+            searchButton.disabled = true;  // 点击之后就禁用, 直到input失焦
+            input_box.focus();
+            // if (temp_keyword.length > 0) {
+            //     // closeButton.classList.remove("move");
+            //     // setTimeout(function() {
+            //         input_box.classList.add('expanded');
+            //         setTimeout(function() {
+            //             $('#local-search-input').val(temp_keyword);
+            //         }, 350);
+            //     // }, 450);
+            // } else {
+            //     // setTimeout(()=> {
+            //         input_box.classList.add('expanded');
+            //     // }, 80);
+            // }
+
+            input_box.classList.add('expanded');
+        }
+    });
+
+    // 你的代码在 document 上监听 click 事件，并检查点击的目标是否在 content_id 指定的元素内部。如果点击的目标不在该元素内，则执行 CloseLocalSearch()。
+    // $(document).click(function(event) {
+    //     if (isMobile()) {
+    //         return;
+    //     } else {
+    //         if (!$(event.target).closest('#' + content_id).length) {
+    //             temp_keyword = "";
+    //             CloseLocalSearch();
+    //         }
+    //     }
+    // });
+
+    $(document).keyup(function(event){
+      switch(event.keyCode) {
+        case 27:
+          // alert("ESC");
+          temp_keyword = "";
+          CloseLocalSearch();
+      }
+    });
+
+    function isMobile() {
+      // console.log(document.body.clientWidth);
+      return document.body.clientWidth < 768
+    }
+
+    function getTimestampAsSecond() {
+      // console.log(document.body.clientWidth);
+      return Math.floor(Date.now() / 1000);
+    }
+
+    {/* function store_search_xml(xmlResponse) {
+        var entries = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // Put the object into storage
+        localStorage.setItem('local_search_xml_data', JSON.stringify(entries));
+        localStorage.setItem('last_store_local_search_date', curDate.getDate());
+        is_load_xml_finished = 1;
+        console.log("[local search] - store search.xml finished.");
+    } */}
+
+    function ajax_store_search_xml(xmlTimestamp) {
+        console.log("[local search] - ajax downloading search.xml ...");
+        $.ajax({
+            url: "/search.xml",
+            dataType: "xml",
+            success: function (xmlResponse) {
+                setLocalSearchXMLData(xmlResponse, xmlTimestamp);
+                // 如果输入框有文字, 等待下载 xml完毕之后再弹出结果
+                if (temp_keyword.length > 0) {
+                    handleSearch();
+                    $('.local-search-result-cls ul li').velocity('stop').velocity('transition.swoopIn', 1200);
+                }
+            }
+        });
+    }
+
+    async function retrieve_search_xml() {
+        // // Retrieve the object from local storage
+        // var retrievedObject = localStorage.getItem('local_search_xml_data');
+        // var xml_resp = JSON.parse(retrievedObject)
+        // return xml_resp
+
+        if (xml_resp_cache) {
+          return xml_resp_cache;
+        }
+        // Retrieve the object from indexedDB
+        xml_resp_cache = await getLocalSearchXMLData();
+        return xml_resp_cache;
+    }
+
+    function openDatabase() {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open("myDatabase", 1); // 设置为版本号 1, 用indexedDB替代localStorage, 因为indexedDB可以存储大量数据（几百 MB 到几 GB）, 而localStorage只能5MB左右, 
+            request.onupgradeneeded = function(event) {
+                db = event.target.result;
+                if (!db.objectStoreNames.contains("searchData")) {
+                    const objectStore = db.createObjectStore("searchData", { keyPath: "id" });
+                    // 可以创建索引以便于查询
+                    objectStore.createIndex("xmlDataIndex", "xml_data", { unique: false });
+                }
+            };
+            request.onsuccess = function(event) {
+                db = event.target.result;
+                console.log("[local search] - Database opened successfully.");
+                resolve(db);
+            };
+            request.onerror = function(event) {
+                console.error("[local search] - Database open error:", event.target.error);
+                reject(event.target.error);
+            };
+        });
+    }
+
+    async function setLocalSearchXMLData(xmlResponse, xmlTimestamp) {
+        if (!db) {
+            await openDatabase();  // 确保数据库已打开
+        }
+        var transaction = db.transaction(["searchData"], "readwrite");
+        var objectStore = transaction.objectStore("searchData");
+
+        var xml_data = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // 存储数据，主键为 "id"，这里我们将 "id" 设为 "local_search_xml_data"
+        var data = { id: "local_search_xml_data", xml_data: xml_data };
+
+        var request = objectStore.put(data);  // 使用 put 可以插入或者更新数据
+        request.onsuccess = function() {
+            console.log("[local search] - Data successfully stored in indexedDB.");
+            // localStorage.setItem('last_store_local_search_date', curDate.getDate());
+            localStorage.setItem('last_publish_timestamp', xmlTimestamp);
+            is_load_xml_finished = 1;
+        };
+        request.onerror = function(event) {
+            console.log("[local search] - Error storing data: ", event.target.error);
+        };
+    }
+
+    // 封装 IndexedDB 操作为 Promise
+    function getLocalSearchXMLData() {
+        return new Promise((resolve, reject) => {
+            if (!db) {
+                reject("[local search] - Database is not initialized.");
+                return;
+            }
+            var transaction = db.transaction(["searchData"], "readonly");
+            var objectStore = transaction.objectStore("searchData");
+            var request = objectStore.get("local_search_xml_data");  // 使用 id 获取数据
+            request.onsuccess = function(event) {
+                if (request.result) {
+                    // 数据存在，成功处理
+                    resolve(request.result.xml_data);  // 解析成功并返回结果
+                } else {
+                    // 数据未找到，返回失败
+                    reject("Data not found");  // 抛出错误
+                }
+            };
+            request.onerror = function(event) {
+                // 错误处理
+                console.log("[local search] - Error retrieving data: ", event.target.error);
+                reject(event.target.error);  // 抛出错误
+            };
+        });
+    }
+
+    // 使用 async/await 来调用这个函数
+    async function loadSearchData() {
+        try {
+            if (!db) {
+                await openDatabase();  // 确保数据库已打开
+            }
+            await getLocalSearchXMLData();  // 等待结果
+            is_load_xml_finished = 1;
+            console.log("[local search] - load search.xml finished.");
+            // console.log("Retrieved data: ", result);
+        } catch (error) {
+            // console.error("Error: ", error);
+            console.log("[local search] - load search.xml not found.");
+            ajax_get_new_search_xml_if_exist(true);
+        }
+    }
+
+    // 节省流量
+    function ajax_get_new_search_xml_if_exist(force=false) {
+        const hostname = window.location.hostname;
+        if (!(hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192"))) {
+            console.log("[local search] - ajax downloading publish_time.xml ...");
+            $.ajax({
+                url: "/publish_time.xml",  // 这个文件是github action里加上去的, 参见本项目 .github/workflows/pages.yml:151
+                dataType: "xml",
+                success: function (xmlResponse) {
+                    // 使用 jQuery 解析 XML 文档并获取时间戳
+                    const xmlTimestamp = $(xmlResponse).find('publish_timestamp').text(); // 提取 <timestamp> 的文本
+                    // 从 localStorage 获取存储的时间戳
+                    const storedTimestamp = localStorage.getItem('last_publish_timestamp') || 0;
+                    if (force) {
+                        ajax_store_search_xml(xmlTimestamp);
+                    } else {
+                        console.log('[local search] - ajax_get_new_search_xml_if_exist, xmlTimestamp: ' + xmlTimestamp + ", storedTimestamp: " + storedTimestamp);
+                        if (xmlTimestamp > storedTimestamp) {
+                            // download search.xml
+                            ajax_store_search_xml(xmlTimestamp);
+                        }
+                        else {
+                            // 调用异步函数
+                            loadSearchData();
+                        }
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('[local search] - ajax_get_new_search_xml_if_exist 请求失败: ' + error);
+                    ajax_store_search_xml(getTimestampAsSecond());
+                }
+            });
+        } else {
+            ajax_store_search_xml(getTimestampAsSecond());
+        }
+    }
+
+    // var local_search_xml_data = localStorage.getItem('local_search_xml_data');
+    // if (local_search_xml_data) {
+    //     is_load_xml_finished = 1;
+    //     console.log("[local search] - load search.xml finished.");
+    // }
+    // var last_store_local_search_date = localStorage.getItem('last_store_local_search_date');
+    // // 只有在 localStorage 没有 search.xml数据或者 距离上次使用local search已经超过一天了才去取search.xml
+    // // 节省流量
+    // if (last_store_local_search_date != curDate.getDate()) {
+    //     // download search.xml
+    //     ajax_store_search_xml();
+    // } else {
+    //     // 调用异步函数
+    //     loadSearchData();
+    // }
+
+    ajax_get_new_search_xml_if_exist();
+
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/lib/wobble_window/wobblewindow.js"> </script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+<script type="text/javascript" src="/js/src/headroom.js"></script> 
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
