@@ -1,0 +1,1890 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+
+<script>
+    (function(){
+        if('ees'){
+			function checkPassword(password) {
+				password = password.trim();
+				if (password !== 'ees'){
+					if (password != null) // 如果用户点击了确认而且密码错误的时候, 因为当password == null的时候说明用户点了取消
+					{
+						alert('Error!');
+					}
+					if (history.length > 1)
+					{
+						history.back();
+					}
+					else
+					{
+						window.location.href = "about:blank";
+					}
+				}
+			}
+
+			var password_verify_on_local = false;
+			const hostname = window.location.hostname;
+			if (password_verify_on_local || (!(hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192")))) {
+				
+				// if (window.innerWidth < 768) {
+
+				// 	window.onload = function () {
+				// 		// 创建遮罩层
+				// 		const overlay = document.createElement("div");
+				// 		// 创建输入框容器
+				// 		overlay.innerHTML = `
+				// 			<div class="password-input-box">
+				// 				<p>Open Sesame</p>
+				// 				<input type="password" id="passwordInput" style="padding: 10px; width: 200px;">
+				// 				<div style="margin-top: 10px;">
+				// 				<button id="confirmBtn">ok</button>
+				// 				<button id="cancelBtn" style="margin-left: 10px;">cancel</button>
+				// 				</div>
+				// 			</div>
+				// 			`;
+				// 		overlay.classList.add("password-overlay");
+				// 		document.body.style.overflow = "hidden"; // 禁止body滚动
+				// 		document.body.appendChild(overlay);
+
+				// 		setTimeout(() => {
+				// 			const input = document.getElementById("passwordInput");
+				// 			input.focus(); // 自动弹出键盘, 经测试, 手机上弹不出来, 所以放弃
+				// 			// console.log("asdfasdfa??tantantan");
+
+				// 			function confirmPassword() {
+				// 				const password = input.value;
+				// 				if (password) {
+				// 					alert("你输入的密码是: " + password);
+				// 					document.body.removeChild(overlay);
+				// 				} else {
+				// 					alert("请输入密码");
+				// 				}
+				// 			}
+
+				// 			// 按回车确认
+				// 			input.addEventListener("keydown", function (event) {
+				// 				if (event.key === "Enter") {
+				// 					confirmPassword();
+				// 				}
+				// 			});
+				// 			// 点击确定按钮
+				// 			document.getElementById("confirmBtn").onclick = confirmPassword;
+				// 			// 点击取消按钮
+				// 			document.getElementById("cancelBtn").onclick = function () {
+				// 				document.body.removeChild(overlay);
+				// 			};
+				// 		}, 1000);
+				// 	};
+
+				// } else {
+					var password = prompt('Open Sesame');
+					checkPassword(password);
+				// }
+
+			}
+
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="noodle,Java,NA,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content=". . .">
+<meta name="keywords" content="noodle,Java,NA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NA contractor interview notes">
+<meta property="og:url" content="https://hulinhong.com/2025/02/19/na_contractor_java_backend_real_interview_questions/index.html">
+<meta property="og:site_name" content="🚙">
+<meta property="og:description" content=". . .">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2025-03-05T13:08:39.227Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NA contractor interview notes">
+<meta name="twitter:description" content=". . .">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"scrollpercent":true,"onmobile":true,"dimmer":true,"body_content_height":0,"display_duration":150},
+    local_search: {"enable":true,"trigger":"auto","top_n_per_article":1},
+    fancybox: false,
+    mediumzoom: true,
+    darkmode_js: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"duration":222,"transition":{"header":"slideDownIn","menu":"slideDownIn","logo":"slideDownIn","post_block_else":"slideDownIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"slideDownIn","footer":"slideDownIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+
+  <title>NA contractor interview notes | 🚙</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">🚙</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">💨 💨 💨</p>
+      
+  </div>
+
+  <div class="menu-item sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="menu-item site-search">
+    
+  
+  <div class="site-search-div">
+    <button class="search-icon" id="search-button">
+      <i class="fa fa-search"></i>
+    </button>
+    <input type="text" id="local-search-input" class="st-search-input">
+    <i id="local-search-close">×</i>
+  </div>
+
+
+<script type="text/javascript" id="local.search.active">
+    {/* var inputArea       = document.querySelector("#local-search-input");
+    inputArea.onclick   = function(){ getSearchFile(); this.focus(); }
+    inputArea.onkeydown = function(){ if(event.keyCode == 13) return false } */}
+</script>
+
+
+
+  </div>
+  <div id="local-search-result-pc" class="local-search-result-cls"></div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+       
+    </ul>
+  
+
+  
+    
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <div id="local-search-result-mobile" class="local-search-result-cls"></div>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2025/02/19/na_contractor_java_backend_real_interview_questions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mike">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="🚙">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">NA contractor interview notes</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2025-02-19T02:45:08+00:00">
+                2025-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Noodle/" itemprop="url" rel="index">
+                    <span itemprop="name">Noodle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <div class="post-tags">
+              
+                <a href="/tags/noodle/" rel="tag"><i class="fa fa-tag"></i> noodle</a>
+              
+                <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+              
+                <a href="/tags/NA/" rel="tag"><i class="fa fa-tag"></i> NA</a>
+              
+            </div>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2025/02/19/na_fulltime_java_backend_real_interview_questions/" rel="next" title="NA fulltime interview notes">
+                <i class="fa fa-chevron-left"></i> 
+                <p class="post-nav-pre-next-title">
+                  NA fulltime interview notes
+                </p> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2025/02/21/na_contractor_java_backend_syllabus/" rel="prev" title="NA contractor knowledge syllabus">
+              <p class="post-nav-pre-next-title">
+                  NA contractor knowledge syllabus
+              </p> 
+              <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+
+      
+      
+
+      
+        <p><strong>. . .</strong><a id="more"></a></p>
+<h1 id="Pilot-Training-Questions"><a href="#Pilot-Training-Questions" class="headerlink" title="Pilot Training Questions"></a>Pilot Training Questions</h1><h2 id="Mock"><a href="#Mock" class="headerlink" title="Mock"></a>Mock</h2><h3 id="BQ"><a href="#BQ" class="headerlink" title="BQ"></a>BQ</h3><h4 id="intro"><a href="#intro" class="headerlink" title="intro"></a>intro</h4><ul>
+<li>Self-Introduction:<ul>
+<li>Prepare a fluent self-introduction and a detailed summary of work/project experience.</li>
+<li>Familiarize yourself thoroughly with your resume.Be ready to elaborate on your roles, achievements, and technologies/tools you used.</li>
+</ul>
+</li>
+<li>Work/Project Summary:<ul>
+<li>Prepare 1-2 examples of past projects or jobs where you made a significant impact. Use the STAR method (Situation, Task, Action, Result) to structure your responses. DO NOT READ, we can tell!</li>
+</ul>
+</li>
+</ul>
+<h5 id="Self-Introduction"><a href="#Self-Introduction" class="headerlink" title="Self - Introduction"></a>Self - Introduction</h5><p>Hey there! I’m Michael Hu. I’ve been deeply involved in the world of Java backend development for over eight years. My passion lies in creating scalable and high - performance backend systems that can handle complex business needs.</p>
+<p>I’m really good at using Java and Spring Boot to build and maintain backend systems. I’ve designed and implemented a bunch of RESTful APIs with Spring Boot. These APIs are not only well - documented and secure but also optimized for great performance, which is super important for seamless communication between distributed systems.</p>
+<p>When it comes to data, I’ve got it covered. I use Hibernate and JPA for data persistence, and I’m skilled at designing complex database schemas, optimizing queries, and keeping data integrity intact, whether it’s with relational databases like MySQL and PostgreSQL or NoSQL databases such as MongoDB.</p>
+<p>I’m also experienced in real - time data processing with Apache Kafka. It’s been really useful for building event - driven architectures that power high - throughput data streams and scalable messaging systems for different business processes.</p>
+<p>Security is a top priority for me. I use Spring Security and OAuth2 to implement authentication and authorization mechanisms, making sure that backend services are secure and compliant with industry standards.</p>
+<p>I’ve worked on a wide range of projects across different industries. Let me share a bit more about my work experience.</p>
+<h5 id="Work-Project-Summary"><a href="#Work-Project-Summary" class="headerlink" title="Work/Project Summary"></a>Work/Project Summary</h5><ul>
+<li><strong>Project 1</strong>: Russell Investments - Backend Developer (Nov 2022 - Present, Seattle, WA)<ul>
+<li><strong>Situation</strong>: Russell Investments, a fintech company, was looking to enhance its existing backend systems to handle a growing number of financial transactions. The existing system faced challenges in terms of performance and security as the volume of data and user requests increased.</li>
+<li><strong>Task</strong>: My main task was to optimize the backend performance, improve security, and integrate new financial services into the system. I had to work on improving the API response times and ensure that all financial data was protected.</li>
+<li><strong>Action</strong>: First, I used Redis for caching frequently accessed data. This reduced the number of database queries and significantly improved the response times. For security, I implemented Spring Security and OAuth2 to enhance authentication and authorization. I also optimized the database queries by analyzing the query execution plans and making necessary adjustments to the database schema. Additionally, I integrated some AWS services like RDS for better data storage and management.</li>
+<li><strong>Result</strong>: After implementing these changes, the API response times were reduced by 30%. The security of the system was enhanced, and there were no security breaches reported. The integration of new financial services was successful, and the overall system could handle 20% more transactions per day.</li>
+</ul>
+</li>
+<li><strong>Project 2</strong>: Prodege - Backend Developer (Aug 2019 - Nov 2022, El Segundo, CA)<ul>
+<li><strong>Situation</strong>: Prodege, an online marketing and consumer polling company, was expanding its operations. The old backend system couldn’t support the new features and the increasing number of users participating in polls and marketing campaigns.</li>
+<li><strong>Task</strong>: I was tasked with building a new microservices - based architecture for the backend. This involved designing and implementing new RESTful APIs, integrating third - party services for data analytics, and ensuring high - performance and reliability.</li>
+<li><strong>Action</strong>: I designed and developed a set of modular microservices using Spring Boot. Each microservice was responsible for a specific function, like user management, poll management, and data analytics integration. I used Kafka for handling real - time data from user interactions, which was then processed for analytics. I also integrated third - party data analytics tools into our system. For deployment, I used Docker and Kubernetes to ensure high availability and scalability.</li>
+<li><strong>Result</strong>: The new microservices architecture made the system more modular and easier to maintain. The integration of data analytics tools provided valuable insights for the marketing campaigns. The system’s performance improved, and we could handle 50% more concurrent users, which led to a 25% increase in user engagement and a significant boost in the company’s revenue from marketing campaigns. </li>
+</ul>
+</li>
+</ul>
+<h4 id="15Q"><a href="#15Q" class="headerlink" title="15Q"></a>15Q</h4><ol>
+<li>Describe a major conflict within or outside your team and how you handled it, or how you dealt with a difficult team member.<ul>
+<li>general approach: First, I try to understand the root cause of the conflict or the behavior of the difficult team member. I set up a one - on - one meeting in a calm environment to have an open - and - honest conversation. I listen actively to their concerns and explain my perspective. If it’s a conflict about work, we analyze the requirements and goals together to find a common ground. For example, if it’s about a different approach to implementing a feature, we evaluate the pros and cons of each method based on the project’s needs like performance, maintainability, and time constraints.</li>
+<li>personal experience: At Prodege, I was working on a microservices - based project with a frontend developer. We had a conflict over the API design. They wanted a very simple API for quick development, but I knew that for long - term scalability and performance, a more complex and well - structured API was needed. I scheduled a meeting with them. I listened to their concerns about time and simplicity. Then, I showed them data from past projects where a simple API led to issues in the long run, like difficulties in adding new features and performance bottlenecks. I also explained how our proposed API design would be more modular and easier to maintain. After this conversation, we reached a compromise. We designed an API that was a bit more complex than what they initially wanted but still had some simplifications to meet the short - term development needs. This solution worked well, and our project was completed successfully.</li>
+</ul>
+</li>
+<li>Describe a time when you had difficulty completing a task or making progress.<ul>
+<li>general approach: When I face difficulty in completing a task, I first break down the task into smaller subtasks. This helps me identify the specific parts that are causing problems. Then, I research relevant technologies or best practices. I also reach out to colleagues or online communities for advice. If it’s a technical issue, I might create a test environment to isolate and solve the problem.</li>
+<li>personal experience: At REI, I was tasked with optimizing the database queries for our retail inventory management system. Initially, I couldn’t figure out why some queries were taking a long time. I started by breaking down the queries into smaller components and analyzing each part. I found that some joins were not optimized. I researched query optimization techniques for MySQL, our database at the time. I also asked a senior colleague who had experience in database optimization. They suggested using indexes more effectively. I created a test database with sample data and experimented with different indexing strategies. After a few tries, I found the right combination of indexes. As a result, the query execution time was reduced by 50%, which significantly improved the performance of the inventory management system.</li>
+</ul>
+</li>
+<li>If your manager asks you to change something that you think is already good enough, how would you handle it?<ul>
+<li>general approach: I would first listen carefully to my manager’s reasons for the requested change. Then, I would explain my perspective on why I thought the current solution was sufficient, presenting data or evidence if possible. If there are valid concerns from the manager, I would work with them to find a solution. I might propose a compromise or a way to implement the change with minimal impact on the existing work.</li>
+<li>personal experience: At Russell Investments, I had implemented a caching mechanism using Redis for our fintech application. The performance improvement was significant, and I thought it was a good solution. However, my manager wanted to change it to a different caching technology. I met with my manager and listened to their concerns about the long - term cost and compatibility with future system upgrades. I then showed them the performance metrics of our current Redis - based caching, like how it reduced the response time by 40%. But I also understood their concerns. So, we decided to run a small - scale test with the new caching technology in a staging environment. After the test, we found that the new technology had some potential benefits in the long run. We then gradually migrated to the new caching technology while closely monitoring the performance.</li>
+</ul>
+</li>
+<li>Why do you want to join our team?<ul>
+<li>general approach: I would research the company’s products, services, and values. I would mention how my skills and experience can contribute to the team’s goals. For example, if the company is focused on developing high - performance applications, I would talk about my experience in optimizing backend performance. I would also express my interest in the company’s innovative culture or the opportunity to work on challenging projects.</li>
+<li>personal experience: After researching your company, I noticed that you’re working on developing a new fintech product with a focus on real - time data processing. I have extensive experience in using Apache Kafka for real - time data processing at Russell Investments. I was able to build a scalable messaging system that handled high - throughput data streams. I believe my skills can directly contribute to the success of this product. Also, I’m impressed by your company’s innovative culture. I’m excited about the opportunity to work with a team that is constantly pushing the boundaries in the fintech industry.</li>
+</ul>
+</li>
+<li>Are you familiar with Agile processes and Waterfall methodology?<ul>
+<li>general approach: I would explain the basic concepts of Agile and Waterfall. For Agile, I would mention its iterative nature, focus on customer feedback, and the use of sprints. For Waterfall, I would talk about its sequential approach from requirements gathering to deployment. I would also share my experience using each methodology. If I have more experience with Agile, I would talk about how I’ve used Scrum or Kanban frameworks, how we had daily stand - up meetings to communicate progress, and how we adapted to changes during sprints.</li>
+<li>personal experience: At IMVU, we mainly used the Agile process, specifically Scrum. We had two - week sprints. Every day, we had a stand - up meeting where each team member would share what they did the previous day, what they planned to do, and any obstacles they faced. I found this process very effective. For example, during the development of a new social feature, we got feedback from users during a sprint. We were able to quickly adjust our plans, add some new features, and remove some less - important ones. This iterative approach allowed us to deliver a better product. I also have some knowledge of the Waterfall methodology. In a small project at school, we used Waterfall. We first defined all the requirements, then designed the system, developed, tested, and finally deployed. While it worked well for that small - scale project, I prefer Agile for its flexibility in handling changes.</li>
+</ul>
+</li>
+<li>What does a typical day look like for you?<ul>
+<li>general approach: A typical day usually starts with checking emails and messages to see if there are any urgent tasks or updates. Then, I review my to - do list, which is often based on the sprint goals if I’m working in an Agile environment. I spend a significant amount of time coding, either implementing new features, fixing bugs, or optimizing existing code. I also have meetings, like team stand - ups, code reviews, or discussions with other teams. In the afternoon, I might do some research if I encounter new technical challenges. Before the end of the day, I update my progress and plan for the next day.</li>
+<li>personal experience: At Prodege, a typical day began with a 15 - minute stand - up meeting. We would quickly share our progress and any issues. After that, I would start coding new features for our online marketing and consumer polling application. One day, I was working on integrating a new third - party analytics API. I spent a few hours coding and debugging. Then, I had a code review meeting with my colleagues. They gave me some great suggestions on improving the code readability. In the afternoon, I encountered an issue with the API authentication. I spent some time researching the API documentation and asking for help on relevant developer forums. By the end of the day, I had made significant progress on the integration, and I updated my tasks in Jira for the next day.</li>
+</ul>
+</li>
+<li>What do you think are the most important factors for a successful team?<ul>
+<li>general approach: Communication is crucial. Team members need to be able to share ideas, progress, and problems openly. Clear goals and roles are also important. Everyone should know what the team is working towards and what their responsibilities are. Trust among team members is essential. It allows for collaboration and risk - taking. And a positive attitude towards learning and adapting to changes helps the team stay competitive.</li>
+<li>personal experience: At REI, we had a very successful project in improving the checkout process for our online store. Communication was key. We had daily communication channels open, and we also had weekly in - depth meetings. Everyone knew their roles clearly. The frontend developers focused on the user - facing interface, and the backend developers, like me, worked on optimizing the database and API calls. We trusted each other’s work. When I made changes to the backend, the frontend developers trusted that it would work well with their part. Also, when we faced new security requirements during the project, we were all open to learning new security techniques and adapting our code. This positive attitude towards learning and change helped us complete the project ahead of schedule and with great results.</li>
+</ul>
+</li>
+<li>If you are working on a sprint and your manager suddenly assigns you a new task that needs to be finished as soon as possible, what would you do?<ul>
+<li>general approach: First, I would quickly assess the new task’s complexity and the time it might take. Then, I would communicate with my manager about my current sprint tasks, their priorities, and the potential impact of taking on the new task. If possible, we could re - prioritize the sprint tasks or adjust the sprint goals. I might also ask for help from colleagues if the new task is similar to something they’ve worked on before.</li>
+<li>personal experience: At Russell Investments, during a sprint focused on improving the performance of our trading platform, my manager assigned me a new task to fix a critical security vulnerability. I quickly estimated that it would take about a day to fix. I told my manager about my current sprint tasks, like optimizing some queries. We decided to pause the query optimization task for a day and focus on the security fix. I also asked a colleague who had experience in security to give me a quick review of my fix. With their help, I was able to complete the security fix within a day and then resume my sprint tasks.</li>
+</ul>
+</li>
+<li>Tell me something about yourself that is not on your resume.<ul>
+<li>general approach: I could talk about a hobby that has taught me useful skills. For example, if I like playing chess, I could say that it has improved my strategic thinking and problem - solving skills. Or I could share a volunteer experience that has enhanced my communication or teamwork skills.</li>
+<li>personal experience: I’m an avid open - source contributor. In my free time, I contribute to a Java - based open - source project related to database connection pooling. This has allowed me to learn from other developers around the world. I’ve had to communicate with them, review their code, and also have my code reviewed. It has improved my coding skills, especially in writing more modular and efficient code. It has also taught me how to work in a global, diverse team, which is very similar to the corporate environment.</li>
+</ul>
+</li>
+<li>Tell me about a difficult project or challenge you faced and how you handled it.<ul>
+<li>general approach: I would use the STAR method. Describe the situation, the task at hand, the actions I took, and the results. For example, if the challenge was to integrate a new and complex third - party service, I would explain how I first studied the service’s documentation, then tried different integration approaches, and finally overcame the obstacles.</li>
+<li>personal experience: At IMVU, we were integrating a new virtual goods payment system. The situation was that the new payment system had very complex security requirements and a different API structure from what we were used to. The task was to integrate it smoothly into our existing virtual world platform. I first spent a lot of time studying the payment system’s documentation. I then created a test environment to experiment with different integration methods. I faced issues with the authentication and data encryption. I reached out to the payment system’s support team and also consulted with some industry experts. After several attempts, I was able to integrate the payment system successfully. As a result, our users could use the new payment methods, and the number of virtual goods purchases increased by 30%.</li>
+</ul>
+</li>
+<li>Share a time when you made a mistake in a team setting, how you resolved it, and what you learned from the experience.<ul>
+<li>general approach: When I make a mistake, I first admit it as soon as possible. Then, I analyze the root cause of the mistake. If it’s a code - related mistake, I fix the code and write additional tests to prevent similar mistakes in the future. I also communicate with the team about the mistake, what I’ve done to fix it, and what we can all learn from it.</li>
+<li>personal experience: At Prodege, I made a mistake in the API I was developing. I accidentally exposed some sensitive user data in the API response. As soon as I realized it, I informed the team immediately. I then analyzed the code and found that it was a mistake in the data filtering logic. I fixed the code and added more rigorous data validation and filtering in the API. I also wrote unit and integration tests to ensure that sensitive data was never exposed again. I apologized to the team and we had a short meeting to discuss how we could improve our code review process to catch such mistakes earlier. From this experience, I learned the importance of double - checking data handling in APIs and the value of a thorough code review.</li>
+</ul>
+</li>
+<li>Do you have on - call experience, and are you comfortable with overnight on - call duties?<ul>
+<li>general approach: If I have on - call experience, I would talk about my past experiences, like how I handled emergencies during on - call shifts. I would mention the tools and processes I used to monitor systems and respond quickly. If I don’t have on - call experience, I would express my willingness to learn and adapt, and talk about my ability to handle stress and work under pressure.</li>
+<li>personal experience: At REI, I had on - call duties during the holiday season when our online store had high traffic. I used monitoring tools like ELK Stack to keep an eye on the system’s performance. One night, I received an alert that the database connection pool was full, causing the checkout process to fail. I quickly accessed the server, analyzed the situation, and found that some queries were not releasing connections properly. I adjusted the query code and increased the connection pool size temporarily. This resolved the issue. I’m comfortable with overnight on - call duties. I understand the importance of being available to ensure the system’s smooth operation, especially for business - critical applications.</li>
+</ul>
+</li>
+<li>Do you know what pair programming is, and what are your thoughts on it?<ul>
+<li>general approach: I would explain that pair programming is a technique where two programmers work together at one workstation, one writing the code (the driver) and the other reviewing and suggesting improvements (the navigator). I would talk about its benefits, like increased code quality, knowledge sharing, and better problem - solving. I might also mention some potential challenges, like differences in working styles, and how to overcome them.</li>
+<li>personal experience: I’ve participated in pair programming during a project at IMVU. We were working on a complex algorithm for user matching in our virtual world. One of the benefits I experienced was the knowledge sharing. My partner had more experience in algorithm design, and I learned a lot from them. We also caught bugs and made better design decisions because we were constantly discussing the code. However, we did face some challenges with our different working speeds. To overcome this, we set clear goals for each session and took turns being the driver and the navigator more frequently. Overall, I think pair programming is a great way to improve code quality and team collaboration.</li>
+</ul>
+</li>
+<li>If you are mentoring a junior colleague and they propose a new idea to the team, how would you handle it?<ul>
+<li>general approach: First, I would listen attentively to their idea and show enthusiasm for their initiative. Then, I would help them analyze the idea from different perspectives, like technical feasibility, impact on the project timeline, and alignment with the project goals. If it’s a good idea, I would encourage them to present it to the team and support them during the presentation. If there are issues, I would guide them on how to improve the idea.</li>
+<li>personal experience: At Russell Investments, a junior colleague proposed using a new open - source library for data processing. I listened carefully and was impressed by their research. We then analyzed it together. We found that while it had some great features, it was not fully compatible with our existing security framework. I helped them research ways to make it work or find alternatives. We also discussed how it would fit into our project timeline. In the end, we found a modified version of the library that could work with our security framework. I encouraged them to present the idea to the team, and I gave them some tips on how to make the presentation more effective. The team adopted the idea, and it improved our data processing efficiency.</li>
+</ul>
+</li>
+<li>Describe your code review process. What do you focus on during a code review?<ul>
+<li>general approach: My code review process usually starts with a quick overview of the code’s purpose and functionality. Then, I check for code readability, like proper indentation, meaningful variable names, and code comments. I also review the code for security, making sure there are no vulnerabilities like SQL injection or data exposure. Performance is another important aspect. I look for inefficient algorithms, unnecessary database queries, or improper use of resources. I also check if the code follows the project’s coding standards and best practices.</li>
+<li>personal experience: At Prodege, during a code review of an API implementation, I first made sure I understood what the API was supposed to do. I noticed that some variable names were not very descriptive, so I suggested changing them for better readability. I also found a potential SQL injection vulnerability in one of the database queries. I pointed it out to the developer and showed them how to use prepared statements to fix it. Regarding performance, I saw that the API was making multiple unnecessary database calls. We discussed how to cache some of the data to reduce the number of calls. By focusing on these aspects, we were able to improve the overall quality of the code. </li>
+</ul>
+</li>
+</ol>
+<h3 id="Tech"><a href="#Tech" class="headerlink" title="Tech"></a>Tech</h3><h2 id="Leetcode"><a href="#Leetcode" class="headerlink" title="Leetcode"></a>Leetcode</h2><ul>
+<li>Arrays<ul>
+<li>Two sum: <a href="https://leetcode.com/problems/two-sum/description/" target="_blank" rel="noopener">https://leetcode.com/problems/two-sum/description/</a></li>
+<li>Contains Duplicate: <a href="https://leetcode.com/problems/contains-duplicate/description/" target="_blank" rel="noopener">https://leetcode.com/problems/contains-duplicate/description/</a></li>
+<li>Group Anagram: <a href="https://leetcode.com/problems/group-anagrams/description/" target="_blank" rel="noopener">https://leetcode.com/problems/group-anagrams/description/</a></li>
+<li>Best Time to Buy and Sell Stock: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/" target="_blank" rel="noopener">https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/</a></li>
+<li>Top K Frequent Elements: <a href="https://leetcode.com/problems/top-k-frequent-elements/description/" target="_blank" rel="noopener">https://leetcode.com/problems/top-k-frequent-elements/description/</a></li>
+<li>Longest Consecutive Sequence: <a href="https://leetcode.com/problems/longest-consecutive-sequence/description/" target="_blank" rel="noopener">https://leetcode.com/problems/longest-consecutive-sequence/description/</a></li>
+</ul>
+</li>
+<li>Two Pointer<ul>
+<li>Valid Palindrome: <a href="https://leetcode.com/problems/valid-palindrome/description/" target="_blank" rel="noopener">https://leetcode.com/problems/valid-palindrome/description/</a></li>
+<li>3Sum: <a href="https://leetcode.com/problems/3sum/description/" target="_blank" rel="noopener">https://leetcode.com/problems/3sum/description/</a></li>
+</ul>
+</li>
+<li>Binary Search<ul>
+<li>Binary Search: <a href="https://leetcode.com/problems/binary-search/description/" target="_blank" rel="noopener">https://leetcode.com/problems/binary-search/description/</a></li>
+<li>Search in Rotated Sorted Array: <a href="https://leetcode.com/problems/search-in-rotated-sorted-array/description/" target="_blank" rel="noopener">https://leetcode.com/problems/search-in-rotated-sorted-array/description/</a></li>
+<li>Koko Eating Bananas: <a href="https://leetcode.com/problems/koko-eating-bananas/description/" target="_blank" rel="noopener">https://leetcode.com/problems/koko-eating-bananas/description/</a></li>
+</ul>
+</li>
+<li>Sliding Window<ul>
+<li>Longest Substring Without Repeating Characters: <a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/description/" target="_blank" rel="noopener">https://leetcode.com/problems/longest-substring-without-repeating-characters/description/</a></li>
+</ul>
+</li>
+<li>Linked List<ul>
+<li>Reverse Linked List: <a href="https://leetcode.com/problems/reverse-linked-list/description/" target="_blank" rel="noopener">https://leetcode.com/problems/reverse-linked-list/description/</a></li>
+<li>Merge Two Sorted Lists: <a href="https://leetcode.com/problems/merge-two-sorted-lists/description/" target="_blank" rel="noopener">https://leetcode.com/problems/merge-two-sorted-lists/description/</a></li>
+<li>Linked List Cycle: <a href="https://leetcode.com/problems/linked-list-cycle/description/" target="_blank" rel="noopener">https://leetcode.com/problems/linked-list-cycle/description/</a></li>
+<li>Copy List with Random Pointer: <a href="https://leetcode.com/problems/copy-list-with-random-pointer/description/" target="_blank" rel="noopener">https://leetcode.com/problems/copy-list-with-random-pointer/description/</a></li>
+</ul>
+</li>
+<li>Stack &amp; Queue<ul>
+<li>Valid Parentheses: <a href="https://leetcode.com/problems/valid-parentheses/description/" target="_blank" rel="noopener">https://leetcode.com/problems/valid-parentheses/description/</a></li>
+<li>Min Stack: <a href="https://leetcode.com/problems/min-stack/description/" target="_blank" rel="noopener">https://leetcode.com/problems/min-stack/description/</a></li>
+<li>Implement Queue using Stacks: <a href="https://leetcode.com/problems/implement-queue-using-stacks/description/" target="_blank" rel="noopener">https://leetcode.com/problems/implement-queue-using-stacks/description/</a></li>
+</ul>
+</li>
+<li>DFS &amp; BFS<ul>
+<li>Number of Islands: <a href="https://leetcode.com/problems/number-of-islands/description/" target="_blank" rel="noopener">https://leetcode.com/problems/number-of-islands/description/</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="Rest-API"><a href="#Rest-API" class="headerlink" title="Rest API"></a>Rest API</h2><ul>
+<li>User Info<ul>
+<li>Given URL: <a href="https://jsonplaceholder.typicode.com/users" target="_blank" rel="noopener">https://jsonplaceholder.typicode.com/users</a></li>
+<li>You need to write a REST api to call the given URL and return a user with its “name, username, zipcode”</li>
+<li>for example, if user id is 1, you should return a JSON file with username “Bret”, email “Sincere@april.biz” and zipcode “92998-3874”<ul>
+<li>HINT: use “Rest Template”</li>
+</ul>
+</li>
+<li>Result: OPEN a webbrowser and enter: <a href="http://localhost:8080/user/1" target="_blank" rel="noopener">http://localhost:8080/user/1</a> should return the correct result.</li>
+<li>Follow-up: id only 1-10, how to handle /user/11 → print in the page “Invalid ID”</li>
+<li>Solution</li>
+</ul>
+</li>
+<li>Movie<ul>
+<li><a href="https://jsonmock.hackerrank.com/api/movies/search/?Title=waterworld" target="_blank" rel="noopener">https://jsonmock.hackerrank.com/api/movies/search/?Title=waterworld</a> </li>
+<li>GIVEN Above URL. Write a MVC with rest api to fetch this URL and then create new rest APIs to:<ul>
+<li>Show all movies</li>
+<li>Show all movies sort by year</li>
+<li>Fetch a particular movie based on its imdbID.</li>
+<li>Hint: have multiple pages</li>
+</ul>
+</li>
+<li>Solutions<ul>
+<li>look at this URL date, it has multiple pages, each page has 10 movies, we need to fetch all pages to get a full list of movies and then filter to find the particular movie by imdbID</li>
+<li>each movie has Title, Year, imdbID three fields, we need to create a model to match them</li>
+<li>need org.json.simple to parse the json object from the given URL</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Build a POST API /greetings with below requirements<ul>
+<li>Create a POST API /greetings</li>
+<li>INPUT – json array: [{“name”:”john doe”, “work”: “engineer”}, {“name”:”jane who”, “work”: “manager”}] </li>
+<li>OUTPUT - json: {“data”: [“Hello john the engineer”, “Hello jane the manager”], “timestamp”: “${requested_timestamp}”</li>
+<li>Use postman to call the API and pass input, it should return the correct response.</li>
+</ul>
+</li>
+</ul>
+<h1 id="concepts"><a href="#concepts" class="headerlink" title="concepts"></a>concepts</h1><h2 id="In-java-difference-between-controller-and-restcontroller"><a href="#In-java-difference-between-controller-and-restcontroller" class="headerlink" title="In java, difference between @controller and @restcontroller"></a>In java, difference between @controller and @restcontroller</h2><p>In Java, specifically in the Spring framework, both <code>@Controller</code> and <code>@RestController</code> are annotations used for building web - related components. Here are the key differences between them:</p>
+<h3 id="1-Function-and-Purpose"><a href="#1-Function-and-Purpose" class="headerlink" title="1. Function and Purpose"></a>1. Function and Purpose</h3><ul>
+<li><strong><code>@Controller</code></strong><ul>
+<li>It is a stereotype annotation in Spring MVC. It is mainly used to mark a class as a Spring MVC controller. A controller class typically handles HTTP requests, processes them, and then returns a view name. The view resolver in Spring MVC will then use this view name to render an appropriate view (such as a JSP page, Thymeleaf template, etc.) to the client.</li>
+</ul>
+</li>
+<li><strong><code>@RestController</code></strong><ul>
+<li>It is a combination of <code>@Controller</code> and <code>@ResponseBody</code>. This annotation is designed for building RESTful web services. When a class is marked with <code>@RestController</code>, all the handler methods in this class will automatically serialize the return value to the HTTP response body in a format like JSON or XML by default.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Return-Value-Handling"><a href="#2-Return-Value-Handling" class="headerlink" title="2. Return Value Handling"></a>2. Return Value Handling</h3><ul>
+<li><p><strong><code>@Controller</code></strong></p>
+<ul>
+<li><p>By default, the return value of a method in a <code>@Controller</code> class is treated as a view name. For example:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyViewController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/view"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">showView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"myView"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>In this code, the method <code>showView</code> returns the string <code>&quot;myView&quot;</code>, and Spring MVC will look for a view with this name to render.</p>
+</li>
+</ul>
+</li>
+<li><p><strong><code>@RestController</code></strong></p>
+<ul>
+<li><p>The return value of a method in a <code>@RestController</code> class is directly serialized and sent as the HTTP response body. For example:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyRestController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/data"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"This is some data"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>When a client makes a request to <code>/data</code>, the string <code>&quot;This is some data&quot;</code> will be sent directly in the response body.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-Usage-Scenarios"><a href="#3-Usage-Scenarios" class="headerlink" title="3. Usage Scenarios"></a>3. Usage Scenarios</h3><ul>
+<li><strong><code>@Controller</code></strong><ul>
+<li>It is suitable for traditional web applications where you need to render views based on user requests. For example, an e - commerce website where you need to display product lists, user profiles, etc. in HTML pages.</li>
+</ul>
+</li>
+<li><strong><code>@RestController</code></strong><ul>
+<li>It is ideal for building RESTful APIs. These APIs can be consumed by various clients such as mobile applications, single - page web applications, etc. For example, a backend API for a mobile banking application that provides services like getting account balance, transaction history, etc. </li>
+</ul>
+</li>
+</ul>
+<h2 id="in-kafka-how-to-handle-schema-evolution"><a href="#in-kafka-how-to-handle-schema-evolution" class="headerlink" title="in kafka, how to handle schema evolution"></a>in kafka, how to handle schema evolution</h2><p>Here are several common methods to handle schema evolution in Apache Kafka:</p>
+<h3 id="1-Using-Schema-Registry"><a href="#1-Using-Schema-Registry" class="headerlink" title="1. Using Schema Registry"></a>1. Using Schema Registry</h3><h4 id="Avro-with-Confluent-Schema-Registry"><a href="#Avro-with-Confluent-Schema-Registry" class="headerlink" title="Avro with Confluent Schema Registry"></a>Avro with Confluent Schema Registry</h4><ul>
+<li><strong>Principle</strong><ul>
+<li>Confluent Schema Registry is a widely used tool for managing schemas in Kafka. It stores schemas in a central repository and enforces compatibility rules between different versions of schemas. When using Avro serialization, producers and consumers can interact with the Schema Registry to ensure that the data they produce and consume adheres to the defined schemas.</li>
+</ul>
+</li>
+<li><strong>Steps</strong><ul>
+<li><strong>Producer side</strong>: When a producer sends data, it first checks if the schema of the data exists in the Schema Registry. If not, it registers the new schema. The registry then assigns a unique ID to the schema. The producer serializes the data using Avro and includes the schema ID in the message.</li>
+<li><strong>Consumer side</strong>: The consumer receives the message with the schema ID, fetches the corresponding schema from the Schema Registry, and deserializes the data using that schema.</li>
+</ul>
+</li>
+<li><strong>Compatibility Modes</strong><ul>
+<li><strong>Backward compatibility</strong>: Newer versions of the schema can be read by older consumers. For example, adding a new optional field to an Avro record is backward - compatible.</li>
+<li><strong>Forward compatibility</strong>: Older versions of the schema can be read by newer consumers. For example, removing a non - required field is forward - compatible.</li>
+<li><strong>Full compatibility</strong>: It combines backward and forward compatibility.</li>
+</ul>
+</li>
+</ul>
+<h4 id="Protobuf-with-Schema-Registry"><a href="#Protobuf-with-Schema-Registry" class="headerlink" title="Protobuf with Schema Registry"></a>Protobuf with Schema Registry</h4><ul>
+<li>Similar to Avro, Protocol Buffers can also be used with a schema registry. Protobuf has its own serialization and deserialization mechanisms, and the schema registry helps in managing different versions of Protobuf schemas.</li>
+</ul>
+<h3 id="2-Designing-Flexible-Schemas"><a href="#2-Designing-Flexible-Schemas" class="headerlink" title="2. Designing Flexible Schemas"></a>2. Designing Flexible Schemas</h3><h4 id="Use-Optional-Fields"><a href="#Use-Optional-Fields" class="headerlink" title="Use Optional Fields"></a>Use Optional Fields</h4><ul>
+<li><p>When defining your data schema, mark non - essential fields as optional. For example, in Avro, you can define a field like this:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"optionalField"</span>,</span><br><span class="line">    <span class="attr">"type"</span>: [<span class="string">"null"</span>, <span class="string">"string"</span>],</span><br><span class="line">    <span class="attr">"default"</span>: <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>This allows you to add new fields in future schema versions without breaking existing consumers that may not expect these new fields.</p>
+</li>
+</ul>
+<h4 id="Avoid-Breaking-Changes"><a href="#Avoid-Breaking-Changes" class="headerlink" title="Avoid Breaking Changes"></a>Avoid Breaking Changes</h4><ul>
+<li>Do not remove or rename existing required fields. If you need to change the meaning of a field, it’s better to add a new field and gradually deprecate the old one.</li>
+</ul>
+<h3 id="3-Versioning-in-the-Application-Code"><a href="#3-Versioning-in-the-Application-Code" class="headerlink" title="3. Versioning in the Application Code"></a>3. Versioning in the Application Code</h3><h4 id="Producer-Side-Versioning"><a href="#Producer-Side-Versioning" class="headerlink" title="Producer - Side Versioning"></a>Producer - Side Versioning</h4><ul>
+<li><p>The producer can explicitly include a version number in the message. For example, you can add a <code>version</code> field to your data structure:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMessage</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> version;</span><br><span class="line">    <span class="keyword">private</span> String data;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Getters and setters</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The producer can increment the version number when there is a schema change.</p>
+</li>
+</ul>
+<h4 id="Consumer-Side-Version-Handling"><a href="#Consumer-Side-Version-Handling" class="headerlink" title="Consumer - Side Version Handling"></a>Consumer - Side Version Handling</h4><ul>
+<li>The consumer can check the version number in the message and handle the data differently based on the version. For example:<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (message.getVersion() == <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="comment">// Handle data in version 1 format</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (message.getVersion() == <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="comment">// Handle data in version 2 format</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-Using-Kafka-Connect-with-Schema-Evolution-Support"><a href="#4-Using-Kafka-Connect-with-Schema-Evolution-Support" class="headerlink" title="4. Using Kafka Connect with Schema Evolution Support"></a>4. Using Kafka Connect with Schema Evolution Support</h3><ul>
+<li>Kafka Connect is a tool for moving data between Kafka and other systems. Some connectors support schema evolution. For example, the JDBC connector can handle changes in the database schema and propagate these changes to Kafka topics while maintaining compatibility.</li>
+</ul>
+<p>在 Apache Kafka 中，处理模式演变（Schema Evolution）有以下几种常见方法：</p>
+<h3 id="1-使用模式注册表"><a href="#1-使用模式注册表" class="headerlink" title="1. 使用模式注册表"></a>1. 使用模式注册表</h3><h4 id="结合-Confluent-模式注册表使用-Avro"><a href="#结合-Confluent-模式注册表使用-Avro" class="headerlink" title="结合 Confluent 模式注册表使用 Avro"></a>结合 Confluent 模式注册表使用 Avro</h4><ul>
+<li><strong>原理</strong><ul>
+<li>Confluent 模式注册表是 Kafka 中广泛使用的管理模式的工具。它将模式存储在中央存储库中，并对不同版本的模式执行兼容性规则。在使用 Avro 序列化时，生产者和消费者可以与模式注册表交互，以确保它们生产和消费的数据符合定义的模式。</li>
+</ul>
+</li>
+<li><strong>步骤</strong><ul>
+<li><strong>生产者端</strong>：生产者发送数据时，首先检查数据的模式是否存在于模式注册表中。如果不存在，则注册新模式。注册表会为该模式分配一个唯一的 ID。生产者使用 Avro 对数据进行序列化，并在消息中包含模式 ID。</li>
+<li><strong>消费者端</strong>：消费者接收到包含模式 ID 的消息后，从模式注册表中获取相应的模式，并使用该模式对数据进行反序列化。</li>
+</ul>
+</li>
+<li><strong>兼容性模式</strong><ul>
+<li><strong>向后兼容</strong>：新模式可以被旧版本的消费者读取。例如，向 Avro 记录中添加一个新的可选字段就是向后兼容的。</li>
+<li><strong>向前兼容</strong>：旧模式可以被新版本的消费者读取。例如，移除一个非必需字段是向前兼容的。</li>
+<li><strong>完全兼容</strong>：同时具备向后兼容和向前兼容的特性。</li>
+</ul>
+</li>
+</ul>
+<h4 id="结合模式注册表使用-Protocol-Buffers（Protobuf）"><a href="#结合模式注册表使用-Protocol-Buffers（Protobuf）" class="headerlink" title="结合模式注册表使用 Protocol Buffers（Protobuf）"></a>结合模式注册表使用 Protocol Buffers（Protobuf）</h4><ul>
+<li>与 Avro 类似，Protocol Buffers 也可以与模式注册表结合使用。Protobuf 有自己的序列化和反序列化机制，模式注册表有助于管理不同版本的 Protobuf 模式。</li>
+</ul>
+<h3 id="2-设计灵活的模式"><a href="#2-设计灵活的模式" class="headerlink" title="2. 设计灵活的模式"></a>2. 设计灵活的模式</h3><h4 id="使用可选字段"><a href="#使用可选字段" class="headerlink" title="使用可选字段"></a>使用可选字段</h4><ul>
+<li><p>在定义数据模式时，将非必需字段标记为可选。例如，在 Avro 中可以这样定义一个字段：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"optionalField"</span>,</span><br><span class="line">    <span class="attr">"type"</span>: [<span class="string">"null"</span>, <span class="string">"string"</span>],</span><br><span class="line">    <span class="attr">"default"</span>: <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这样，在未来的模式版本中添加新字段时，不会破坏可能不期望这些新字段的现有消费者。</p>
+</li>
+</ul>
+<h4 id="避免重大更改"><a href="#避免重大更改" class="headerlink" title="避免重大更改"></a>避免重大更改</h4><ul>
+<li>不要移除或重命名现有的必需字段。如果需要更改字段的含义，最好添加一个新字段，并逐步弃用旧字段。</li>
+</ul>
+<h3 id="3-在应用代码中进行版本控制"><a href="#3-在应用代码中进行版本控制" class="headerlink" title="3. 在应用代码中进行版本控制"></a>3. 在应用代码中进行版本控制</h3><h4 id="生产者端版本控制"><a href="#生产者端版本控制" class="headerlink" title="生产者端版本控制"></a>生产者端版本控制</h4><ul>
+<li><p>生产者可以在消息中显式包含版本号。例如，可以在数据结构中添加一个 <code>version</code> 字段：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMessage</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> version;</span><br><span class="line">    <span class="keyword">private</span> String data;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Getters 和 setters</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当模式发生变化时，生产者可以递增版本号。</p>
+</li>
+</ul>
+<h4 id="消费者端版本处理"><a href="#消费者端版本处理" class="headerlink" title="消费者端版本处理"></a>消费者端版本处理</h4><ul>
+<li>消费者可以检查消息中的版本号，并根据版本不同对数据进行不同的处理。例如：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (message.getVersion() == <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="comment">// 处理版本 1 格式的数据</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (message.getVersion() == <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="comment">// 处理版本 2 格式的数据</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-使用支持模式演变的-Kafka-Connect"><a href="#4-使用支持模式演变的-Kafka-Connect" class="headerlink" title="4. 使用支持模式演变的 Kafka Connect"></a>4. 使用支持模式演变的 Kafka Connect</h3><ul>
+<li>Kafka Connect 是用于在 Kafka 和其他系统之间移动数据的工具。一些连接器支持模式演变。例如，JDBC 连接器可以处理数据库模式的更改，并将这些更改传播到 Kafka 主题，同时保持兼容性。 </li>
+</ul>
+<h2 id="kafka-Exactly-one-semantics"><a href="#kafka-Exactly-one-semantics" class="headerlink" title="kafka Exactly one semantics"></a>kafka Exactly one semantics</h2><p>Kafka 提供三种消息传递语义，分别是最多一次（At most once）、至少一次（At least once）和精确一次（Exactly once），它们的区别如下：</p>
+<h3 id="最多一次（At-most-once）"><a href="#最多一次（At-most-once）" class="headerlink" title="最多一次（At most once）"></a>最多一次（At most once）</h3><ul>
+<li><strong>生产者</strong>：消息发送后，不管是否成功写入 Kafka 就继续发送下一条消息。如果发送失败，不会重试。比如网络抖动导致消息没发出去，生产者也不会重新发送。</li>
+<li><strong>消费者</strong>：消费消息前先提交偏移量，再处理消息。若处理过程中消费者崩溃，已提交偏移量的消息不会再次处理，可能造成消息丢失。</li>
+<li><strong>应用场景</strong>：适用于对数据丢失容忍度较高，对性能要求较高的场景，如实时日志收集，少量日志丢失不影响整体分析。</li>
+</ul>
+<h3 id="至少一次（At-least-once）"><a href="#至少一次（At-least-once）" class="headerlink" title="至少一次（At least once）"></a>至少一次（At least once）</h3><ul>
+<li><strong>生产者</strong>：消息发送失败会重试，保证消息至少被写入 Kafka 一次。但如果写入成功，而确认响应丢失，生产者重试会导致消息重复写入。</li>
+<li><strong>消费者</strong>：先处理消息，处理完成后再提交偏移量。若处理完消息还未提交偏移量时消费者崩溃，重启后会重新处理之前的消息，导致消息重复消费。</li>
+<li><strong>应用场景</strong>：适用于对数据丢失零容忍，但能接受数据重复的场景，如数据统计分析，重复数据可以通过去重处理。</li>
+</ul>
+<h3 id="精确一次（Exactly-once）"><a href="#精确一次（Exactly-once）" class="headerlink" title="精确一次（Exactly once）"></a>精确一次（Exactly once）</h3><ul>
+<li><strong>生产者</strong>：有幂等生产者和事务性生产者两种机制。幂等生产者借助 PID 和序列号避免同一分区内重复写入；事务性生产者保证跨分区消息发送的原子性，失败可回滚。</li>
+<li><strong>消费者</strong>：结合生产者事务操作与手动提交偏移量，在事务中处理消息并在完成后提交，故障时事务回滚，确保消息不重复不丢失。</li>
+<li><strong>应用场景</strong>：适用于对数据准确性要求极高的场景，如金融交易系统，每笔交易必须精确处理一次。 </li>
+</ul>
+<h3 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h3><p>Exactly-once semantics means that each message is written to a Kafka topic and consumed and processed exactly once, ensuring data consistency.</p>
+<h3 id="Challenges"><a href="#Challenges" class="headerlink" title="Challenges"></a>Challenges</h3><ul>
+<li><strong>Producer</strong>: Retries may lead to duplicate message writes due to the failure of receiving acknowledgments.</li>
+<li><strong>Consumer</strong>: Incorrect timing of offset commits may result in duplicate message processing or message loss.</li>
+</ul>
+<h3 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h3><ul>
+<li><strong>Producer</strong><ul>
+<li><strong>Idempotent Producer</strong>: Introduced since Kafka 0.11.0, it avoids duplicate writes by means of the Producer ID (PID) and sequence numbers.</li>
+<li><strong>Transactional Producer</strong>: Ensures the atomicity of message sending across multiple partitions, and in case of failure, the transaction can be rolled back.</li>
+</ul>
+</li>
+<li><strong>Consumer</strong>: Combine the producer’s transaction operations with manual offset commits. Process messages within a transaction and commit the offset after the processing is completed. When a failure occurs, the transaction is rolled back to ensure there are no message-related issues. </li>
+</ul>
+<h1 id="bq"><a href="#bq" class="headerlink" title="bq"></a>bq</h1><h1 id="coding"><a href="#coding" class="headerlink" title="coding"></a>coding</h1><ul>
+<li>find kth element in an array</li>
+<li>find the middle node in a linked list</li>
+</ul>
+
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/noodle/" rel="tag"><i class="fa fa-tag"></i> noodle</a>
+            
+              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+            
+              <a href="/tags/NA/" rel="tag"><i class="fa fa-tag"></i> NA</a>
+            
+          </div>
+        
+
+        
+        
+        
+
+        
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2025/02/19/na_fulltime_java_backend_real_interview_questions/" rel="next" title="NA fulltime interview notes">
+                  <i class="fa fa-chevron-left"></i> 
+                  <p class="post-nav-pre-next-title">
+                    NA fulltime interview notes
+                  </p> 
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2025/02/21/na_contractor_java_backend_syllabus/" rel="prev" title="NA contractor knowledge syllabus">
+                <p class="post-nav-pre-next-title">
+                    NA contractor knowledge syllabus
+                </p> 
+                <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+
+        
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  
+
+  <aside id="sidebar" class="sidebar">
+
+    
+      
+        <div id="sidebar-dimmer"></div>
+      
+    
+
+    <div class="sidebar-inner">
+    
+      <div class="sidebar-toggle-inside motion-element">
+        <div class="sidebar-toggle-line-wrap">
+          <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+        </div>
+      </div>
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <a href="/" class="site-author-image" rel="start" style="border:none">
+            <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Mike">
+          </a>
+          <p class="site-author-name" itemprop="name">Mike</p>
+           
+              <p class="site-description motion-element" itemprop="description">🚙 🚗 💨 It is recommended to use Chrome, Safari, or Edge to read this blog since this blog was developed on Edge (Chromium kernel version) and tested on Safari.</p>
+          
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">280</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">102</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+          <div class="site-state-item site-state-about">
+            <a href="/about/">
+              <span class="site-state-item-about fa fa-fw fa-user"></span>
+              <span class="site-state-item-name">about</span>
+            </a>
+          </div>
+          
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/no5ix" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://open.spotify.com/user/313duq77ekebrfyak3xijqewzss4?si=e7653b829a9747bf" target="_blank" title="Spotify">
+                  
+                    <i class="fa fa-fw fa-spotify"></i>
+                  
+                    
+                      Spotify
+                    
+                </a>
+              </span>
+            
+          
+          
+          <!-- 网易云音乐 -->
+            <!-- <div class="netease-cloud-music"> -->
+              <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=110 src="//music.163.com/outchain/player?type=0&id=992743594&auto=0&height=90"></iframe> -->
+            <!-- </div> -->
+          <!-- 网易云音乐 -->
+
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pilot-Training-Questions"><span class="nav-text">Pilot Training Questions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mock"><span class="nav-text">Mock</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BQ"><span class="nav-text">BQ</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#intro"><span class="nav-text">intro</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Self-Introduction"><span class="nav-text">Self - Introduction</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Work-Project-Summary"><span class="nav-text">Work/Project Summary</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15Q"><span class="nav-text">15Q</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tech"><span class="nav-text">Tech</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Leetcode"><span class="nav-text">Leetcode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rest-API"><span class="nav-text">Rest API</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#concepts"><span class="nav-text">concepts</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#In-java-difference-between-controller-and-restcontroller"><span class="nav-text">In java, difference between @controller and @restcontroller</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Function-and-Purpose"><span class="nav-text">1. Function and Purpose</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Return-Value-Handling"><span class="nav-text">2. Return Value Handling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Usage-Scenarios"><span class="nav-text">3. Usage Scenarios</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#in-kafka-how-to-handle-schema-evolution"><span class="nav-text">in kafka, how to handle schema evolution</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Using-Schema-Registry"><span class="nav-text">1. Using Schema Registry</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Avro-with-Confluent-Schema-Registry"><span class="nav-text">Avro with Confluent Schema Registry</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Protobuf-with-Schema-Registry"><span class="nav-text">Protobuf with Schema Registry</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Designing-Flexible-Schemas"><span class="nav-text">2. Designing Flexible Schemas</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Use-Optional-Fields"><span class="nav-text">Use Optional Fields</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Avoid-Breaking-Changes"><span class="nav-text">Avoid Breaking Changes</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Versioning-in-the-Application-Code"><span class="nav-text">3. Versioning in the Application Code</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Producer-Side-Versioning"><span class="nav-text">Producer - Side Versioning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Consumer-Side-Version-Handling"><span class="nav-text">Consumer - Side Version Handling</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Using-Kafka-Connect-with-Schema-Evolution-Support"><span class="nav-text">4. Using Kafka Connect with Schema Evolution Support</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-使用模式注册表"><span class="nav-text">1. 使用模式注册表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#结合-Confluent-模式注册表使用-Avro"><span class="nav-text">结合 Confluent 模式注册表使用 Avro</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结合模式注册表使用-Protocol-Buffers（Protobuf）"><span class="nav-text">结合模式注册表使用 Protocol Buffers（Protobuf）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-设计灵活的模式"><span class="nav-text">2. 设计灵活的模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用可选字段"><span class="nav-text">使用可选字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#避免重大更改"><span class="nav-text">避免重大更改</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-在应用代码中进行版本控制"><span class="nav-text">3. 在应用代码中进行版本控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生产者端版本控制"><span class="nav-text">生产者端版本控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#消费者端版本处理"><span class="nav-text">消费者端版本处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-使用支持模式演变的-Kafka-Connect"><span class="nav-text">4. 使用支持模式演变的 Kafka Connect</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kafka-Exactly-one-semantics"><span class="nav-text">kafka Exactly one semantics</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最多一次（At-most-once）"><span class="nav-text">最多一次（At most once）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#至少一次（At-least-once）"><span class="nav-text">至少一次（At least once）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#精确一次（Exactly-once）"><span class="nav-text">精确一次（Exactly once）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Concept"><span class="nav-text">Concept</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Challenges"><span class="nav-text">Challenges</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solutions"><span class="nav-text">Solutions</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bq"><span class="nav-text">bq</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#coding"><span class="nav-text">coding</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mike</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <!--
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      
+        <span id="scrollpercent"><span>0</span>%</span>
+      
+    </div>
+    -->
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/mediumzoom/medium-zoom.js?v=1.1.0"></script>
+
+
+
+
+  
+
+
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    let db; // 全局数据库变量
+    var is_load_xml_finished = 0;
+    var keywords = [];
+    var curDate = new Date();
+    var xml_resp_cache = null;
+    var temp_keyword = "";
+
+    'use strict';
+
+    var content_id = isMobile() ? "local-search-result-mobile" : "local-search-result-pc";
+    var input_box = document.getElementById('local-search-input');
+    var resultContent = document.getElementById(content_id);
+    const searchButton = document.getElementById('search-button');
+    const closeButton = document.getElementById('local-search-close');
+
+    var str = "";
+
+    // 是否为第一个字母被键入的标志位
+    var first_char_flag = 0;
+
+    // 因为在移动设备上, 点击搜索之后会 scroll 到页面顶部, 所以需要记录之前的页面x, y坐标值, 以便于搜索完点击 close 按钮之后 scroll 回原来的页面坐标值.
+    var last_page_x = 0;
+    var last_page_y = 0;
+
+    var overlay = document.createElement("div");
+    overlay.classList.add("local-search-overlay");
+    document.body.appendChild(overlay);
+
+    function CloseLocalSearch(when_delete_all_on_mobile=false)
+    {
+        setTimeout(function() {  // 这个setTimeout的目的是为了解决当使用中文输入法输入英文的时候敲下enter键的那一瞬间发生从有文字到没文字又到有文字, 而下方window.scrollTo这个还没执行到, 会导致页面scroll乱滚以及velocity动画重复播放; 加了这个timeout之后就可以检测是否属于这种情况
+            if (temp_keyword.length > 0) {
+                return;
+            }
+            first_char_flag = 0;
+            $('#local-search-input').val('');
+            // $('#local-search-close').hide();
+            closeButton.classList.remove("show");
+
+            // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownOut', 200);
+            if (isMobile())
+            {
+              // $('body').scrollTop(last_page_y);  // scrollTop 有兼容性问题
+              // $('#' + content_id).hide();
+
+                $('#' + content_id).velocity('stop').velocity( 'transition.slideUpOut', 300);
+
+                if (!when_delete_all_on_mobile) {
+                    input_box.blur();
+                    // setTimeout(() => {
+                    //     closeButton.classList.remove("move");
+                    // }, 1000);
+                    input_box.classList.remove('expanded');
+                    document.body.style.overflow = ""; // 恢复body滚动
+                    overlay.classList.remove("show");
+                } else {
+                    return;
+                }
+                // const element = document.getElementById('local-search-result-mobile');
+                // let bottomY = element.offsetTop + element.offsetHeight;  // local search result底部相对于整个页面的 Y 坐标
+                // // console.log("bottttt= " + bottomY);
+                // if (bottomY == 0) {  // 说明 local search result底部 比当前页面还要长
+                //     scrollTo(last_page_x, last_page_y);
+                // } else {
+                //     // console.log("rrrrrrretrn " + bottomY);
+                //     // console.log("rrrrrrretrnyyy " + window.scrollY);
+                //     if (window.scrollY > bottomY) {  // 如果用户滚动到比 local search result的底部还要低, 那说明他不想回到他search之前的位置了
+                //         // console.log("4bottttt222= " + last_page_x);
+                //     } else {
+                //         // setTimeout(function() {
+                //             // scrollTo(last_page_x, last_page_y);
+                //             window.scrollTo({
+                //                 top: last_page_y,
+                //                 left: last_page_x,
+                //                 behavior: "smooth",
+                //                 duration: 150 // 滚动动画持续x毫秒
+                //             });
+                //         // }, 150);
+                //     }
+                // }
+                // last_page_x = 0;
+                // last_page_y = 0;
+            }
+            else
+            {
+                $('#' + content_id).attr("headroom_special_attr","true");   //headroom_special_attr是用来, 当页面滚动的时候local search的结果页面也会跟着一起被收起, 当不写这行代码的时候, 空的result会在页面往上滚的时候出现 ...
+                resultContent.classList.remove("smooth-transition");  // 这个是为了"当页面滚动的时候local search的结果页面也会跟着一起被收起"的时候有一个平滑滚动的动画, 这个不能直接写在css里, 不然会影响 velocity的动画
+
+                $('#' + content_id).velocity('stop').velocity( 'transition.slideUpOut', 800);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.bounceOut', 800);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.slideUpBigOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.bounceUpOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.expandOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.whirlOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.shrinkOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.swoopOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.flipBounceXOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.fadeOut', 600);
+            }
+        }, 150);
+    }
+
+    async function handleSearch()
+    {
+        if (keywords.length <= 0) {
+            return;
+        }
+        resultContent.innerHTML = "";
+    //   $('#local-search-close').show();
+    
+        closeButton.classList.add("show");
+
+        // 0x04. perform local searching
+        if (is_load_xml_finished == 0)
+        {
+            var local_search_tips = 
+                "<span class='local-search-empty'>" + "第一次搜索可能较慢, 先思考一个经典算法问题, 跳台阶:" + "</span>" +
+                "<span class='local-search-empty'>" + "一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个6级的台阶总共有多少种跳法?n级呢?" + "</span>";
+            var ProgressBar = 
+                "<div class='progress-bar'>" +
+                    "<div class='progress-bar-charge'></div>" +
+                "</div>";
+            resultContent.innerHTML = 
+                "<ul class='local-search-empty-ul'>" + 
+                local_search_tips +
+                ProgressBar;
+        }
+        else
+        {
+            // Retrieve the object from local storage
+            var xml_resp = await retrieve_search_xml()
+
+            xml_resp.forEach(function (data) {
+            var isMatch = true;
+            var content_index = [];
+            if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+            }
+            var is_encrypted = data.encrypted.trim() == '1'
+            var is_sensitive = CONFIG.local_search.sensitive_word && data_content.indexOf(CONFIG.local_search.sensitive_word) >= 0
+            var orig_data_title = data.title.trim();
+            var data_title = orig_data_title.toLowerCase();
+            var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+            var data_content = orig_data_content.toLowerCase();
+            var data_url = decodeURIComponent(data.url);
+            var index_title = -1;
+            var index_content = -1;
+            var first_occur = -1;
+            // only match artiles with not empty contents
+            if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                index_title = data_title.indexOf(keyword);
+                // index_content = (is_sensitive || is_encrypted) ? -1 : data_content.indexOf(keyword);  // 不能搜加密文章,
+                index_content = data_content.indexOf(keyword); //  这样可以搜加密了的文章, 但是搜索结果框不显示正文只显示标题
+
+                if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                } else {
+                    if (index_content < 0) {
+                    index_content = 0;
+                    }
+                    if (i == 0) {
+                    first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                }
+                });
+            } else {
+                isMatch = false;
+            }
+            // 0x05. show search results
+            if (isMatch) {
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                var match_content = "";
+                
+                const hostname = window.location.hostname;
+                if ((!is_sensitive && !is_encrypted) || (hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192")))
+                {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if (start < 0) {
+                    start = 0;
+                    }
+                    if (start == 0) {
+                    end = 100;
+                    }
+                    if (end > content.length) {
+                    end = content.length;
+                    }
+                    match_content = content.substr(start, end);
+                }
+                // highlight all keywords
+                var regS = "";
+                if (match_content != "")
+                {
+                    keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    });
+                }
+                else
+                {
+                    keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    });
+                }
+                str += "<li><a href='" + data_url + "' class='search-result-title' target='_blank'>" + orig_data_title + "</a>";
+                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+            }
+            });
+
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+            return resultContent.innerHTML = 
+                "<ul class='local-search-empty-ul'><span class='local-search-empty'>404.<span></ul>";
+            }
+            resultContent.innerHTML = str;
+      }
+    }
+
+    input_box.addEventListener('input', function () {
+        // 0x03. parse query to keywords list
+        str = '<ul class=\"search-result-list\">';
+        temp_keyword = this.value.trim();
+        if (temp_keyword.length <= 0) {
+            CloseLocalSearch(true);
+            return;
+        }
+
+        keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
+        handleSearch();
+
+        // 当用户键入第一个字母的时候的动画处理逻辑 : 
+        // 当 first_char_flag 为 0 的时候, 
+        // 要播放一个动画
+        if (first_char_flag == 0)
+        {
+            // $('body').scrollTop(0);
+            let duration = 600;
+            if (isMobile())
+            {
+                // if (window.scrollY != 0) {  // 加这个判断是为了防止 清空后再输入再点x没回原位
+                //     last_page_x = window.scrollX;
+                //     last_page_y = window.scrollY;
+                //     scrollTo(0,0);
+                // }
+              // $('body').scrollTop(0);
+            } else {
+                $('#' + content_id).removeAttr("headroom_special_attr");  // headroom_special_attr是用来 当页面滚动的时候local search的结果页面也会跟着一起被收起, 当不写这行代码的时候, 空的result会在页面往上滚的时候出现 ...
+                  setTimeout(()=>{
+                      resultContent.classList.add("smooth-transition"); // 这个是为了"当页面滚动的时候local search的结果页面也会跟着一起被收起"的时候有一个平滑滚动的动画, 这个不能直接写在css里, 不然会影响 velocity
+                  }, duration + 200); 
+            }
+            first_char_flag = 1;
+
+            if (isMobile()) {
+                $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', duration);
+            } else {
+                $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', duration);
+                  // $('#' + content_id).velocity('stop').velocity('transition.bounceIn', 800);
+                //   $('.local-search-result-cls ul li').velocity('stop').velocity('transition.bounceUpIn', 1200);
+            }
+          // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownBigIn', 1000);
+        } else {
+            // if (isMobile())
+            // {
+            //     const element = document.getElementById('local-search-result-mobile');
+            //     let bottomY = element.offsetTop + element.offsetHeight;  // local search result底部相对于整个页面的 Y 坐标
+            //     if (window.scrollY > bottomY) {  // 如果用户滚动到比 local search result的底部还要低
+            //         last_page_x = window.scrollX;
+            //         last_page_y = window.scrollY;
+            //         window.scrollTo({
+            //             top: 0,
+            //             left: 0,
+            //             behavior: "smooth",
+            //             duration: 150 // 滚动动画持续x毫秒
+            //         });
+            //     }
+            // }
+        }
+    });
+
+    // 这里要不要用 click 要用 pointerup, 不然 mac safari 触摸板 tap 得tap两次才能触发这里
+    $(document).on('pointerup', '#local-search-close', function(event) {
+        temp_keyword = "";
+        CloseLocalSearch();
+    });
+
+    input_box.addEventListener("focus", function() {  // when input get the focus
+        if (isMobile()) {
+            document.body.style.overflow = "hidden"; // 禁止body滚动
+            overlay.classList.add("show");
+        }
+    });
+
+    input_box.addEventListener("blur", function() {  // when input lose the focus
+        if (isMobile()) {
+            // console.log("输入框失去焦点");
+            // $('#local-search-input').val('');
+            // if (temp_keyword.length > 0) {
+            //     if (str.indexOf('<li>') === -1) {  // 说明local search 没搜到东西
+            //         window.scrollTo({
+            //             top: last_page_y,
+            //             left: last_page_x,
+            //             behavior: "smooth",
+            //             duration: 150 // 滚动动画持续x毫秒
+            //         });
+            //     }
+            //     // closeButton.classList.add("move");
+            //     // setTimeout(function() {
+            //     //     input_box.classList.remove('expanded');
+            //     // }, 450);
+            // } else {
+            //     window.scrollTo({  // 当失焦的时候且输入框没文字的时候就滚回原来的位置
+            //         top: last_page_y,
+            //         left: last_page_x,
+            //         behavior: "smooth",
+            //         duration: 150 // 滚动动画持续x毫秒
+            //     });
+            //     input_box.classList.remove('expanded');
+            // }
+            setTimeout(()=> {
+                searchButton.disabled = false;
+            }, 600);
+
+            // console.log("输入框失去焦点2: " + temp_keyword.length);
+            if (temp_keyword.length <= 0) {
+                document.body.style.overflow = ""; // 恢复body滚动
+                overlay.classList.remove("show");
+                input_box.classList.remove('expanded');
+            }
+        }
+    });
+
+    searchButton.addEventListener('click', function() {  // 这里要用click不要用 pointerup, 不然ios可能弹不出键盘
+        if (isMobile()) {
+            // 使输入框渐变显示
+            searchButton.disabled = true;  // 点击之后就禁用, 直到input失焦
+            input_box.focus();
+            // if (temp_keyword.length > 0) {
+            //     // closeButton.classList.remove("move");
+            //     // setTimeout(function() {
+            //         input_box.classList.add('expanded');
+            //         setTimeout(function() {
+            //             $('#local-search-input').val(temp_keyword);
+            //         }, 350);
+            //     // }, 450);
+            // } else {
+            //     // setTimeout(()=> {
+            //         input_box.classList.add('expanded');
+            //     // }, 80);
+            // }
+
+            input_box.classList.add('expanded');
+        }
+    });
+
+    // 你的代码在 document 上监听 click 事件，并检查点击的目标是否在 content_id 指定的元素内部。如果点击的目标不在该元素内，则执行 CloseLocalSearch()。
+    // $(document).click(function(event) {
+    //     if (isMobile()) {
+    //         return;
+    //     } else {
+    //         if (!$(event.target).closest('#' + content_id).length) {
+    //             temp_keyword = "";
+    //             CloseLocalSearch();
+    //         }
+    //     }
+    // });
+
+    $(document).keyup(function(event){
+      switch(event.keyCode) {
+        case 27:
+          // alert("ESC");
+          temp_keyword = "";
+          CloseLocalSearch();
+      }
+    });
+
+    function isMobile() {
+      // console.log(document.body.clientWidth);
+      return document.body.clientWidth < 768
+    }
+
+    function getTimestampAsSecond() {
+      // console.log(document.body.clientWidth);
+      return Math.floor(Date.now() / 1000);
+    }
+
+    {/* function store_search_xml(xmlResponse) {
+        var entries = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // Put the object into storage
+        localStorage.setItem('local_search_xml_data', JSON.stringify(entries));
+        localStorage.setItem('last_store_local_search_date', curDate.getDate());
+        is_load_xml_finished = 1;
+        console.log("[local search] - store search.xml finished.");
+    } */}
+
+    function ajax_store_search_xml(xmlTimestamp) {
+        console.log("[local search] - ajax downloading search.xml ...");
+        $.ajax({
+            url: "/search.xml",
+            dataType: "xml",
+            success: function (xmlResponse) {
+                setLocalSearchXMLData(xmlResponse, xmlTimestamp);
+                // 如果输入框有文字, 等待下载 xml完毕之后再弹出结果
+                if (temp_keyword.length > 0) {
+                    handleSearch();
+                    $('.local-search-result-cls ul li').velocity('stop').velocity('transition.swoopIn', 1200);
+                }
+            }
+        });
+    }
+
+    async function retrieve_search_xml() {
+        // // Retrieve the object from local storage
+        // var retrievedObject = localStorage.getItem('local_search_xml_data');
+        // var xml_resp = JSON.parse(retrievedObject)
+        // return xml_resp
+
+        if (xml_resp_cache) {
+          return xml_resp_cache;
+        }
+        // Retrieve the object from indexedDB
+        xml_resp_cache = await getLocalSearchXMLData();
+        return xml_resp_cache;
+    }
+
+    function openDatabase() {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open("myDatabase", 1); // 设置为版本号 1, 用indexedDB替代localStorage, 因为indexedDB可以存储大量数据（几百 MB 到几 GB）, 而localStorage只能5MB左右, 
+            request.onupgradeneeded = function(event) {
+                db = event.target.result;
+                if (!db.objectStoreNames.contains("searchData")) {
+                    const objectStore = db.createObjectStore("searchData", { keyPath: "id" });
+                    // 可以创建索引以便于查询
+                    objectStore.createIndex("xmlDataIndex", "xml_data", { unique: false });
+                }
+            };
+            request.onsuccess = function(event) {
+                db = event.target.result;
+                console.log("[local search] - Database opened successfully.");
+                resolve(db);
+            };
+            request.onerror = function(event) {
+                console.error("[local search] - Database open error:", event.target.error);
+                reject(event.target.error);
+            };
+        });
+    }
+
+    async function setLocalSearchXMLData(xmlResponse, xmlTimestamp) {
+        if (!db) {
+            await openDatabase();  // 确保数据库已打开
+        }
+        var transaction = db.transaction(["searchData"], "readwrite");
+        var objectStore = transaction.objectStore("searchData");
+
+        var xml_data = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // 存储数据，主键为 "id"，这里我们将 "id" 设为 "local_search_xml_data"
+        var data = { id: "local_search_xml_data", xml_data: xml_data };
+
+        var request = objectStore.put(data);  // 使用 put 可以插入或者更新数据
+        request.onsuccess = function() {
+            console.log("[local search] - Data successfully stored in indexedDB.");
+            // localStorage.setItem('last_store_local_search_date', curDate.getDate());
+            localStorage.setItem('last_publish_timestamp', xmlTimestamp);
+            is_load_xml_finished = 1;
+        };
+        request.onerror = function(event) {
+            console.log("[local search] - Error storing data: ", event.target.error);
+        };
+    }
+
+    // 封装 IndexedDB 操作为 Promise
+    function getLocalSearchXMLData() {
+        return new Promise((resolve, reject) => {
+            if (!db) {
+                reject("[local search] - Database is not initialized.");
+                return;
+            }
+            var transaction = db.transaction(["searchData"], "readonly");
+            var objectStore = transaction.objectStore("searchData");
+            var request = objectStore.get("local_search_xml_data");  // 使用 id 获取数据
+            request.onsuccess = function(event) {
+                if (request.result) {
+                    // 数据存在，成功处理
+                    resolve(request.result.xml_data);  // 解析成功并返回结果
+                } else {
+                    // 数据未找到，返回失败
+                    reject("Data not found");  // 抛出错误
+                }
+            };
+            request.onerror = function(event) {
+                // 错误处理
+                console.log("[local search] - Error retrieving data: ", event.target.error);
+                reject(event.target.error);  // 抛出错误
+            };
+        });
+    }
+
+    // 使用 async/await 来调用这个函数
+    async function loadSearchData() {
+        try {
+            if (!db) {
+                await openDatabase();  // 确保数据库已打开
+            }
+            await getLocalSearchXMLData();  // 等待结果
+            is_load_xml_finished = 1;
+            console.log("[local search] - load search.xml finished.");
+            // console.log("Retrieved data: ", result);
+        } catch (error) {
+            // console.error("Error: ", error);
+            console.log("[local search] - load search.xml not found.");
+            ajax_get_new_search_xml_if_exist(true);
+        }
+    }
+
+    // 节省流量
+    function ajax_get_new_search_xml_if_exist(force=false) {
+        const hostname = window.location.hostname;
+        if (!(hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192"))) {
+            console.log("[local search] - ajax downloading publish_time.xml ...");
+            $.ajax({
+                url: "/publish_time.xml",  // 这个文件是github action里加上去的, 参见本项目 .github/workflows/pages.yml:151
+                dataType: "xml",
+                success: function (xmlResponse) {
+                    // 使用 jQuery 解析 XML 文档并获取时间戳
+                    const xmlTimestamp = $(xmlResponse).find('publish_timestamp').text(); // 提取 <timestamp> 的文本
+                    // 从 localStorage 获取存储的时间戳
+                    const storedTimestamp = localStorage.getItem('last_publish_timestamp') || 0;
+                    if (force) {
+                        ajax_store_search_xml(xmlTimestamp);
+                    } else {
+                        console.log('[local search] - ajax_get_new_search_xml_if_exist, xmlTimestamp: ' + xmlTimestamp + ", storedTimestamp: " + storedTimestamp);
+                        if (xmlTimestamp > storedTimestamp) {
+                            // download search.xml
+                            ajax_store_search_xml(xmlTimestamp);
+                        }
+                        else {
+                            // 调用异步函数
+                            loadSearchData();
+                        }
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('[local search] - ajax_get_new_search_xml_if_exist 请求失败: ' + error);
+                    ajax_store_search_xml(getTimestampAsSecond());
+                }
+            });
+        } else {
+            ajax_store_search_xml(getTimestampAsSecond());
+        }
+    }
+
+    // var local_search_xml_data = localStorage.getItem('local_search_xml_data');
+    // if (local_search_xml_data) {
+    //     is_load_xml_finished = 1;
+    //     console.log("[local search] - load search.xml finished.");
+    // }
+    // var last_store_local_search_date = localStorage.getItem('last_store_local_search_date');
+    // // 只有在 localStorage 没有 search.xml数据或者 距离上次使用local search已经超过一天了才去取search.xml
+    // // 节省流量
+    // if (last_store_local_search_date != curDate.getDate()) {
+    //     // download search.xml
+    //     ajax_store_search_xml();
+    // } else {
+    //     // 调用异步函数
+    //     loadSearchData();
+    // }
+
+    ajax_get_new_search_xml_if_exist();
+
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/lib/wobble_window/wobblewindow.js"> </script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+<script type="text/javascript" src="/js/src/headroom.js"></script> 
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>

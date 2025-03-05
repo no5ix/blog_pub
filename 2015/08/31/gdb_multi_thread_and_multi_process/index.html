@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+
+<script>
+    (function(){
+        if(''){
+			function checkPassword(password) {
+				password = password.trim();
+				if (password !== ''){
+					if (password != null) // 如果用户点击了确认而且密码错误的时候, 因为当password == null的时候说明用户点了取消
+					{
+						alert('Error!');
+					}
+					if (history.length > 1)
+					{
+						history.back();
+					}
+					else
+					{
+						window.location.href = "about:blank";
+					}
+				}
+			}
+
+			var password_verify_on_local = false;
+			const hostname = window.location.hostname;
+			if (password_verify_on_local || (!(hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192")))) {
+				
+				// if (window.innerWidth < 768) {
+
+				// 	window.onload = function () {
+				// 		// 创建遮罩层
+				// 		const overlay = document.createElement("div");
+				// 		// 创建输入框容器
+				// 		overlay.innerHTML = `
+				// 			<div class="password-input-box">
+				// 				<p>Open Sesame</p>
+				// 				<input type="password" id="passwordInput" style="padding: 10px; width: 200px;">
+				// 				<div style="margin-top: 10px;">
+				// 				<button id="confirmBtn">ok</button>
+				// 				<button id="cancelBtn" style="margin-left: 10px;">cancel</button>
+				// 				</div>
+				// 			</div>
+				// 			`;
+				// 		overlay.classList.add("password-overlay");
+				// 		document.body.style.overflow = "hidden"; // 禁止body滚动
+				// 		document.body.appendChild(overlay);
+
+				// 		setTimeout(() => {
+				// 			const input = document.getElementById("passwordInput");
+				// 			input.focus(); // 自动弹出键盘, 经测试, 手机上弹不出来, 所以放弃
+				// 			// console.log("asdfasdfa??tantantan");
+
+				// 			function confirmPassword() {
+				// 				const password = input.value;
+				// 				if (password) {
+				// 					alert("你输入的密码是: " + password);
+				// 					document.body.removeChild(overlay);
+				// 				} else {
+				// 					alert("请输入密码");
+				// 				}
+				// 			}
+
+				// 			// 按回车确认
+				// 			input.addEventListener("keydown", function (event) {
+				// 				if (event.key === "Enter") {
+				// 					confirmPassword();
+				// 				}
+				// 			});
+				// 			// 点击确定按钮
+				// 			document.getElementById("confirmBtn").onclick = confirmPassword;
+				// 			// 点击取消按钮
+				// 			document.getElementById("cancelBtn").onclick = function () {
+				// 				document.body.removeChild(overlay);
+				// 			};
+				// 		}, 1000);
+				// 	};
+
+				// } else {
+					var password = prompt('Open Sesame');
+					checkPassword(password);
+				// }
+
+			}
+
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="GDB,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="GDB多进程/多线程调试实战例子在gcc编译的时候，记得附加 -lpthread参数, 否则会出现 undefined reference to ‘pthread_create’ 的错误.(因为在链接的时候，无法找到phread库中哥函数的入口地址，于是链接会失败。) 例程123456789101112131415161718192021222324252627282930313233343536">
+<meta name="keywords" content="GDB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GDB多进程多线程调试实战">
+<meta property="og:url" content="https://hulinhong.com/2015/08/31/gdb_multi_thread_and_multi_process/index.html">
+<meta property="og:site_name" content="🚙">
+<meta property="og:description" content="GDB多进程/多线程调试实战例子在gcc编译的时候，记得附加 -lpthread参数, 否则会出现 undefined reference to ‘pthread_create’ 的错误.(因为在链接的时候，无法找到phread库中哥函数的入口地址，于是链接会失败。) 例程123456789101112131415161718192021222324252627282930313233343536">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2025-03-05T13:08:39.219Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GDB多进程多线程调试实战">
+<meta name="twitter:description" content="GDB多进程/多线程调试实战例子在gcc编译的时候，记得附加 -lpthread参数, 否则会出现 undefined reference to ‘pthread_create’ 的错误.(因为在链接的时候，无法找到phread库中哥函数的入口地址，于是链接会失败。) 例程123456789101112131415161718192021222324252627282930313233343536">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"scrollpercent":true,"onmobile":true,"dimmer":true,"body_content_height":0,"display_duration":150},
+    local_search: {"enable":true,"trigger":"auto","top_n_per_article":1},
+    fancybox: false,
+    mediumzoom: true,
+    darkmode_js: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"duration":222,"transition":{"header":"slideDownIn","menu":"slideDownIn","logo":"slideDownIn","post_block_else":"slideDownIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"slideDownIn","footer":"slideDownIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+
+  <title>GDB多进程多线程调试实战 | 🚙</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">🚙</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">💨 💨 💨</p>
+      
+  </div>
+
+  <div class="menu-item sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="menu-item site-search">
+    
+  
+  <div class="site-search-div">
+    <button class="search-icon" id="search-button">
+      <i class="fa fa-search"></i>
+    </button>
+    <input type="text" id="local-search-input" class="st-search-input">
+    <i id="local-search-close">×</i>
+  </div>
+
+
+<script type="text/javascript" id="local.search.active">
+    {/* var inputArea       = document.querySelector("#local-search-input");
+    inputArea.onclick   = function(){ getSearchFile(); this.focus(); }
+    inputArea.onkeydown = function(){ if(event.keyCode == 13) return false } */}
+</script>
+
+
+
+  </div>
+  <div id="local-search-result-pc" class="local-search-result-cls"></div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+       
+    </ul>
+  
+
+  
+    
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <div id="local-search-result-mobile" class="local-search-result-cls"></div>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/08/31/gdb_multi_thread_and_multi_process/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mike">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="🚙">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">GDB多进程多线程调试实战</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-08-31T14:20:23+00:00">
+                2015-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <div class="post-tags">
+              
+                <a href="/tags/GDB/" rel="tag"><i class="fa fa-tag"></i> GDB</a>
+              
+            </div>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/23/putty_config/" rel="next" title="Putty配置">
+                <i class="fa fa-chevron-left"></i> 
+                <p class="post-nav-pre-next-title">
+                  Putty配置
+                </p> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/09/12/hash索引btree索引聚簇索引非聚簇索引/" rel="prev" title="hash索引btree索引聚簇索引非聚簇索引">
+              <p class="post-nav-pre-next-title">
+                  hash索引btree索引聚簇索引非聚簇索引
+              </p> 
+              <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+
+      
+      
+
+      
+        <h1 id="GDB多进程-多线程调试实战例子"><a href="#GDB多进程-多线程调试实战例子" class="headerlink" title="GDB多进程/多线程调试实战例子"></a>GDB多进程/多线程调试实战例子</h1><p>在gcc编译的时候，记得附加 -lpthread参数, 否则会出现 undefined reference to ‘pthread_create’ 的错误.<br>(因为在链接的时候，无法找到phread库中哥函数的入口地址，于是链接会失败。)</p>
+<h2 id="例程"><a href="#例程" class="headerlink" title="例程"></a>例程</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processA</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processB</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">processAworker</span><span class="params">(<span class="keyword">void</span> *arg)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> pid;</span><br><span class="line"></span><br><span class="line">		pid = fork();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (pid != <span class="number">0</span>)</span><br><span class="line">				processA();</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">				processB();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processA</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">		<span class="keyword">pid_t</span> pid = getpid();</span><br><span class="line">		<span class="keyword">char</span> prefix[] = <span class="string">"ProcessA: "</span>;</span><br><span class="line">		<span class="keyword">char</span> tprefix[] = <span class="string">"thread "</span>;</span><br><span class="line">		<span class="keyword">int</span> tstatus;</span><br><span class="line">		<span class="keyword">pthread_t</span> pt;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%s%lu %s\n"</span>, prefix, pid, <span class="string">"step1"</span>);</span><br><span class="line"></span><br><span class="line">		tstatus = pthread_create(&amp;pt, <span class="literal">NULL</span>, processAworker, <span class="literal">NULL</span>);</span><br><span class="line">		<span class="keyword">if</span> (tstatus != <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"ProcessA: Can not create new thread."</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		processAworker(<span class="literal">NULL</span>);</span><br><span class="line">		sleep(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">processAworker</span><span class="params">(<span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">		<span class="keyword">pid_t</span> pid = getpid();</span><br><span class="line">		<span class="keyword">pthread_t</span> tid = pthread_self();</span><br><span class="line">		<span class="keyword">char</span> prefix[] = <span class="string">"ProcessA: "</span>;</span><br><span class="line">		<span class="keyword">char</span> tprefix[] = <span class="string">"thread "</span>;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%s%lu %s%lu %s\n"</span>, prefix, pid, tprefix, tid, <span class="string">"step2"</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%s%lu %s%lu %s\n"</span>, prefix, pid, tprefix, tid, <span class="string">"step3"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processB</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">		<span class="keyword">pid_t</span> pid = getpid();</span><br><span class="line">		<span class="keyword">char</span> prefix[] = <span class="string">"ProcessB: "</span>;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%s%lu %s\n"</span>, prefix, pid, <span class="string">"step1"</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%s%lu %s\n"</span>, prefix, pid, <span class="string">"step2"</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%s%lu %s\n"</span>, prefix, pid, <span class="string">"step3"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><pre><code>[cnwuwil@centos c-lab]$ ./test
+ProcessA: 802 step1
+ProcessB: 803 step1
+ProcessB: 803 step2
+ProcessB: 803 step3
+ProcessA: 802 thread 3077555904 step2
+ProcessA: 802 thread 3077555904 step3
+ProcessA: 802 thread 3077553008 step2
+ProcessA: 802 thread 3077553008 step3
+</code></pre><h1 id="GDB多进程调试命令"><a href="#GDB多进程调试命令" class="headerlink" title="GDB多进程调试命令"></a>GDB多进程调试命令</h1><ul>
+<li>set follow-fork-mode [parent|child]   set detach-on-fork [on|off]</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>follow-fork-mode</th>
+<th style="text-align:center">detach-on-fork</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parent</td>
+<td style="text-align:center">on</td>
+<td>只调试主进程（GDB默认）</td>
+</tr>
+<tr>
+<td>child</td>
+<td style="text-align:center">on</td>
+<td>只调试子进程</td>
+</tr>
+<tr>
+<td>parent</td>
+<td style="text-align:center">off</td>
+<td>同时调试两个进程，GDB跟主进程，子进程block在fork位置</td>
+</tr>
+<tr>
+<td>child</td>
+<td style="text-align:center">off</td>
+<td>同时调试两个进程，GDB跟子进程，主进程block在fork位置</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>查询正在调试的进程：info inferiors</li>
+<li>切换调试的进程： inferior +inferior number</li>
+<li>catch fork命令可以捕获进程的创建</li>
+<li>attach + pid ， 可以附到一个正在运行的进程上进行调试</li>
+</ul>
+<p><strong>. . .</strong><a id="more"></a></p>
+<h1 id="GDB多线程调试命令"><a href="#GDB多线程调试命令" class="headerlink" title="GDB多线程调试命令"></a>GDB多线程调试命令</h1><ul>
+<li>show scheduler-locking  //显示当前scheduler-locking</li>
+<li>set scheduler-locking [on/off/step]  //设置scheduler-locking<ul>
+<li>on：只有当前调试线程运行，其他线程处于暂停状态。</li>
+<li>off：当前调试线程外的其他线程一直在正常运行。</li>
+<li>step：其他线程跟随当前调试线程运行，但具体怎么协同运行，测试中无法体现。</li>
+<li>注意：set scheduler-locking要处于线程运行环境下才能生效，也就是程序已经运行并且暂停在某个断点处，否则会出现“Target ‘exec’ cannot support this command.”这样的错误；而且经过测试，设置后的scheduler-locking值在整个进程内有效，不属于某个线程。</li>
+</ul>
+</li>
+<li>查询线程：info threads</li>
+<li>切换调试线程：thread + thread_number</li>
+</ul>
+<h2 id="实战调试1"><a href="#实战调试1" class="headerlink" title="实战调试1"></a>实战调试1</h2><p>1.调试主进程，block子进程。</p>
+<pre><code>(gdb) set detach-on-fork off
+
+(gdb) show detach-on-fork
+Whether gdb will detach the child of a fork is off.
+
+(gdb) catch fork
+Catchpoint 1 (fork)
+
+(gdb) r
+[Thread debugging using libthread_db enabled]
+
+Catchpoint 1 (forked process 3475), 0x00110424 in __kernel_vsyscall ()
+Missing separate debuginfos, use: debuginfo-install glibc-2.12-1.47.el6.i686
+
+(gdb) break test.c:14
+Breakpoint 2 at 0x8048546: file test.c, line 14.
+
+(gdb) cont
+[New process 3475]
+[Thread debugging using libthread_db enabled]
+
+Breakpoint 2, main (argc=1, argv=0xbffff364) at test.c:14
+Missing separate debuginfos, use: debuginfo-install glibc-2.12-1.47.el6.i686
+
+(gdb) info inferiors
+    Num  Description       Executable       
+    2    process 3475      /home/cnwuwil/labs/c-lab/test
+* 1    process 3472      /home/cnwuwil/labs/c-lab/test
+</code></pre><p>2.切换到子进程：</p>
+<pre><code>(gdb) inferior 2
+[Switching to inferior 2 [process 3475] (/home/cnwuwil/labs/c-lab/test)]
+[Switching to thread 2 (Thread 0xb7fe86c0 (LWP 3475))]
+#0  0x00110424 in ?? ()
+
+(gdb) info inferiors
+    Num  Description       Executable       
+* 2    process 3475      /home/cnwuwil/labs/c-lab/test
+    1    process 3472      /home/cnwuwil/labs/c-lab/test
+
+(gdb) inferior 1
+[Switching to inferior 1 [process 3472] (/home/cnwuwil/labs/c-lab/test)]
+[Switching to thread 1 (Thread 0xb7fe86c0 (LWP 3472))]
+#0  main (argc=1, argv=0xbffff364) at test.c:14
+
+(gdb) info inferiors
+    Num  Description       Executable       
+    2    process 3475      /home/cnwuwil/labs/c-lab/test
+* 1    process 3472      /home/cnwuwil/labs/c-lab/test
+</code></pre><p>3.设断点继续调试主进程，主进程产生两个子线程：</p>
+<pre><code>(gdb) break test.c:50
+Breakpoint 3 at 0x804867d: file test.c, line 50. (2 locations)
+
+(gdb) cont
+ProcessA: 3472 step1
+[New Thread 0xb7fe7b70 (LWP 3562)]
+ProcessA: 3472 thread 3086911168 step2
+
+Breakpoint 3, processAworker (arg=0x0) at test.c:50
+
+(gdb) info inferiors
+    Num  Description       Executable       
+    2    process 3475      /home/cnwuwil/labs/c-lab/test
+* 1    process 3472      /home/cnwuwil/labs/c-lab/test
+
+(gdb) info threads
+    3 Thread 0xb7fe7b70 (LWP 3562)  0x00110424 in __kernel_vsyscall ()
+    2 Thread 0xb7fe86c0 (LWP 3475)  0x00110424 in ?? ()
+* 1 Thread 0xb7fe86c0 (LWP 3472)  processAworker (arg=0x0) at test.c:50
+</code></pre><p>4.切换到主进程中的子线程，注意：线程2为前面产生的子进程</p>
+<pre><code>(gdb) thread 3
+[Switching to thread 3 (Thread 0xb7fe7b70 (LWP 3562))]#0  0x00110424 in __kernel_vsyscall ()
+
+(gdb) cont
+ProcessA: 3472 thread 3086911168 step3
+ProcessA: 3472 thread 3086908272 step2
+[Switching to Thread 0xb7fe7b70 (LWP 3562)]
+
+Breakpoint 3, processAworker (arg=0x0) at test.c:50
+
+(gdb) info threads
+* 3 Thread 0xb7fe7b70 (LWP 3562)  processAworker (arg=0x0) at test.c:50
+    2 Thread 0xb7fe86c0 (LWP 3475)  0x00110424 in ?? ()
+    1 Thread 0xb7fe86c0 (LWP 3472)  0x00110424 in __kernel_vsyscall ()
+
+(gdb) thread 1
+</code></pre><h2 id="实战调试2"><a href="#实战调试2" class="headerlink" title="实战调试2"></a>实战调试2</h2><pre><code>b@b-VirtualBox:~/Documents/temp_test$ sudo gdb ./o_multi_thread_process 
+[sudo] password for b: 
+GNU gdb (Ubuntu 7.7.1-0ubuntu5~14.04.2) 7.7.1
+Copyright (C) 2014 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type &quot;show copying&quot;
+and &quot;show warranty&quot; for details.
+This GDB was configured as &quot;x86_64-linux-gnu&quot;.
+Type &quot;show configuration&quot; for configuration details.
+For bug reporting instructions, please see:
+&lt;http://www.gnu.org/software/gdb/bugs/&gt;.
+Find the GDB manual and other documentation resources online at:
+&lt;http://www.gnu.org/software/gdb/documentation/&gt;.
+For help, type &quot;help&quot;.
+Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...
+Reading symbols from ./o_multi_thread_process...done.
+
+(gdb) attach 3027
+Attaching to program: /home/b/Documents/temp_test/o_multi_thread_process, process 3027
+Reading symbols from /lib/x86_64-linux-gnu/libpthread.so.0...Reading symbols from /usr/lib/debug//lib/x86_64-linux-gnu/libpthread-2.19.so...done.
+done.
+[New LWP 3029]
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library &quot;/lib/x86_64-linux-gnu/libthread_db.so.1&quot;.
+Loaded symbols for /lib/x86_64-linux-gnu/libpthread.so.0
+Reading symbols from /lib/x86_64-linux-gnu/libc.so.6...Reading symbols from /usr/lib/debug//lib/x86_64-linux-gnu/libc-2.19.so...done.
+done.
+Loaded symbols for /lib/x86_64-linux-gnu/libc.so.6
+Reading symbols from /lib64/ld-linux-x86-64.so.2...Reading symbols from /usr/lib/debug//lib/x86_64-linux-gnu/ld-2.19.so...done.
+done.
+Loaded symbols for /lib64/ld-linux-x86-64.so.2
+0x00007f5c9acb8dfd in nanosleep () at ../sysdeps/unix/syscall-template.S:81
+81    ../sysdeps/unix/syscall-template.S: No such file or directory.
+
+(gdb) set follow-fork-mode parent 
+
+(gdb) set detach-on-fork off
+
+(gdb) catch fork
+Catchpoint 1 (fork)
+
+(gdb) r
+Starting program: /home/b/Documents/temp_test/o_multi_thread_process 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library &quot;/lib/x86_64-linux-gnu/libthread_db.so.1&quot;.
+
+Catchpoint 1 (forked process 3002), 0x00007ffff78b7ee4 in __libc_fork ()
+        at ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c:130
+130    ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c: No such file or directory.
+
+(gdb) info inferiors 
+    Num  Description       Executable        
+* 1    process 2998      /home/b/Documents/temp_test/o_multi_thread_process 
+
+(gdb) b 14
+Breakpoint 2 at 0x7ffff78b7f5b: file ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c, line 14.
+
+(gdb) info breakpoints 
+Num     Type           Disp Enb Address            What
+1       catchpoint     keep y                      fork, process 3002 
+    catchpoint already hit 1 time
+2       breakpoint     keep y   0x00007ffff78b7f5b in __libc_fork 
+                                                                                                    at ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c:14
+
+(gdb) d 2
+
+(gdb) info breakpoints 
+Num     Type           Disp Enb Address            What
+1       catchpoint     keep y                      fork, process 3002 
+    catchpoint already hit 1 time
+
+(gdb) b multi_thread_process.cpp : 14
+Breakpoint 3 at 0x4007f4: file ./multi_thread_process.cpp, line 14.
+
+(gdb) c
+Continuing.
+[New process 3002]
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library &quot;/lib/x86_64-linux-gnu/libthread_db.so.1&quot;.
+Reading symbols from /usr/lib/debug/lib/x86_64-linux-gnu/libpthread-2.19.so...done.
+Reading symbols from /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.19.so...done.
+Reading symbols from /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.19.so...done.
+
+Breakpoint 3, main (argc=1, argv=0x7fffffffe598) at ./multi_thread_process.cpp:15
+15      if(pid != 0)
+
+(gdb) info inferiors 
+    Num  Description       Executable        
+    2    process 3002      /home/b/Documents/temp_test/o_multi_thread_process 
+* 1    process 2998      /home/b/Documents/temp_test/o_multi_thread_process 
+
+(gdb) inferior 2
+[Switching to inferior 2 [process 3002] (/home/b/Documents/temp_test/o_multi_thread_process)]
+[Switching to thread 2 (Thread 0x7ffff7fdf740 (LWP 3002))] 
+0  0x00007ffff78b7ee4 in __libc_fork () at ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c:130
+130    ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c: No such file or directory.
+
+(gdb) set scheduler-locking on
+
+(gdb) b multi_thread_process.cpp : 50
+Breakpoint 4 at 0x400916: multi_thread_process.cpp:50. (2 locations)
+
+(gdb) info threads 
+    Id   Target Id         Frame 
+* 2    Thread 0x7ffff7fdf740 (LWP 3002) &quot;o_multi_thread_&quot; 0x00007ffff78b7ee4 in __libc_fork ()
+        at ../nptl/sysdeps/unix/sysv/linux/x86_64/../fork.c:130
+    1    Thread 0x7ffff7fdf740 (LWP 2998) &quot;o_multi_thread_&quot; main (argc=1, argv=0x7fffffffe598)
+        at ./multi_thread_process.cpp:15
+
+(gdb) c
+Continuing.
+
+Breakpoint 3, main (argc=1, argv=0x7fffffffe598) at ./multi_thread_process.cpp:15
+15      if(pid != 0)
+
+(gdb) info threads 
+    Id   Target Id         Frame 
+* 2    Thread 0x7ffff7fdf740 (LWP 3002) &quot;o_multi_thread_&quot; main (argc=1, argv=0x7fffffffe598)
+        at ./multi_thread_process.cpp:15
+    1    Thread 0x7ffff7fdf740 (LWP 2998) &quot;o_multi_thread_&quot; main (argc=1, argv=0x7fffffffe598)
+        at ./multi_thread_process.cpp:15
+
+(gdb) c
+Continuing.
+ProcessB: 3002 step1
+ProcessB: 3002 step2
+ProcessB: 3002 step3
+^C
+Program received signal SIGINT, Interrupt.
+0x00007ffff78b7de0 in __nanosleep_nocancel () at ../sysdeps/unix/syscall-template.S:81
+81    ../sysdeps/unix/syscall-template.S: No such file or directory.
+
+(gdb) info threads 
+    Id   Target Id         Frame 
+* 2    Thread 0x7ffff7fdf740 (LWP 3002) &quot;o_multi_thread_&quot; 0x00007ffff78b7de0 in __nanosleep_nocancel ()
+        at ../sysdeps/unix/syscall-template.S:81
+    1    Thread 0x7ffff7fdf740 (LWP 2998) &quot;o_multi_thread_&quot; main (argc=1, argv=0x7fffffffe598)
+        at ./multi_thread_process.cpp:15
+
+(gdb) info inferiors 
+    Num  Description       Executable        
+* 2    process 3002      /home/b/Documents/temp_test/o_multi_thread_process 
+    1    process 2998      /home/b/Documents/temp_test/o_multi_thread_process 
+
+(gdb) inferior 1
+[Switching to inferior 1 [process 2998] (/home/b/Documents/temp_test/o_multi_thread_process)]
+[Switching to thread 1 (Thread 0x7ffff7fdf740 (LWP 2998))] 
+0  main (argc=1, argv=0x7fffffffe598) at ./multi_thread_process.cpp:15
+15      if(pid != 0)
+
+(gdb) list
+10      {
+11      int pid;
+12    
+13      pid = fork();
+14    
+15      if(pid != 0)
+16        processA();
+17      else
+18        processB();
+19    
+
+(gdb) r
+The program being debugged has been started already.
+Start it from the beginning? (y or n) n
+Program not restarted.
+
+(gdb) c
+Continuing.
+ProcessA: 2998 step1
+[New Thread 0x7ffff77f6700 (LWP 3017)]
+^C
+Program received signal SIGINT, Interrupt.
+0x00007ffff78b7dfd in nanosleep () at ../sysdeps/unix/syscall-template.S:81
+81    ../sysdeps/unix/syscall-template.S: No such file or directory.
+
+(gdb) info threads 
+    Id   Target Id         Frame 
+    3    Thread 0x7ffff77f6700 (LWP 3017) &quot;o_multi_thread_&quot; clone () at ../sysdeps/unix/sysv/linux/x86_64/clone.S:81
+    2    Thread 0x7ffff7fdf740 (LWP 3002) &quot;o_multi_thread_&quot; 0x00007ffff78b7de0 in __nanosleep_nocancel ()
+        at ../sysdeps/unix/syscall-template.S:81
+* 1    Thread 0x7ffff7fdf740 (LWP 2998) &quot;o_multi_thread_&quot; 0x00007ffff78b7dfd in nanosleep ()
+        at ../sysdeps/unix/syscall-template.S:81
+
+(gdb) 
+</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://blog.csdn.net/pbymw8iwm/article/details/7876797" target="_blank" rel="noopener">参考</a></p>
+
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/GDB/" rel="tag"><i class="fa fa-tag"></i> GDB</a>
+            
+          </div>
+        
+
+        
+        
+        
+
+        
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2015/08/23/putty_config/" rel="next" title="Putty配置">
+                  <i class="fa fa-chevron-left"></i> 
+                  <p class="post-nav-pre-next-title">
+                    Putty配置
+                  </p> 
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2015/09/12/hash索引btree索引聚簇索引非聚簇索引/" rel="prev" title="hash索引btree索引聚簇索引非聚簇索引">
+                <p class="post-nav-pre-next-title">
+                    hash索引btree索引聚簇索引非聚簇索引
+                </p> 
+                <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+
+        
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  
+
+  <aside id="sidebar" class="sidebar">
+
+    
+      
+        <div id="sidebar-dimmer"></div>
+      
+    
+
+    <div class="sidebar-inner">
+    
+      <div class="sidebar-toggle-inside motion-element">
+        <div class="sidebar-toggle-line-wrap">
+          <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+        </div>
+      </div>
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <a href="/" class="site-author-image" rel="start" style="border:none">
+            <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Mike">
+          </a>
+          <p class="site-author-name" itemprop="name">Mike</p>
+           
+              <p class="site-description motion-element" itemprop="description">🚙 🚗 💨 It is recommended to use Chrome, Safari, or Edge to read this blog since this blog was developed on Edge (Chromium kernel version) and tested on Safari.</p>
+          
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">280</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">102</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+          <div class="site-state-item site-state-about">
+            <a href="/about/">
+              <span class="site-state-item-about fa fa-fw fa-user"></span>
+              <span class="site-state-item-name">about</span>
+            </a>
+          </div>
+          
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/no5ix" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://open.spotify.com/user/313duq77ekebrfyak3xijqewzss4?si=e7653b829a9747bf" target="_blank" title="Spotify">
+                  
+                    <i class="fa fa-fw fa-spotify"></i>
+                  
+                    
+                      Spotify
+                    
+                </a>
+              </span>
+            
+          
+          
+          <!-- 网易云音乐 -->
+            <!-- <div class="netease-cloud-music"> -->
+              <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=110 src="//music.163.com/outchain/player?type=0&id=992743594&auto=0&height=90"></iframe> -->
+            <!-- </div> -->
+          <!-- 网易云音乐 -->
+
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GDB多进程-多线程调试实战例子"><span class="nav-text">GDB多进程/多线程调试实战例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例程"><span class="nav-text">例程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出"><span class="nav-text">输出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GDB多进程调试命令"><span class="nav-text">GDB多进程调试命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GDB多线程调试命令"><span class="nav-text">GDB多线程调试命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实战调试1"><span class="nav-text">实战调试1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实战调试2"><span class="nav-text">实战调试2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mike</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <!--
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      
+        <span id="scrollpercent"><span>0</span>%</span>
+      
+    </div>
+    -->
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/mediumzoom/medium-zoom.js?v=1.1.0"></script>
+
+
+
+
+  
+
+
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    let db; // 全局数据库变量
+    var is_load_xml_finished = 0;
+    var keywords = [];
+    var curDate = new Date();
+    var xml_resp_cache = null;
+    var temp_keyword = "";
+
+    'use strict';
+
+    var content_id = isMobile() ? "local-search-result-mobile" : "local-search-result-pc";
+    var input_box = document.getElementById('local-search-input');
+    var resultContent = document.getElementById(content_id);
+    const searchButton = document.getElementById('search-button');
+    const closeButton = document.getElementById('local-search-close');
+
+    var str = "";
+
+    // 是否为第一个字母被键入的标志位
+    var first_char_flag = 0;
+
+    // 因为在移动设备上, 点击搜索之后会 scroll 到页面顶部, 所以需要记录之前的页面x, y坐标值, 以便于搜索完点击 close 按钮之后 scroll 回原来的页面坐标值.
+    var last_page_x = 0;
+    var last_page_y = 0;
+
+    var overlay = document.createElement("div");
+    overlay.classList.add("local-search-overlay");
+    document.body.appendChild(overlay);
+
+    function CloseLocalSearch(when_delete_all_on_mobile=false)
+    {
+        setTimeout(function() {  // 这个setTimeout的目的是为了解决当使用中文输入法输入英文的时候敲下enter键的那一瞬间发生从有文字到没文字又到有文字, 而下方window.scrollTo这个还没执行到, 会导致页面scroll乱滚以及velocity动画重复播放; 加了这个timeout之后就可以检测是否属于这种情况
+            if (temp_keyword.length > 0) {
+                return;
+            }
+            first_char_flag = 0;
+            $('#local-search-input').val('');
+            // $('#local-search-close').hide();
+            closeButton.classList.remove("show");
+
+            // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownOut', 200);
+            if (isMobile())
+            {
+              // $('body').scrollTop(last_page_y);  // scrollTop 有兼容性问题
+              // $('#' + content_id).hide();
+
+                $('#' + content_id).velocity('stop').velocity( 'transition.slideUpOut', 300);
+
+                if (!when_delete_all_on_mobile) {
+                    input_box.blur();
+                    // setTimeout(() => {
+                    //     closeButton.classList.remove("move");
+                    // }, 1000);
+                    input_box.classList.remove('expanded');
+                    document.body.style.overflow = ""; // 恢复body滚动
+                    overlay.classList.remove("show");
+                } else {
+                    return;
+                }
+                // const element = document.getElementById('local-search-result-mobile');
+                // let bottomY = element.offsetTop + element.offsetHeight;  // local search result底部相对于整个页面的 Y 坐标
+                // // console.log("bottttt= " + bottomY);
+                // if (bottomY == 0) {  // 说明 local search result底部 比当前页面还要长
+                //     scrollTo(last_page_x, last_page_y);
+                // } else {
+                //     // console.log("rrrrrrretrn " + bottomY);
+                //     // console.log("rrrrrrretrnyyy " + window.scrollY);
+                //     if (window.scrollY > bottomY) {  // 如果用户滚动到比 local search result的底部还要低, 那说明他不想回到他search之前的位置了
+                //         // console.log("4bottttt222= " + last_page_x);
+                //     } else {
+                //         // setTimeout(function() {
+                //             // scrollTo(last_page_x, last_page_y);
+                //             window.scrollTo({
+                //                 top: last_page_y,
+                //                 left: last_page_x,
+                //                 behavior: "smooth",
+                //                 duration: 150 // 滚动动画持续x毫秒
+                //             });
+                //         // }, 150);
+                //     }
+                // }
+                // last_page_x = 0;
+                // last_page_y = 0;
+            }
+            else
+            {
+                $('#' + content_id).attr("headroom_special_attr","true");   //headroom_special_attr是用来, 当页面滚动的时候local search的结果页面也会跟着一起被收起, 当不写这行代码的时候, 空的result会在页面往上滚的时候出现 ...
+                resultContent.classList.remove("smooth-transition");  // 这个是为了"当页面滚动的时候local search的结果页面也会跟着一起被收起"的时候有一个平滑滚动的动画, 这个不能直接写在css里, 不然会影响 velocity的动画
+
+                $('#' + content_id).velocity('stop').velocity( 'transition.slideUpOut', 800);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.bounceOut', 800);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.slideUpBigOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.bounceUpOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.expandOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.whirlOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.shrinkOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.swoopOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.flipBounceXOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.fadeOut', 600);
+            }
+        }, 150);
+    }
+
+    async function handleSearch()
+    {
+        if (keywords.length <= 0) {
+            return;
+        }
+        resultContent.innerHTML = "";
+    //   $('#local-search-close').show();
+    
+        closeButton.classList.add("show");
+
+        // 0x04. perform local searching
+        if (is_load_xml_finished == 0)
+        {
+            var local_search_tips = 
+                "<span class='local-search-empty'>" + "第一次搜索可能较慢, 先思考一个经典算法问题, 跳台阶:" + "</span>" +
+                "<span class='local-search-empty'>" + "一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个6级的台阶总共有多少种跳法?n级呢?" + "</span>";
+            var ProgressBar = 
+                "<div class='progress-bar'>" +
+                    "<div class='progress-bar-charge'></div>" +
+                "</div>";
+            resultContent.innerHTML = 
+                "<ul class='local-search-empty-ul'>" + 
+                local_search_tips +
+                ProgressBar;
+        }
+        else
+        {
+            // Retrieve the object from local storage
+            var xml_resp = await retrieve_search_xml()
+
+            xml_resp.forEach(function (data) {
+            var isMatch = true;
+            var content_index = [];
+            if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+            }
+            var is_encrypted = data.encrypted.trim() == '1'
+            var is_sensitive = CONFIG.local_search.sensitive_word && data_content.indexOf(CONFIG.local_search.sensitive_word) >= 0
+            var orig_data_title = data.title.trim();
+            var data_title = orig_data_title.toLowerCase();
+            var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+            var data_content = orig_data_content.toLowerCase();
+            var data_url = decodeURIComponent(data.url);
+            var index_title = -1;
+            var index_content = -1;
+            var first_occur = -1;
+            // only match artiles with not empty contents
+            if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                index_title = data_title.indexOf(keyword);
+                // index_content = (is_sensitive || is_encrypted) ? -1 : data_content.indexOf(keyword);  // 不能搜加密文章,
+                index_content = data_content.indexOf(keyword); //  这样可以搜加密了的文章, 但是搜索结果框不显示正文只显示标题
+
+                if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                } else {
+                    if (index_content < 0) {
+                    index_content = 0;
+                    }
+                    if (i == 0) {
+                    first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                }
+                });
+            } else {
+                isMatch = false;
+            }
+            // 0x05. show search results
+            if (isMatch) {
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                var match_content = "";
+                
+                const hostname = window.location.hostname;
+                if ((!is_sensitive && !is_encrypted) || (hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192")))
+                {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if (start < 0) {
+                    start = 0;
+                    }
+                    if (start == 0) {
+                    end = 100;
+                    }
+                    if (end > content.length) {
+                    end = content.length;
+                    }
+                    match_content = content.substr(start, end);
+                }
+                // highlight all keywords
+                var regS = "";
+                if (match_content != "")
+                {
+                    keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    });
+                }
+                else
+                {
+                    keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    });
+                }
+                str += "<li><a href='" + data_url + "' class='search-result-title' target='_blank'>" + orig_data_title + "</a>";
+                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+            }
+            });
+
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+            return resultContent.innerHTML = 
+                "<ul class='local-search-empty-ul'><span class='local-search-empty'>404.<span></ul>";
+            }
+            resultContent.innerHTML = str;
+      }
+    }
+
+    input_box.addEventListener('input', function () {
+        // 0x03. parse query to keywords list
+        str = '<ul class=\"search-result-list\">';
+        temp_keyword = this.value.trim();
+        if (temp_keyword.length <= 0) {
+            CloseLocalSearch(true);
+            return;
+        }
+
+        keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
+        handleSearch();
+
+        // 当用户键入第一个字母的时候的动画处理逻辑 : 
+        // 当 first_char_flag 为 0 的时候, 
+        // 要播放一个动画
+        if (first_char_flag == 0)
+        {
+            // $('body').scrollTop(0);
+            let duration = 600;
+            if (isMobile())
+            {
+                // if (window.scrollY != 0) {  // 加这个判断是为了防止 清空后再输入再点x没回原位
+                //     last_page_x = window.scrollX;
+                //     last_page_y = window.scrollY;
+                //     scrollTo(0,0);
+                // }
+              // $('body').scrollTop(0);
+            } else {
+                $('#' + content_id).removeAttr("headroom_special_attr");  // headroom_special_attr是用来 当页面滚动的时候local search的结果页面也会跟着一起被收起, 当不写这行代码的时候, 空的result会在页面往上滚的时候出现 ...
+                  setTimeout(()=>{
+                      resultContent.classList.add("smooth-transition"); // 这个是为了"当页面滚动的时候local search的结果页面也会跟着一起被收起"的时候有一个平滑滚动的动画, 这个不能直接写在css里, 不然会影响 velocity
+                  }, duration + 200); 
+            }
+            first_char_flag = 1;
+
+            if (isMobile()) {
+                $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', duration);
+            } else {
+                $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', duration);
+                  // $('#' + content_id).velocity('stop').velocity('transition.bounceIn', 800);
+                //   $('.local-search-result-cls ul li').velocity('stop').velocity('transition.bounceUpIn', 1200);
+            }
+          // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownBigIn', 1000);
+        } else {
+            // if (isMobile())
+            // {
+            //     const element = document.getElementById('local-search-result-mobile');
+            //     let bottomY = element.offsetTop + element.offsetHeight;  // local search result底部相对于整个页面的 Y 坐标
+            //     if (window.scrollY > bottomY) {  // 如果用户滚动到比 local search result的底部还要低
+            //         last_page_x = window.scrollX;
+            //         last_page_y = window.scrollY;
+            //         window.scrollTo({
+            //             top: 0,
+            //             left: 0,
+            //             behavior: "smooth",
+            //             duration: 150 // 滚动动画持续x毫秒
+            //         });
+            //     }
+            // }
+        }
+    });
+
+    // 这里要不要用 click 要用 pointerup, 不然 mac safari 触摸板 tap 得tap两次才能触发这里
+    $(document).on('pointerup', '#local-search-close', function(event) {
+        temp_keyword = "";
+        CloseLocalSearch();
+    });
+
+    input_box.addEventListener("focus", function() {  // when input get the focus
+        if (isMobile()) {
+            document.body.style.overflow = "hidden"; // 禁止body滚动
+            overlay.classList.add("show");
+        }
+    });
+
+    input_box.addEventListener("blur", function() {  // when input lose the focus
+        if (isMobile()) {
+            // console.log("输入框失去焦点");
+            // $('#local-search-input').val('');
+            // if (temp_keyword.length > 0) {
+            //     if (str.indexOf('<li>') === -1) {  // 说明local search 没搜到东西
+            //         window.scrollTo({
+            //             top: last_page_y,
+            //             left: last_page_x,
+            //             behavior: "smooth",
+            //             duration: 150 // 滚动动画持续x毫秒
+            //         });
+            //     }
+            //     // closeButton.classList.add("move");
+            //     // setTimeout(function() {
+            //     //     input_box.classList.remove('expanded');
+            //     // }, 450);
+            // } else {
+            //     window.scrollTo({  // 当失焦的时候且输入框没文字的时候就滚回原来的位置
+            //         top: last_page_y,
+            //         left: last_page_x,
+            //         behavior: "smooth",
+            //         duration: 150 // 滚动动画持续x毫秒
+            //     });
+            //     input_box.classList.remove('expanded');
+            // }
+            setTimeout(()=> {
+                searchButton.disabled = false;
+            }, 600);
+
+            // console.log("输入框失去焦点2: " + temp_keyword.length);
+            if (temp_keyword.length <= 0) {
+                document.body.style.overflow = ""; // 恢复body滚动
+                overlay.classList.remove("show");
+                input_box.classList.remove('expanded');
+            }
+        }
+    });
+
+    searchButton.addEventListener('click', function() {  // 这里要用click不要用 pointerup, 不然ios可能弹不出键盘
+        if (isMobile()) {
+            // 使输入框渐变显示
+            searchButton.disabled = true;  // 点击之后就禁用, 直到input失焦
+            input_box.focus();
+            // if (temp_keyword.length > 0) {
+            //     // closeButton.classList.remove("move");
+            //     // setTimeout(function() {
+            //         input_box.classList.add('expanded');
+            //         setTimeout(function() {
+            //             $('#local-search-input').val(temp_keyword);
+            //         }, 350);
+            //     // }, 450);
+            // } else {
+            //     // setTimeout(()=> {
+            //         input_box.classList.add('expanded');
+            //     // }, 80);
+            // }
+
+            input_box.classList.add('expanded');
+        }
+    });
+
+    // 你的代码在 document 上监听 click 事件，并检查点击的目标是否在 content_id 指定的元素内部。如果点击的目标不在该元素内，则执行 CloseLocalSearch()。
+    // $(document).click(function(event) {
+    //     if (isMobile()) {
+    //         return;
+    //     } else {
+    //         if (!$(event.target).closest('#' + content_id).length) {
+    //             temp_keyword = "";
+    //             CloseLocalSearch();
+    //         }
+    //     }
+    // });
+
+    $(document).keyup(function(event){
+      switch(event.keyCode) {
+        case 27:
+          // alert("ESC");
+          temp_keyword = "";
+          CloseLocalSearch();
+      }
+    });
+
+    function isMobile() {
+      // console.log(document.body.clientWidth);
+      return document.body.clientWidth < 768
+    }
+
+    function getTimestampAsSecond() {
+      // console.log(document.body.clientWidth);
+      return Math.floor(Date.now() / 1000);
+    }
+
+    {/* function store_search_xml(xmlResponse) {
+        var entries = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // Put the object into storage
+        localStorage.setItem('local_search_xml_data', JSON.stringify(entries));
+        localStorage.setItem('last_store_local_search_date', curDate.getDate());
+        is_load_xml_finished = 1;
+        console.log("[local search] - store search.xml finished.");
+    } */}
+
+    function ajax_store_search_xml(xmlTimestamp) {
+        console.log("[local search] - ajax downloading search.xml ...");
+        $.ajax({
+            url: "/search.xml",
+            dataType: "xml",
+            success: function (xmlResponse) {
+                setLocalSearchXMLData(xmlResponse, xmlTimestamp);
+                // 如果输入框有文字, 等待下载 xml完毕之后再弹出结果
+                if (temp_keyword.length > 0) {
+                    handleSearch();
+                    $('.local-search-result-cls ul li').velocity('stop').velocity('transition.swoopIn', 1200);
+                }
+            }
+        });
+    }
+
+    async function retrieve_search_xml() {
+        // // Retrieve the object from local storage
+        // var retrievedObject = localStorage.getItem('local_search_xml_data');
+        // var xml_resp = JSON.parse(retrievedObject)
+        // return xml_resp
+
+        if (xml_resp_cache) {
+          return xml_resp_cache;
+        }
+        // Retrieve the object from indexedDB
+        xml_resp_cache = await getLocalSearchXMLData();
+        return xml_resp_cache;
+    }
+
+    function openDatabase() {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open("myDatabase", 1); // 设置为版本号 1, 用indexedDB替代localStorage, 因为indexedDB可以存储大量数据（几百 MB 到几 GB）, 而localStorage只能5MB左右, 
+            request.onupgradeneeded = function(event) {
+                db = event.target.result;
+                if (!db.objectStoreNames.contains("searchData")) {
+                    const objectStore = db.createObjectStore("searchData", { keyPath: "id" });
+                    // 可以创建索引以便于查询
+                    objectStore.createIndex("xmlDataIndex", "xml_data", { unique: false });
+                }
+            };
+            request.onsuccess = function(event) {
+                db = event.target.result;
+                console.log("[local search] - Database opened successfully.");
+                resolve(db);
+            };
+            request.onerror = function(event) {
+                console.error("[local search] - Database open error:", event.target.error);
+                reject(event.target.error);
+            };
+        });
+    }
+
+    async function setLocalSearchXMLData(xmlResponse, xmlTimestamp) {
+        if (!db) {
+            await openDatabase();  // 确保数据库已打开
+        }
+        var transaction = db.transaction(["searchData"], "readwrite");
+        var objectStore = transaction.objectStore("searchData");
+
+        var xml_data = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // 存储数据，主键为 "id"，这里我们将 "id" 设为 "local_search_xml_data"
+        var data = { id: "local_search_xml_data", xml_data: xml_data };
+
+        var request = objectStore.put(data);  // 使用 put 可以插入或者更新数据
+        request.onsuccess = function() {
+            console.log("[local search] - Data successfully stored in indexedDB.");
+            // localStorage.setItem('last_store_local_search_date', curDate.getDate());
+            localStorage.setItem('last_publish_timestamp', xmlTimestamp);
+            is_load_xml_finished = 1;
+        };
+        request.onerror = function(event) {
+            console.log("[local search] - Error storing data: ", event.target.error);
+        };
+    }
+
+    // 封装 IndexedDB 操作为 Promise
+    function getLocalSearchXMLData() {
+        return new Promise((resolve, reject) => {
+            if (!db) {
+                reject("[local search] - Database is not initialized.");
+                return;
+            }
+            var transaction = db.transaction(["searchData"], "readonly");
+            var objectStore = transaction.objectStore("searchData");
+            var request = objectStore.get("local_search_xml_data");  // 使用 id 获取数据
+            request.onsuccess = function(event) {
+                if (request.result) {
+                    // 数据存在，成功处理
+                    resolve(request.result.xml_data);  // 解析成功并返回结果
+                } else {
+                    // 数据未找到，返回失败
+                    reject("Data not found");  // 抛出错误
+                }
+            };
+            request.onerror = function(event) {
+                // 错误处理
+                console.log("[local search] - Error retrieving data: ", event.target.error);
+                reject(event.target.error);  // 抛出错误
+            };
+        });
+    }
+
+    // 使用 async/await 来调用这个函数
+    async function loadSearchData() {
+        try {
+            if (!db) {
+                await openDatabase();  // 确保数据库已打开
+            }
+            await getLocalSearchXMLData();  // 等待结果
+            is_load_xml_finished = 1;
+            console.log("[local search] - load search.xml finished.");
+            // console.log("Retrieved data: ", result);
+        } catch (error) {
+            // console.error("Error: ", error);
+            console.log("[local search] - load search.xml not found.");
+            ajax_get_new_search_xml_if_exist(true);
+        }
+    }
+
+    // 节省流量
+    function ajax_get_new_search_xml_if_exist(force=false) {
+        const hostname = window.location.hostname;
+        if (!(hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192"))) {
+            console.log("[local search] - ajax downloading publish_time.xml ...");
+            $.ajax({
+                url: "/publish_time.xml",  // 这个文件是github action里加上去的, 参见本项目 .github/workflows/pages.yml:151
+                dataType: "xml",
+                success: function (xmlResponse) {
+                    // 使用 jQuery 解析 XML 文档并获取时间戳
+                    const xmlTimestamp = $(xmlResponse).find('publish_timestamp').text(); // 提取 <timestamp> 的文本
+                    // 从 localStorage 获取存储的时间戳
+                    const storedTimestamp = localStorage.getItem('last_publish_timestamp') || 0;
+                    if (force) {
+                        ajax_store_search_xml(xmlTimestamp);
+                    } else {
+                        console.log('[local search] - ajax_get_new_search_xml_if_exist, xmlTimestamp: ' + xmlTimestamp + ", storedTimestamp: " + storedTimestamp);
+                        if (xmlTimestamp > storedTimestamp) {
+                            // download search.xml
+                            ajax_store_search_xml(xmlTimestamp);
+                        }
+                        else {
+                            // 调用异步函数
+                            loadSearchData();
+                        }
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('[local search] - ajax_get_new_search_xml_if_exist 请求失败: ' + error);
+                    ajax_store_search_xml(getTimestampAsSecond());
+                }
+            });
+        } else {
+            ajax_store_search_xml(getTimestampAsSecond());
+        }
+    }
+
+    // var local_search_xml_data = localStorage.getItem('local_search_xml_data');
+    // if (local_search_xml_data) {
+    //     is_load_xml_finished = 1;
+    //     console.log("[local search] - load search.xml finished.");
+    // }
+    // var last_store_local_search_date = localStorage.getItem('last_store_local_search_date');
+    // // 只有在 localStorage 没有 search.xml数据或者 距离上次使用local search已经超过一天了才去取search.xml
+    // // 节省流量
+    // if (last_store_local_search_date != curDate.getDate()) {
+    //     // download search.xml
+    //     ajax_store_search_xml();
+    // } else {
+    //     // 调用异步函数
+    //     loadSearchData();
+    // }
+
+    ajax_get_new_search_xml_if_exist();
+
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/lib/wobble_window/wobblewindow.js"> </script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+<script type="text/javascript" src="/js/src/headroom.js"></script> 
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>

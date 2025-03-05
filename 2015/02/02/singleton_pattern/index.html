@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+
+<script>
+    (function(){
+        if(''){
+			function checkPassword(password) {
+				password = password.trim();
+				if (password !== ''){
+					if (password != null) // 如果用户点击了确认而且密码错误的时候, 因为当password == null的时候说明用户点了取消
+					{
+						alert('Error!');
+					}
+					if (history.length > 1)
+					{
+						history.back();
+					}
+					else
+					{
+						window.location.href = "about:blank";
+					}
+				}
+			}
+
+			var password_verify_on_local = false;
+			const hostname = window.location.hostname;
+			if (password_verify_on_local || (!(hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192")))) {
+				
+				// if (window.innerWidth < 768) {
+
+				// 	window.onload = function () {
+				// 		// 创建遮罩层
+				// 		const overlay = document.createElement("div");
+				// 		// 创建输入框容器
+				// 		overlay.innerHTML = `
+				// 			<div class="password-input-box">
+				// 				<p>Open Sesame</p>
+				// 				<input type="password" id="passwordInput" style="padding: 10px; width: 200px;">
+				// 				<div style="margin-top: 10px;">
+				// 				<button id="confirmBtn">ok</button>
+				// 				<button id="cancelBtn" style="margin-left: 10px;">cancel</button>
+				// 				</div>
+				// 			</div>
+				// 			`;
+				// 		overlay.classList.add("password-overlay");
+				// 		document.body.style.overflow = "hidden"; // 禁止body滚动
+				// 		document.body.appendChild(overlay);
+
+				// 		setTimeout(() => {
+				// 			const input = document.getElementById("passwordInput");
+				// 			input.focus(); // 自动弹出键盘, 经测试, 手机上弹不出来, 所以放弃
+				// 			// console.log("asdfasdfa??tantantan");
+
+				// 			function confirmPassword() {
+				// 				const password = input.value;
+				// 				if (password) {
+				// 					alert("你输入的密码是: " + password);
+				// 					document.body.removeChild(overlay);
+				// 				} else {
+				// 					alert("请输入密码");
+				// 				}
+				// 			}
+
+				// 			// 按回车确认
+				// 			input.addEventListener("keydown", function (event) {
+				// 				if (event.key === "Enter") {
+				// 					confirmPassword();
+				// 				}
+				// 			});
+				// 			// 点击确定按钮
+				// 			document.getElementById("confirmBtn").onclick = confirmPassword;
+				// 			// 点击取消按钮
+				// 			document.getElementById("cancelBtn").onclick = function () {
+				// 				document.body.removeChild(overlay);
+				// 			};
+				// 		}, 1000);
+				// 	};
+
+				// } else {
+					var password = prompt('Open Sesame');
+					checkPassword(password);
+				// }
+
+			}
+
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="DesignPattern,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="在某些应用环境下面，一个类只允许有一个实例，这就是著名的单例模式。单例模式分为  懒汉模式 饿汉模式  饿汉模式在实例化 m_instance 变量时，直接调用类的构造函数。顾名思义，在还未使用变量时，已经对 m_instance 进行赋值，就像很饥饿的感觉。在main开始前就初始化好了， 所以是线程安全的。 没有考虑析构问题饿汉模式的示例代码首先给出没有考虑析构问题的饿汉模式的实现 123456">
+<meta name="keywords" content="DesignPattern">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单例模式的析构问题和线程安全问题">
+<meta property="og:url" content="https://hulinhong.com/2015/02/02/singleton_pattern/index.html">
+<meta property="og:site_name" content="🚙">
+<meta property="og:description" content="在某些应用环境下面，一个类只允许有一个实例，这就是著名的单例模式。单例模式分为  懒汉模式 饿汉模式  饿汉模式在实例化 m_instance 变量时，直接调用类的构造函数。顾名思义，在还未使用变量时，已经对 m_instance 进行赋值，就像很饥饿的感觉。在main开始前就初始化好了， 所以是线程安全的。 没有考虑析构问题饿汉模式的示例代码首先给出没有考虑析构问题的饿汉模式的实现 123456">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2025-03-05T13:08:39.240Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="单例模式的析构问题和线程安全问题">
+<meta name="twitter:description" content="在某些应用环境下面，一个类只允许有一个实例，这就是著名的单例模式。单例模式分为  懒汉模式 饿汉模式  饿汉模式在实例化 m_instance 变量时，直接调用类的构造函数。顾名思义，在还未使用变量时，已经对 m_instance 进行赋值，就像很饥饿的感觉。在main开始前就初始化好了， 所以是线程安全的。 没有考虑析构问题饿汉模式的示例代码首先给出没有考虑析构问题的饿汉模式的实现 123456">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"scrollpercent":true,"onmobile":true,"dimmer":true,"body_content_height":0,"display_duration":150},
+    local_search: {"enable":true,"trigger":"auto","top_n_per_article":1},
+    fancybox: false,
+    mediumzoom: true,
+    darkmode_js: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"duration":222,"transition":{"header":"slideDownIn","menu":"slideDownIn","logo":"slideDownIn","post_block_else":"slideDownIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"slideDownIn","footer":"slideDownIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+
+  <title>单例模式的析构问题和线程安全问题 | 🚙</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">🚙</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">💨 💨 💨</p>
+      
+  </div>
+
+  <div class="menu-item sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="menu-item site-search">
+    
+  
+  <div class="site-search-div">
+    <button class="search-icon" id="search-button">
+      <i class="fa fa-search"></i>
+    </button>
+    <input type="text" id="local-search-input" class="st-search-input">
+    <i id="local-search-close">×</i>
+  </div>
+
+
+<script type="text/javascript" id="local.search.active">
+    {/* var inputArea       = document.querySelector("#local-search-input");
+    inputArea.onclick   = function(){ getSearchFile(); this.focus(); }
+    inputArea.onkeydown = function(){ if(event.keyCode == 13) return false } */}
+</script>
+
+
+
+  </div>
+  <div id="local-search-result-pc" class="local-search-result-cls"></div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+       
+    </ul>
+  
+
+  
+    
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <div id="local-search-result-mobile" class="local-search-result-cls"></div>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2015/02/02/singleton_pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mike">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="🚙">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">单例模式的析构问题和线程安全问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-02-02T12:18:54+00:00">
+                2015-02-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Misc/" itemprop="url" rel="index">
+                    <span itemprop="name">Misc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <div class="post-tags">
+              
+                <a href="/tags/DesignPattern/" rel="tag"><i class="fa fa-tag"></i> DesignPattern</a>
+              
+            </div>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/02/02/gdb_tutorial/" rel="next" title="GDB基础教程">
+                <i class="fa fa-chevron-left"></i> 
+                <p class="post-nav-pre-next-title">
+                  GDB基础教程
+                </p> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/02/03/lua_special_part/" rel="prev" title="Lua特别之处笔记">
+              <p class="post-nav-pre-next-title">
+                  Lua特别之处笔记
+              </p> 
+              <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+
+      
+      
+
+      
+        <p>在某些应用环境下面，一个类只允许有一个实例，这就是著名的单例模式。<br>单例模式分为</p>
+<ul>
+<li>懒汉模式</li>
+<li>饿汉模式</li>
+</ul>
+<h1 id="饿汉模式"><a href="#饿汉模式" class="headerlink" title="饿汉模式"></a>饿汉模式</h1><p>在实例化 <code>m_instance</code> 变量时，直接调用类的构造函数。顾名思义，在还未使用变量时，已经对 <code>m_instance</code> 进行赋值，就像很饥饿的感觉。<br>在main开始前就初始化好了， 所以是线程安全的。</p>
+<h2 id="没有考虑析构问题饿汉模式的示例代码"><a href="#没有考虑析构问题饿汉模式的示例代码" class="headerlink" title="没有考虑析构问题饿汉模式的示例代码"></a>没有考虑析构问题饿汉模式的示例代码</h2><p>首先给出没有考虑析构问题的饿汉模式的实现</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">singleton</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">	singleton() &#123;&#125;;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	singleton(<span class="keyword">const</span> singleton&amp;) &#123;&#125;;</span><br><span class="line">	singleton&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> singleton&amp;) &#123;&#125;;</span><br><span class="line">	<span class="keyword">static</span> singleton* m_instance;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> singleton* <span class="title">GetInstance</span><span class="params">()</span></span>;</span><br><span class="line">	~singleton()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Singleton destruction\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">singleton* singleton::GetInstance()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> m_instance;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">singleton* singleton::m_instance = <span class="keyword">new</span> singleton;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	singleton *ct = singleton::GetInstance();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="饿汉模式的优点"><a href="#饿汉模式的优点" class="headerlink" title="饿汉模式的优点"></a>饿汉模式的优点</h2><ul>
+<li>线程安全 </li>
+<li>实现简单，容易维护</li>
+</ul>
+<h2 id="饿汉模式的缺点"><a href="#饿汉模式的缺点" class="headerlink" title="饿汉模式的缺点"></a>饿汉模式的缺点</h2><ul>
+<li>不适合部分场景。如：因为性能问题，希望懒加载；需要运行时才能知道，是否生成实例 </li>
+<li>由于在main开始前就必须初始化，几乎不可能给类传入任何参数。</li>
+</ul>
+<h1 id="懒汉模式"><a href="#懒汉模式" class="headerlink" title="懒汉模式"></a>懒汉模式</h1><p>懒汉模式下，在定义m_instance变量时先等于NULL，在调用GetInstance()方法时，在判断是否要赋值。这种模式，并非是线程安全的，因为多个线程同时调用GetInstance()方法，就可能导致有产生多个实例。</p>
+<h2 id="没有考虑线程安全与析构问题的懒汉模式的示例代码"><a href="#没有考虑线程安全与析构问题的懒汉模式的示例代码" class="headerlink" title="没有考虑线程安全与析构问题的懒汉模式的示例代码"></a>没有考虑线程安全与析构问题的懒汉模式的示例代码</h2><p>下面是没有考虑线程安全以及析构问题的懒汉模式的代码实现</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">singleton</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">	singleton() &#123;&#125;;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	singleton(<span class="keyword">const</span> singleton&amp;) &#123;&#125;;</span><br><span class="line">	singleton&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> singleton&amp;) &#123;&#125;;</span><br><span class="line">	<span class="keyword">static</span> singleton* m_instance;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> singleton* <span class="title">GetInstance</span><span class="params">()</span></span>;</span><br><span class="line">	~singleton()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Singleton destruction\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">singleton* singleton::GetInstance()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (m_instance == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		m_instance = <span class="keyword">new</span> singleton;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> m_instance;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">singleton* singleton::m_instance = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	singleton *ct = singleton::GetInstance();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解决懒汉模式线程安全问题的几种方法"><a href="#解决懒汉模式线程安全问题的几种方法" class="headerlink" title="解决懒汉模式线程安全问题的几种方法"></a>解决懒汉模式线程安全问题的几种方法</h2><p>有下面几种方法 :</p>
+<ul>
+<li><a href="#使用局部静态变量">使用局部静态变量</a></li>
+<li><a href="#加锁">加锁</a></li>
+<li><a href="#pthread-once">pthread_once</a></li>
+<li><a href="#DCL">DCL</a></li>
+</ul>
+<h3 id="使用局部静态变量"><a href="#使用局部静态变量" class="headerlink" title="使用局部静态变量"></a>使用局部静态变量</h3><p>使用局部静态变量。<br>局部静态变量的初始化是线程安全的，这一点由编译器保证.（<a href="http://gcc.gnu.org/ml/gcc-patches/2004-09/msg00265.html" target="_blank" rel="noopener">http://gcc.gnu.org/ml/gcc-patches/2004-09/msg00265.html</a>，这是一个 GCC 的 patch，专门解决这个问题）。会在程序退出的时候自动销毁。<br><a href="http://stackoverflow.com/questions/270947/can-any-one-provide-me-a-sample-of-singleton-in-c/271104#271104" target="_blank" rel="noopener">见此处</a></p>
+<p>这个方法适合 C++11，C++11保证静态局部变量的初始化是线程安全的。<br>如果是 C++98 就不能用这个方法。</p>
+<figure class="highlight c++"><figcaption><span>非摸板版本</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">S</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="function"><span class="keyword">static</span> S&amp; <span class="title">getInstance</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">static</span> S    instance;</span><br><span class="line">            <span class="keyword">return</span> instance;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        S() &#123;&#125;</span><br><span class="line">        S(S <span class="keyword">const</span>&amp;);              <span class="comment">// Don't Implement.</span></span><br><span class="line">        <span class="keyword">void</span> <span class="keyword">operator</span>=(S <span class="keyword">const</span>&amp;); <span class="comment">// Don't implement</span></span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
+<p>或者<br><figure class="highlight cpp"><figcaption><span>模板版本</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> T&amp; <span class="title">GetInstance</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> T instance;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Singleton(T&amp;&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    Singleton(<span class="keyword">const</span> T&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    <span class="keyword">void</span> <span class="keyword">operator</span>= (<span class="keyword">const</span> T&amp;) = <span class="keyword">delete</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    Singleton() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="keyword">virtual</span> ~Singleton() = <span class="keyword">default</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="加锁"><a href="#加锁" class="headerlink" title="加锁"></a>加锁</h3><p>线程安全，但每次都有开销。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// singleton.h</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> &#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="function"><span class="keyword">static</span> Singleton *<span class="title">GetInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            lock();</span><br><span class="line">            <span class="keyword">if</span> (p == <span class="literal">NULL</span>) &#123;</span><br><span class="line">                p = <span class="keyword">new</span> Singleton;</span><br><span class="line">            &#125;</span><br><span class="line">			unlock();</span><br><span class="line">            <span class="keyword">return</span> p;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">static</span> Singleon *p;</span><br><span class="line">    Singleton() &#123;&#125;</span><br><span class="line">    Singleton(<span class="keyword">const</span> Singleton &amp;);</span><br><span class="line">    Singleton&amp; <span class="keyword">operator</span>= (<span class="keyword">const</span> Singleton &amp;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// singleton.cc</span></span><br><span class="line">Singleton *Singleton::p = <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="pthread-once"><a href="#pthread-once" class="headerlink" title="pthread_once"></a>pthread_once</h3><p>陈硕推荐的做法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> &#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="function"><span class="keyword">static</span> Singleton *<span class="title">GetInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            pthread_once(&amp;ponce_, &amp;Singleton::init);</span><br><span class="line">            <span class="keyword">return</span> value_;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">private</span>:</span><br><span class="line">        Singleton() &#123;&#125;</span><br><span class="line">        Singleton(<span class="keyword">const</span> Singleton &amp;);</span><br><span class="line">        Singleton&amp; <span class="keyword">operator</span>= (<span class="keyword">const</span> Singleton &amp;);</span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            value_ = <span class="keyword">new</span> T();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">pthread_once_t</span> ponce_;</span><br><span class="line">        <span class="keyword">static</span> Singleton *value_;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">pthread_once_t</span> SIngleton::ponce_ = PTHREAD_ONCE_INIT;</span><br><span class="line">Singleton* Singleton::value_ = <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="DCL"><a href="#DCL" class="headerlink" title="DCL"></a>DCL</h3><p>double check locking. 只能用内存屏障，其他做法都是有问题的。<br>参见论文： <a href="http://www.aristeia.com/Papers/DDJ_Jul_Aug_2004_revised.pdf" target="_blank" rel="noopener">http://www.aristeia.com/Papers/DDJ_Jul_Aug_2004_revised.pdf</a><br>普通的 double check 之所以错，是因为乱序执行和多处理器下，不同 CPU 中间 cache 刷往内存并对其他 CPU 可见的顺序无法保障（cache coherency problem）。<br><code>Singleton&lt;T&gt; *p = new Singleton&lt;T&gt;;</code>, 那么实际有 3 步：</p>
+<ol>
+<li>分配内存</li>
+<li>构造</li>
+<li>赋值给 p</li>
+</ol>
+<p>2 和 3 的顺序是未定的（乱序执行！）。因此，如果直接赋值给 p 那么很可能构造还没完成。此时另一个线程调用 GetInstance，在 lock 外面 check 了一下，发现 p!=NULL，于是直接返回 p，使用了未初始化完成的实例，跪了。</p>
+<p>那么，如果用中间变量转一下呢？用 tmp_p 转了下以后，tmp_p 赋值给 p 的时候，显然 p 指向的实例是构造完成了的。然而，这个 tmp_p 在编译器看来明显没什么用，会被优化掉。</p>
+<h1 id="关于不能自动调用析构的问题"><a href="#关于不能自动调用析构的问题" class="headerlink" title="关于不能自动调用析构的问题"></a>关于不能自动调用析构的问题</h1><p>上面的两个示例代码<br>( <a href="#没有考虑析构问题饿汉模式的示例代码">没有考虑析构问题饿汉模式的示例代码</a> 和 <a href="#没有考虑线程安全与析构问题的懒汉模式的示例代码">没有考虑线程安全与析构问题的懒汉模式的示例代码</a> ) 都有不能自动调用析构的问题.</p>
+<p>当你运行这两个示例代码之后, 你都会发现并没有打印 “Singleton destruction”, 也就是说程序结束时并没有调用 singleton 类的析构函数的, 为什么呢?</p>
+<p>因为 <code>m_instance = new singleton;</code>, new出来的东西需要delete掉, 如果加上一句 <code>delete ct; ct = NULL;</code>, 就会调用析构函数了.<br>但这种手动调用很容易忘啊, 怎么才能自动调用它的析构呢?</p>
+<p>我们想要的是 : 自动化的正常删除该实例。</p>
+<p>有两种方法, 我给他划分为: </p>
+<ul>
+<li><a href="#不需要加GC内嵌类的单例模式">不需要加GC(垃圾回收)内嵌类的单例模式(推荐)</a></li>
+<li><a href="#需要加GC内嵌类的单例模式">需要加GC(垃圾回收)内嵌类的单例模式</a></li>
+</ul>
+<h2 id="需要加GC内嵌类的单例模式"><a href="#需要加GC内嵌类的单例模式" class="headerlink" title="需要加GC内嵌类的单例模式"></a>需要加GC内嵌类的单例模式</h2><p>我们先看第二种,</p>
+<p>我们知道，程序在结束的时候，系统会自动析构所有的全局变量。事实上，系统也会析构所有的类的静态成员变量，就像这些静态成员也是全局变量一样。利用这个特征，我们可以在单例类中定义一个这样的静态成员变量，而它的唯一工作就是在析构函数中删除单例类的实例。<br>那就是定义一个内部垃圾回收GC类，并且在 singleton 中定义一个此类的静态成员。程序结束时，系统会自动析构此静态成员，此时，在此类的析构函数中析构 singleton 实例，就可以实现 m_instance 的自动释放。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">singleton</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">	singleton() &#123;&#125;;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	singleton(<span class="keyword">const</span> singleton&amp;) &#123;&#125;;</span><br><span class="line">	singleton&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> singleton&amp;) &#123;&#125;;</span><br><span class="line">	<span class="keyword">static</span> singleton* m_instance;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> singleton* <span class="title">GetInstance</span><span class="params">()</span></span>;</span><br><span class="line">	~singleton()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Singleton destruction\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">GC</span></span></span><br><span class="line"><span class="class">	&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		~GC()</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"GC destruction\n"</span>);</span><br><span class="line">			<span class="keyword">if</span> (m_instance)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">delete</span> m_instance;</span><br><span class="line">				m_instance = <span class="literal">NULL</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="keyword">static</span> GC gc_singleton;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">singleton::GC singleton::gc_singleton;</span><br><span class="line"></span><br><span class="line">singleton* singleton::GetInstance()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (m_instance == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		m_instance = <span class="keyword">new</span> singleton();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> m_instance;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">singleton* singleton::m_instance = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	singleton *ct = singleton::GetInstance();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然还有更好的方法.那就是下面这个不需要加GC内嵌类的单例模式.</p>
+<h2 id="不需要加GC内嵌类的单例模式"><a href="#不需要加GC内嵌类的单例模式" class="headerlink" title="不需要加GC内嵌类的单例模式"></a>不需要加GC内嵌类的单例模式</h2><p>在 GetInstance 方法里放一个 m_instance 的局部静态变量, 然后返回他的地址, 他就可以在程序结束自动调用析构函数.<br>而且这种方法在C++11也能保证线程安全.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">singleton</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">	singleton() &#123;&#125;;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	singleton(<span class="keyword">const</span> singleton&amp;) &#123;&#125;;</span><br><span class="line">	singleton&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> singleton&amp;) &#123;&#125;;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> singleton* <span class="title">GetInstance</span><span class="params">()</span></span>;</span><br><span class="line">	~singleton()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Singleton destruction\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">singleton* singleton::GetInstance()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">static</span> singleton m_instance;</span><br><span class="line">	<span class="keyword">return</span> &amp;m_instance;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	singleton *ct = singleton::GetInstance();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>既要考虑线程安全又要考虑析构问题的话, 有下面几种方法 :</p>
+<ul>
+<li>饿汉模式+GC内嵌类</li>
+<li>懒汉模式+GC内嵌类, 然后加锁，但每个线程缓存了返回的指针，调用一次有用缓存的指针即可。</li>
+<li>懒汉模式+GC内嵌类, 然后 pthread_once</li>
+</ul>
+<p>如果是C++11的话, 则可以使用局部静态变量, 因为C++11保证静态局部变量的初始化是线程安全的(C++98不保证), 而且也没有析构问题.</p>
+
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/DesignPattern/" rel="tag"><i class="fa fa-tag"></i> DesignPattern</a>
+            
+          </div>
+        
+
+        
+        
+        
+
+        
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2015/02/02/gdb_tutorial/" rel="next" title="GDB基础教程">
+                  <i class="fa fa-chevron-left"></i> 
+                  <p class="post-nav-pre-next-title">
+                    GDB基础教程
+                  </p> 
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2015/02/03/lua_special_part/" rel="prev" title="Lua特别之处笔记">
+                <p class="post-nav-pre-next-title">
+                    Lua特别之处笔记
+                </p> 
+                <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+
+        
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  
+
+  <aside id="sidebar" class="sidebar">
+
+    
+      
+        <div id="sidebar-dimmer"></div>
+      
+    
+
+    <div class="sidebar-inner">
+    
+      <div class="sidebar-toggle-inside motion-element">
+        <div class="sidebar-toggle-line-wrap">
+          <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+        </div>
+      </div>
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <a href="/" class="site-author-image" rel="start" style="border:none">
+            <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Mike">
+          </a>
+          <p class="site-author-name" itemprop="name">Mike</p>
+           
+              <p class="site-description motion-element" itemprop="description">🚙 🚗 💨 It is recommended to use Chrome, Safari, or Edge to read this blog since this blog was developed on Edge (Chromium kernel version) and tested on Safari.</p>
+          
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">280</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">102</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+          <div class="site-state-item site-state-about">
+            <a href="/about/">
+              <span class="site-state-item-about fa fa-fw fa-user"></span>
+              <span class="site-state-item-name">about</span>
+            </a>
+          </div>
+          
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/no5ix" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://open.spotify.com/user/313duq77ekebrfyak3xijqewzss4?si=e7653b829a9747bf" target="_blank" title="Spotify">
+                  
+                    <i class="fa fa-fw fa-spotify"></i>
+                  
+                    
+                      Spotify
+                    
+                </a>
+              </span>
+            
+          
+          
+          <!-- 网易云音乐 -->
+            <!-- <div class="netease-cloud-music"> -->
+              <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=110 src="//music.163.com/outchain/player?type=0&id=992743594&auto=0&height=90"></iframe> -->
+            <!-- </div> -->
+          <!-- 网易云音乐 -->
+
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#饿汉模式"><span class="nav-text">饿汉模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#没有考虑析构问题饿汉模式的示例代码"><span class="nav-text">没有考虑析构问题饿汉模式的示例代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#饿汉模式的优点"><span class="nav-text">饿汉模式的优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#饿汉模式的缺点"><span class="nav-text">饿汉模式的缺点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#懒汉模式"><span class="nav-text">懒汉模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#没有考虑线程安全与析构问题的懒汉模式的示例代码"><span class="nav-text">没有考虑线程安全与析构问题的懒汉模式的示例代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决懒汉模式线程安全问题的几种方法"><span class="nav-text">解决懒汉模式线程安全问题的几种方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用局部静态变量"><span class="nav-text">使用局部静态变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加锁"><span class="nav-text">加锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pthread-once"><span class="nav-text">pthread_once</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DCL"><span class="nav-text">DCL</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于不能自动调用析构的问题"><span class="nav-text">关于不能自动调用析构的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#需要加GC内嵌类的单例模式"><span class="nav-text">需要加GC内嵌类的单例模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不需要加GC内嵌类的单例模式"><span class="nav-text">不需要加GC内嵌类的单例模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mike</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <!--
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      
+        <span id="scrollpercent"><span>0</span>%</span>
+      
+    </div>
+    -->
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/mediumzoom/medium-zoom.js?v=1.1.0"></script>
+
+
+
+
+  
+
+
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    let db; // 全局数据库变量
+    var is_load_xml_finished = 0;
+    var keywords = [];
+    var curDate = new Date();
+    var xml_resp_cache = null;
+    var temp_keyword = "";
+
+    'use strict';
+
+    var content_id = isMobile() ? "local-search-result-mobile" : "local-search-result-pc";
+    var input_box = document.getElementById('local-search-input');
+    var resultContent = document.getElementById(content_id);
+    const searchButton = document.getElementById('search-button');
+    const closeButton = document.getElementById('local-search-close');
+
+    var str = "";
+
+    // 是否为第一个字母被键入的标志位
+    var first_char_flag = 0;
+
+    // 因为在移动设备上, 点击搜索之后会 scroll 到页面顶部, 所以需要记录之前的页面x, y坐标值, 以便于搜索完点击 close 按钮之后 scroll 回原来的页面坐标值.
+    var last_page_x = 0;
+    var last_page_y = 0;
+
+    var overlay = document.createElement("div");
+    overlay.classList.add("local-search-overlay");
+    document.body.appendChild(overlay);
+
+    function CloseLocalSearch(when_delete_all_on_mobile=false)
+    {
+        setTimeout(function() {  // 这个setTimeout的目的是为了解决当使用中文输入法输入英文的时候敲下enter键的那一瞬间发生从有文字到没文字又到有文字, 而下方window.scrollTo这个还没执行到, 会导致页面scroll乱滚以及velocity动画重复播放; 加了这个timeout之后就可以检测是否属于这种情况
+            if (temp_keyword.length > 0) {
+                return;
+            }
+            first_char_flag = 0;
+            $('#local-search-input').val('');
+            // $('#local-search-close').hide();
+            closeButton.classList.remove("show");
+
+            // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownOut', 200);
+            if (isMobile())
+            {
+              // $('body').scrollTop(last_page_y);  // scrollTop 有兼容性问题
+              // $('#' + content_id).hide();
+
+                $('#' + content_id).velocity('stop').velocity( 'transition.slideUpOut', 300);
+
+                if (!when_delete_all_on_mobile) {
+                    input_box.blur();
+                    // setTimeout(() => {
+                    //     closeButton.classList.remove("move");
+                    // }, 1000);
+                    input_box.classList.remove('expanded');
+                    document.body.style.overflow = ""; // 恢复body滚动
+                    overlay.classList.remove("show");
+                } else {
+                    return;
+                }
+                // const element = document.getElementById('local-search-result-mobile');
+                // let bottomY = element.offsetTop + element.offsetHeight;  // local search result底部相对于整个页面的 Y 坐标
+                // // console.log("bottttt= " + bottomY);
+                // if (bottomY == 0) {  // 说明 local search result底部 比当前页面还要长
+                //     scrollTo(last_page_x, last_page_y);
+                // } else {
+                //     // console.log("rrrrrrretrn " + bottomY);
+                //     // console.log("rrrrrrretrnyyy " + window.scrollY);
+                //     if (window.scrollY > bottomY) {  // 如果用户滚动到比 local search result的底部还要低, 那说明他不想回到他search之前的位置了
+                //         // console.log("4bottttt222= " + last_page_x);
+                //     } else {
+                //         // setTimeout(function() {
+                //             // scrollTo(last_page_x, last_page_y);
+                //             window.scrollTo({
+                //                 top: last_page_y,
+                //                 left: last_page_x,
+                //                 behavior: "smooth",
+                //                 duration: 150 // 滚动动画持续x毫秒
+                //             });
+                //         // }, 150);
+                //     }
+                // }
+                // last_page_x = 0;
+                // last_page_y = 0;
+            }
+            else
+            {
+                $('#' + content_id).attr("headroom_special_attr","true");   //headroom_special_attr是用来, 当页面滚动的时候local search的结果页面也会跟着一起被收起, 当不写这行代码的时候, 空的result会在页面往上滚的时候出现 ...
+                resultContent.classList.remove("smooth-transition");  // 这个是为了"当页面滚动的时候local search的结果页面也会跟着一起被收起"的时候有一个平滑滚动的动画, 这个不能直接写在css里, 不然会影响 velocity的动画
+
+                $('#' + content_id).velocity('stop').velocity( 'transition.slideUpOut', 800);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.bounceOut', 800);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.slideUpBigOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.bounceUpOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.expandOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.whirlOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.shrinkOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.swoopOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.flipBounceXOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.fadeOut', 600);
+            }
+        }, 150);
+    }
+
+    async function handleSearch()
+    {
+        if (keywords.length <= 0) {
+            return;
+        }
+        resultContent.innerHTML = "";
+    //   $('#local-search-close').show();
+    
+        closeButton.classList.add("show");
+
+        // 0x04. perform local searching
+        if (is_load_xml_finished == 0)
+        {
+            var local_search_tips = 
+                "<span class='local-search-empty'>" + "第一次搜索可能较慢, 先思考一个经典算法问题, 跳台阶:" + "</span>" +
+                "<span class='local-search-empty'>" + "一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个6级的台阶总共有多少种跳法?n级呢?" + "</span>";
+            var ProgressBar = 
+                "<div class='progress-bar'>" +
+                    "<div class='progress-bar-charge'></div>" +
+                "</div>";
+            resultContent.innerHTML = 
+                "<ul class='local-search-empty-ul'>" + 
+                local_search_tips +
+                ProgressBar;
+        }
+        else
+        {
+            // Retrieve the object from local storage
+            var xml_resp = await retrieve_search_xml()
+
+            xml_resp.forEach(function (data) {
+            var isMatch = true;
+            var content_index = [];
+            if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+            }
+            var is_encrypted = data.encrypted.trim() == '1'
+            var is_sensitive = CONFIG.local_search.sensitive_word && data_content.indexOf(CONFIG.local_search.sensitive_word) >= 0
+            var orig_data_title = data.title.trim();
+            var data_title = orig_data_title.toLowerCase();
+            var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+            var data_content = orig_data_content.toLowerCase();
+            var data_url = decodeURIComponent(data.url);
+            var index_title = -1;
+            var index_content = -1;
+            var first_occur = -1;
+            // only match artiles with not empty contents
+            if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                index_title = data_title.indexOf(keyword);
+                // index_content = (is_sensitive || is_encrypted) ? -1 : data_content.indexOf(keyword);  // 不能搜加密文章,
+                index_content = data_content.indexOf(keyword); //  这样可以搜加密了的文章, 但是搜索结果框不显示正文只显示标题
+
+                if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                } else {
+                    if (index_content < 0) {
+                    index_content = 0;
+                    }
+                    if (i == 0) {
+                    first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                }
+                });
+            } else {
+                isMatch = false;
+            }
+            // 0x05. show search results
+            if (isMatch) {
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                var match_content = "";
+                
+                const hostname = window.location.hostname;
+                if ((!is_sensitive && !is_encrypted) || (hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192")))
+                {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if (start < 0) {
+                    start = 0;
+                    }
+                    if (start == 0) {
+                    end = 100;
+                    }
+                    if (end > content.length) {
+                    end = content.length;
+                    }
+                    match_content = content.substr(start, end);
+                }
+                // highlight all keywords
+                var regS = "";
+                if (match_content != "")
+                {
+                    keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    });
+                }
+                else
+                {
+                    keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    });
+                }
+                str += "<li><a href='" + data_url + "' class='search-result-title' target='_blank'>" + orig_data_title + "</a>";
+                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+            }
+            });
+
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+            return resultContent.innerHTML = 
+                "<ul class='local-search-empty-ul'><span class='local-search-empty'>404.<span></ul>";
+            }
+            resultContent.innerHTML = str;
+      }
+    }
+
+    input_box.addEventListener('input', function () {
+        // 0x03. parse query to keywords list
+        str = '<ul class=\"search-result-list\">';
+        temp_keyword = this.value.trim();
+        if (temp_keyword.length <= 0) {
+            CloseLocalSearch(true);
+            return;
+        }
+
+        keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
+        handleSearch();
+
+        // 当用户键入第一个字母的时候的动画处理逻辑 : 
+        // 当 first_char_flag 为 0 的时候, 
+        // 要播放一个动画
+        if (first_char_flag == 0)
+        {
+            // $('body').scrollTop(0);
+            let duration = 600;
+            if (isMobile())
+            {
+                // if (window.scrollY != 0) {  // 加这个判断是为了防止 清空后再输入再点x没回原位
+                //     last_page_x = window.scrollX;
+                //     last_page_y = window.scrollY;
+                //     scrollTo(0,0);
+                // }
+              // $('body').scrollTop(0);
+            } else {
+                $('#' + content_id).removeAttr("headroom_special_attr");  // headroom_special_attr是用来 当页面滚动的时候local search的结果页面也会跟着一起被收起, 当不写这行代码的时候, 空的result会在页面往上滚的时候出现 ...
+                  setTimeout(()=>{
+                      resultContent.classList.add("smooth-transition"); // 这个是为了"当页面滚动的时候local search的结果页面也会跟着一起被收起"的时候有一个平滑滚动的动画, 这个不能直接写在css里, 不然会影响 velocity
+                  }, duration + 200); 
+            }
+            first_char_flag = 1;
+
+            if (isMobile()) {
+                $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', duration);
+            } else {
+                $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', duration);
+                  // $('#' + content_id).velocity('stop').velocity('transition.bounceIn', 800);
+                //   $('.local-search-result-cls ul li').velocity('stop').velocity('transition.bounceUpIn', 1200);
+            }
+          // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownBigIn', 1000);
+        } else {
+            // if (isMobile())
+            // {
+            //     const element = document.getElementById('local-search-result-mobile');
+            //     let bottomY = element.offsetTop + element.offsetHeight;  // local search result底部相对于整个页面的 Y 坐标
+            //     if (window.scrollY > bottomY) {  // 如果用户滚动到比 local search result的底部还要低
+            //         last_page_x = window.scrollX;
+            //         last_page_y = window.scrollY;
+            //         window.scrollTo({
+            //             top: 0,
+            //             left: 0,
+            //             behavior: "smooth",
+            //             duration: 150 // 滚动动画持续x毫秒
+            //         });
+            //     }
+            // }
+        }
+    });
+
+    // 这里要不要用 click 要用 pointerup, 不然 mac safari 触摸板 tap 得tap两次才能触发这里
+    $(document).on('pointerup', '#local-search-close', function(event) {
+        temp_keyword = "";
+        CloseLocalSearch();
+    });
+
+    input_box.addEventListener("focus", function() {  // when input get the focus
+        if (isMobile()) {
+            document.body.style.overflow = "hidden"; // 禁止body滚动
+            overlay.classList.add("show");
+        }
+    });
+
+    input_box.addEventListener("blur", function() {  // when input lose the focus
+        if (isMobile()) {
+            // console.log("输入框失去焦点");
+            // $('#local-search-input').val('');
+            // if (temp_keyword.length > 0) {
+            //     if (str.indexOf('<li>') === -1) {  // 说明local search 没搜到东西
+            //         window.scrollTo({
+            //             top: last_page_y,
+            //             left: last_page_x,
+            //             behavior: "smooth",
+            //             duration: 150 // 滚动动画持续x毫秒
+            //         });
+            //     }
+            //     // closeButton.classList.add("move");
+            //     // setTimeout(function() {
+            //     //     input_box.classList.remove('expanded');
+            //     // }, 450);
+            // } else {
+            //     window.scrollTo({  // 当失焦的时候且输入框没文字的时候就滚回原来的位置
+            //         top: last_page_y,
+            //         left: last_page_x,
+            //         behavior: "smooth",
+            //         duration: 150 // 滚动动画持续x毫秒
+            //     });
+            //     input_box.classList.remove('expanded');
+            // }
+            setTimeout(()=> {
+                searchButton.disabled = false;
+            }, 600);
+
+            // console.log("输入框失去焦点2: " + temp_keyword.length);
+            if (temp_keyword.length <= 0) {
+                document.body.style.overflow = ""; // 恢复body滚动
+                overlay.classList.remove("show");
+                input_box.classList.remove('expanded');
+            }
+        }
+    });
+
+    searchButton.addEventListener('click', function() {  // 这里要用click不要用 pointerup, 不然ios可能弹不出键盘
+        if (isMobile()) {
+            // 使输入框渐变显示
+            searchButton.disabled = true;  // 点击之后就禁用, 直到input失焦
+            input_box.focus();
+            // if (temp_keyword.length > 0) {
+            //     // closeButton.classList.remove("move");
+            //     // setTimeout(function() {
+            //         input_box.classList.add('expanded');
+            //         setTimeout(function() {
+            //             $('#local-search-input').val(temp_keyword);
+            //         }, 350);
+            //     // }, 450);
+            // } else {
+            //     // setTimeout(()=> {
+            //         input_box.classList.add('expanded');
+            //     // }, 80);
+            // }
+
+            input_box.classList.add('expanded');
+        }
+    });
+
+    // 你的代码在 document 上监听 click 事件，并检查点击的目标是否在 content_id 指定的元素内部。如果点击的目标不在该元素内，则执行 CloseLocalSearch()。
+    // $(document).click(function(event) {
+    //     if (isMobile()) {
+    //         return;
+    //     } else {
+    //         if (!$(event.target).closest('#' + content_id).length) {
+    //             temp_keyword = "";
+    //             CloseLocalSearch();
+    //         }
+    //     }
+    // });
+
+    $(document).keyup(function(event){
+      switch(event.keyCode) {
+        case 27:
+          // alert("ESC");
+          temp_keyword = "";
+          CloseLocalSearch();
+      }
+    });
+
+    function isMobile() {
+      // console.log(document.body.clientWidth);
+      return document.body.clientWidth < 768
+    }
+
+    function getTimestampAsSecond() {
+      // console.log(document.body.clientWidth);
+      return Math.floor(Date.now() / 1000);
+    }
+
+    {/* function store_search_xml(xmlResponse) {
+        var entries = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // Put the object into storage
+        localStorage.setItem('local_search_xml_data', JSON.stringify(entries));
+        localStorage.setItem('last_store_local_search_date', curDate.getDate());
+        is_load_xml_finished = 1;
+        console.log("[local search] - store search.xml finished.");
+    } */}
+
+    function ajax_store_search_xml(xmlTimestamp) {
+        console.log("[local search] - ajax downloading search.xml ...");
+        $.ajax({
+            url: "/search.xml",
+            dataType: "xml",
+            success: function (xmlResponse) {
+                setLocalSearchXMLData(xmlResponse, xmlTimestamp);
+                // 如果输入框有文字, 等待下载 xml完毕之后再弹出结果
+                if (temp_keyword.length > 0) {
+                    handleSearch();
+                    $('.local-search-result-cls ul li').velocity('stop').velocity('transition.swoopIn', 1200);
+                }
+            }
+        });
+    }
+
+    async function retrieve_search_xml() {
+        // // Retrieve the object from local storage
+        // var retrievedObject = localStorage.getItem('local_search_xml_data');
+        // var xml_resp = JSON.parse(retrievedObject)
+        // return xml_resp
+
+        if (xml_resp_cache) {
+          return xml_resp_cache;
+        }
+        // Retrieve the object from indexedDB
+        xml_resp_cache = await getLocalSearchXMLData();
+        return xml_resp_cache;
+    }
+
+    function openDatabase() {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open("myDatabase", 1); // 设置为版本号 1, 用indexedDB替代localStorage, 因为indexedDB可以存储大量数据（几百 MB 到几 GB）, 而localStorage只能5MB左右, 
+            request.onupgradeneeded = function(event) {
+                db = event.target.result;
+                if (!db.objectStoreNames.contains("searchData")) {
+                    const objectStore = db.createObjectStore("searchData", { keyPath: "id" });
+                    // 可以创建索引以便于查询
+                    objectStore.createIndex("xmlDataIndex", "xml_data", { unique: false });
+                }
+            };
+            request.onsuccess = function(event) {
+                db = event.target.result;
+                console.log("[local search] - Database opened successfully.");
+                resolve(db);
+            };
+            request.onerror = function(event) {
+                console.error("[local search] - Database open error:", event.target.error);
+                reject(event.target.error);
+            };
+        });
+    }
+
+    async function setLocalSearchXMLData(xmlResponse, xmlTimestamp) {
+        if (!db) {
+            await openDatabase();  // 确保数据库已打开
+        }
+        var transaction = db.transaction(["searchData"], "readwrite");
+        var objectStore = transaction.objectStore("searchData");
+
+        var xml_data = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // 存储数据，主键为 "id"，这里我们将 "id" 设为 "local_search_xml_data"
+        var data = { id: "local_search_xml_data", xml_data: xml_data };
+
+        var request = objectStore.put(data);  // 使用 put 可以插入或者更新数据
+        request.onsuccess = function() {
+            console.log("[local search] - Data successfully stored in indexedDB.");
+            // localStorage.setItem('last_store_local_search_date', curDate.getDate());
+            localStorage.setItem('last_publish_timestamp', xmlTimestamp);
+            is_load_xml_finished = 1;
+        };
+        request.onerror = function(event) {
+            console.log("[local search] - Error storing data: ", event.target.error);
+        };
+    }
+
+    // 封装 IndexedDB 操作为 Promise
+    function getLocalSearchXMLData() {
+        return new Promise((resolve, reject) => {
+            if (!db) {
+                reject("[local search] - Database is not initialized.");
+                return;
+            }
+            var transaction = db.transaction(["searchData"], "readonly");
+            var objectStore = transaction.objectStore("searchData");
+            var request = objectStore.get("local_search_xml_data");  // 使用 id 获取数据
+            request.onsuccess = function(event) {
+                if (request.result) {
+                    // 数据存在，成功处理
+                    resolve(request.result.xml_data);  // 解析成功并返回结果
+                } else {
+                    // 数据未找到，返回失败
+                    reject("Data not found");  // 抛出错误
+                }
+            };
+            request.onerror = function(event) {
+                // 错误处理
+                console.log("[local search] - Error retrieving data: ", event.target.error);
+                reject(event.target.error);  // 抛出错误
+            };
+        });
+    }
+
+    // 使用 async/await 来调用这个函数
+    async function loadSearchData() {
+        try {
+            if (!db) {
+                await openDatabase();  // 确保数据库已打开
+            }
+            await getLocalSearchXMLData();  // 等待结果
+            is_load_xml_finished = 1;
+            console.log("[local search] - load search.xml finished.");
+            // console.log("Retrieved data: ", result);
+        } catch (error) {
+            // console.error("Error: ", error);
+            console.log("[local search] - load search.xml not found.");
+            ajax_get_new_search_xml_if_exist(true);
+        }
+    }
+
+    // 节省流量
+    function ajax_get_new_search_xml_if_exist(force=false) {
+        const hostname = window.location.hostname;
+        if (!(hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192"))) {
+            console.log("[local search] - ajax downloading publish_time.xml ...");
+            $.ajax({
+                url: "/publish_time.xml",  // 这个文件是github action里加上去的, 参见本项目 .github/workflows/pages.yml:151
+                dataType: "xml",
+                success: function (xmlResponse) {
+                    // 使用 jQuery 解析 XML 文档并获取时间戳
+                    const xmlTimestamp = $(xmlResponse).find('publish_timestamp').text(); // 提取 <timestamp> 的文本
+                    // 从 localStorage 获取存储的时间戳
+                    const storedTimestamp = localStorage.getItem('last_publish_timestamp') || 0;
+                    if (force) {
+                        ajax_store_search_xml(xmlTimestamp);
+                    } else {
+                        console.log('[local search] - ajax_get_new_search_xml_if_exist, xmlTimestamp: ' + xmlTimestamp + ", storedTimestamp: " + storedTimestamp);
+                        if (xmlTimestamp > storedTimestamp) {
+                            // download search.xml
+                            ajax_store_search_xml(xmlTimestamp);
+                        }
+                        else {
+                            // 调用异步函数
+                            loadSearchData();
+                        }
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('[local search] - ajax_get_new_search_xml_if_exist 请求失败: ' + error);
+                    ajax_store_search_xml(getTimestampAsSecond());
+                }
+            });
+        } else {
+            ajax_store_search_xml(getTimestampAsSecond());
+        }
+    }
+
+    // var local_search_xml_data = localStorage.getItem('local_search_xml_data');
+    // if (local_search_xml_data) {
+    //     is_load_xml_finished = 1;
+    //     console.log("[local search] - load search.xml finished.");
+    // }
+    // var last_store_local_search_date = localStorage.getItem('last_store_local_search_date');
+    // // 只有在 localStorage 没有 search.xml数据或者 距离上次使用local search已经超过一天了才去取search.xml
+    // // 节省流量
+    // if (last_store_local_search_date != curDate.getDate()) {
+    //     // download search.xml
+    //     ajax_store_search_xml();
+    // } else {
+    //     // 调用异步函数
+    //     loadSearchData();
+    // }
+
+    ajax_get_new_search_xml_if_exist();
+
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/lib/wobble_window/wobblewindow.js"> </script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+<script type="text/javascript" src="/js/src/headroom.js"></script> 
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>

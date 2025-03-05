@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+
+<script>
+    (function(){
+        if(''){
+			function checkPassword(password) {
+				password = password.trim();
+				if (password !== ''){
+					if (password != null) // 如果用户点击了确认而且密码错误的时候, 因为当password == null的时候说明用户点了取消
+					{
+						alert('Error!');
+					}
+					if (history.length > 1)
+					{
+						history.back();
+					}
+					else
+					{
+						window.location.href = "about:blank";
+					}
+				}
+			}
+
+			var password_verify_on_local = false;
+			const hostname = window.location.hostname;
+			if (password_verify_on_local || (!(hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192")))) {
+				
+				// if (window.innerWidth < 768) {
+
+				// 	window.onload = function () {
+				// 		// 创建遮罩层
+				// 		const overlay = document.createElement("div");
+				// 		// 创建输入框容器
+				// 		overlay.innerHTML = `
+				// 			<div class="password-input-box">
+				// 				<p>Open Sesame</p>
+				// 				<input type="password" id="passwordInput" style="padding: 10px; width: 200px;">
+				// 				<div style="margin-top: 10px;">
+				// 				<button id="confirmBtn">ok</button>
+				// 				<button id="cancelBtn" style="margin-left: 10px;">cancel</button>
+				// 				</div>
+				// 			</div>
+				// 			`;
+				// 		overlay.classList.add("password-overlay");
+				// 		document.body.style.overflow = "hidden"; // 禁止body滚动
+				// 		document.body.appendChild(overlay);
+
+				// 		setTimeout(() => {
+				// 			const input = document.getElementById("passwordInput");
+				// 			input.focus(); // 自动弹出键盘, 经测试, 手机上弹不出来, 所以放弃
+				// 			// console.log("asdfasdfa??tantantan");
+
+				// 			function confirmPassword() {
+				// 				const password = input.value;
+				// 				if (password) {
+				// 					alert("你输入的密码是: " + password);
+				// 					document.body.removeChild(overlay);
+				// 				} else {
+				// 					alert("请输入密码");
+				// 				}
+				// 			}
+
+				// 			// 按回车确认
+				// 			input.addEventListener("keydown", function (event) {
+				// 				if (event.key === "Enter") {
+				// 					confirmPassword();
+				// 				}
+				// 			});
+				// 			// 点击确定按钮
+				// 			document.getElementById("confirmBtn").onclick = confirmPassword;
+				// 			// 点击取消按钮
+				// 			document.getElementById("cancelBtn").onclick = function () {
+				// 				document.body.removeChild(overlay);
+				// 			};
+				// 		}, 1000);
+				// 	};
+
+				// } else {
+					var password = prompt('Open Sesame');
+					checkPassword(password);
+				// }
+
+			}
+
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Linux,Compile,Make,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="项目越来越大，每次需要重新编译整个项目都是一件很浪费时间的事情。Research了一下，找到以下可以帮助提高速度的方法，总结一下。  tmpfs 有人说在Windows下用了RAMDisk把一个项目编译时间从4.  5小时减少到了5分钟，也许这个数字是有点夸张了，不过粗想想，把文件放到内存上做编译应该是比在磁盘 上快多了吧，尤其如果编译器需要生成很多临时文件的话。 这个做法的实现成本最低，在Li">
+<meta name="keywords" content="Linux,Compile,Make">
+<meta property="og:type" content="article">
+<meta property="og:title" content="快速编译技巧">
+<meta property="og:url" content="https://hulinhong.com/2016/11/01/快速编译技巧/index.html">
+<meta property="og:site_name" content="🚙">
+<meta property="og:description" content="项目越来越大，每次需要重新编译整个项目都是一件很浪费时间的事情。Research了一下，找到以下可以帮助提高速度的方法，总结一下。  tmpfs 有人说在Windows下用了RAMDisk把一个项目编译时间从4.  5小时减少到了5分钟，也许这个数字是有点夸张了，不过粗想想，把文件放到内存上做编译应该是比在磁盘 上快多了吧，尤其如果编译器需要生成很多临时文件的话。 这个做法的实现成本最低，在Li">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2025-03-05T13:08:39.250Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="快速编译技巧">
+<meta name="twitter:description" content="项目越来越大，每次需要重新编译整个项目都是一件很浪费时间的事情。Research了一下，找到以下可以帮助提高速度的方法，总结一下。  tmpfs 有人说在Windows下用了RAMDisk把一个项目编译时间从4.  5小时减少到了5分钟，也许这个数字是有点夸张了，不过粗想想，把文件放到内存上做编译应该是比在磁盘 上快多了吧，尤其如果编译器需要生成很多临时文件的话。 这个做法的实现成本最低，在Li">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"scrollpercent":true,"onmobile":true,"dimmer":true,"body_content_height":0,"display_duration":150},
+    local_search: {"enable":true,"trigger":"auto","top_n_per_article":1},
+    fancybox: false,
+    mediumzoom: true,
+    darkmode_js: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"duration":222,"transition":{"header":"slideDownIn","menu":"slideDownIn","logo":"slideDownIn","post_block_else":"slideDownIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"slideDownIn","footer":"slideDownIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+
+  <title>快速编译技巧 | 🚙</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">🚙</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">💨 💨 💨</p>
+      
+  </div>
+
+  <div class="menu-item sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="menu-item site-search">
+    
+  
+  <div class="site-search-div">
+    <button class="search-icon" id="search-button">
+      <i class="fa fa-search"></i>
+    </button>
+    <input type="text" id="local-search-input" class="st-search-input">
+    <i id="local-search-close">×</i>
+  </div>
+
+
+<script type="text/javascript" id="local.search.active">
+    {/* var inputArea       = document.querySelector("#local-search-input");
+    inputArea.onclick   = function(){ getSearchFile(); this.focus(); }
+    inputArea.onkeydown = function(){ if(event.keyCode == 13) return false } */}
+</script>
+
+
+
+  </div>
+  <div id="local-search-result-pc" class="local-search-result-cls"></div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+       
+    </ul>
+  
+
+  
+    
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <div id="local-search-result-mobile" class="local-search-result-cls"></div>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/2016/11/01/快速编译技巧/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mike">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="🚙">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">快速编译技巧</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-01T22:57:29+00:00">
+                2016-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <div class="post-tags">
+              
+                <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+              
+                <a href="/tags/Compile/" rel="tag"><i class="fa fa-tag"></i> Compile</a>
+              
+                <a href="/tags/Make/" rel="tag"><i class="fa fa-tag"></i> Make</a>
+              
+            </div>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/18/a_fish_flock_ai_plugin_for_ue4/" rel="next" title="一个基于虚幻4群聚鱼群AI插件">
+                <i class="fa fa-chevron-left"></i> 
+                <p class="post-nav-pre-next-title">
+                  一个基于虚幻4群聚鱼群AI插件
+                </p> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/14/游戏网络开发一之TCPvsUDP/" rel="prev" title="游戏网络开发一之TCPvsUDP">
+              <p class="post-nav-pre-next-title">
+                  游戏网络开发一之TCPvsUDP
+              </p> 
+              <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+
+      
+      
+
+      
+        <blockquote>
+<p>项目越来越大，每次需要重新编译整个项目都是一件很浪费时间的事情。Research了一下，找到以下可以帮助提高速度的方法，总结一下。</p>
+</blockquote>
+<h1 id="tmpfs"><a href="#tmpfs" class="headerlink" title="tmpfs"></a>tmpfs</h1><blockquote>
+<p>有人说在Windows下用了RAMDisk把一个项目编译时间从4.</p>
+</blockquote>
+<p>5小时减少到了5分钟，也许这个数字是有点夸张了，不过粗想想，把文件放到内存上做编译应该是比在磁盘</p>
+<p>上快多了吧，尤其如果编译器需要生成很多临时文件的话。</p>
+<p>这个做法的实现成本最低，在Linux中，直接mount一个tmpfs就可以了。而且对所编译的工程没有任何要求，也不用改动编译环境。</p>
+<p>mount -t tmpfs tmpfs ~/build -o size=1G</p>
+<p>用2.6.32.2的Linux Kernel来测试一下编译速度：</p>
+<ul>
+<li><p>用物理磁盘：40分16秒</p>
+</li>
+<li><p>用tmpfs：39分56秒</p>
+</li>
+</ul>
+<p>呃……没什么变化。看来编译慢很大程度上瓶颈并不在IO上面。但对于一个实际项目来说，</p>
+<p>编译过程中可能还会有打包等IO密集的操作，所以只要可能，用tmpfs是有</p>
+<p>益无害的。</p>
+<blockquote>
+<p>当然对于大项目来说，你需要有足够的内存才能负担得起这个tmpfs的开销。</p>
+</blockquote>
+<h1 id="make-j"><a href="#make-j" class="headerlink" title="make -j"></a>make -j</h1><blockquote>
+<p>既然IO不是瓶颈，那CPU就应该是一个影响编译速度的重要因素了。</p>
+</blockquote>
+<p>用make -j带一个参数，可以把项目在进行并行编译，比如在一台双核的机器上，完全可以用make -<br>j4，让make最多允许4个编译命令同时执行，这样可以更有效的利用CPU资源。</p>
+<p>还是用Kernel来测试：</p>
+<ul>
+<li><p>用make： 40分16秒</p>
+</li>
+<li><p>用make -j4：23分16秒</p>
+</li>
+<li><p>用make -j8：22分59秒</p>
+</li>
+</ul>
+<p>由此看来，在多核CPU上，适当的进行并行编译还是可以明显提高编译速度的。但并行的任务不宜太多，一般是以CPU的核心数目的两倍为宜。</p>
+<p>不过这个方案不是完全没有cost的，如果项目的Makefile不规范，没有正确的设置好依赖关系，并行编译的结果就是编译不能正常进行。如果依赖关系设置过于保守<br>，则可能本身编译的可并行度就下降了，也不能取得最佳的效果。</p>
+<h1 id="ccache"><a href="#ccache" class="headerlink" title="ccache"></a>ccache</h1><blockquote>
+<p>ccache用于把编译的中间结果进行缓存，以便在再次编译的时候可以节省时间。这对于玩Kernel来说实在是再好不过了，因为经常需要修改一些Kernel的代码，然后<br>再重新编译，而这两次编译大部分东西可能都没有发生变化。对于平时开发项目来说，也是一样。为什么不是直接用make所支持的增量编译呢？还是因为现实中，因<br>为Makefile的不规范，很可能这种“聪明”的方案根本不能正常工作，只有每次make clean再make才行。</p>
+</blockquote>
+<p>安装完ccache后，可以在/usr/local/bin下建立gcc，g++，c++，cc的symbolic<br>link，链到/usr/bin/ccache上。总之确认系统在调用gcc等命令时会调用到ccache就可以了（通常情况下/usr/local/bin会在PATH中排在/usr/bin前面）。</p>
+<p>继续测试：</p>
+<ul>
+<li><p>用ccache的第一次编译(make -j4)：23分38秒</p>
+</li>
+<li><p>用ccache的第二次编译(make -j4)：8分48秒</p>
+</li>
+<li><p>用ccache的第三次编译(修改若干配置，make -j4)：23分48秒</p>
+</li>
+</ul>
+<p>看来修改配置（我改了CPU类型…）对ccache的影响是很大的，因为基本头文件发生变化后，就导致所有缓存数据都无效了，必须重头来做。但如果只是修改一些.<br>c文件的代码，ccache的效果还是相当明显的。而且使用ccache对项目没有特别的依赖，布署成本很低，这在日常工作中很实用。</p>
+<p>可以用ccache -s来查看cache的使用和命中情况：</p>
+<p>cache directory                   /home/lifanxi/.ccache</p>
+<p>cache hit                           7165</p>
+<p>cache miss                         14283</p>
+<p>called for link                       71</p>
+<p>not a C/C++ file                     120</p>
+<p>no input file                       3045</p>
+<p>files in cache                     28566</p>
+<p>cache size                          81.7 Mbytes</p>
+<p>max cache size                     976.6 Mbytes</p>
+<p>可以看到，显然只有第二编次译时cache命中了，cache miss是第一次和第三次编译带来的。两次cache占用了81.7M的磁盘，还是完全可以接受的。</p>
+<h1 id="distcc"><a href="#distcc" class="headerlink" title="distcc"></a>distcc</h1><blockquote>
+<p>一台机器的能力有限，可以联合多台电脑一起来编译。这在公司的日常开发中也是可行的，因为可能每个开发人员都有自己的开发编译环境，它们的编译器版本一般<br>是一致的，公司的网络也通常具有较好的性能。这时就是distcc大显身手的时候了。</p>
+</blockquote>
+<p>使用distcc，并不像想象中那样要求每台电脑都具有完全一致的环境，它只要求源代码可以用make -j并行编译，并且参与分布式编译的电脑系统中具有相同的编译<br>器。因为它的原理只是把预处理好的源文件分发到多台计算机上，预处理、编译后的目标文件的链接和其它除编译以外的工作仍然是在发起编译的主控电脑上完成，<br>所以只要求发起编译的那台机器具备一套完整的编译环境就可以了。</p>
+<p>distcc安装后，可以启动一下它的服务：</p>
+<p>/usr/bin/distccd  –daemon –allow 10.64.0.0/16</p>
+<p>默认的3632端口允许来自同一个网络的distcc连接。</p>
+<p>然后设置一下DISTCC_HOSTS环境变量，设置可以参与编译的机器列表。</p>
+<blockquote>
+<p>通常localhost也参与编译，但如果可以参与编译的机器很多，则可以把localhost从这个列表</p>
+<p>中去掉，这样本机就完全只是进行预处理、分发和链接了，编译都在别的机器上完成。</p>
+</blockquote>
+<p>因为机器很多时，localhost的处理负担很重，所以它就不再“兼职”编译了。</p>
+<p>export DISTCC_HOSTS=&quot;localhost 10.64.25.1 10.64.25.2 10.64.25.3&quot;</p>
+<p>然后与ccache类似把g++，gcc等常用的命令链接到/usr/bin/distcc上就可以了。</p>
+<p>在make的时候，也必须用-j参数，一般是参数可以用所有参用编译的计算机CPU内核总数的两倍做为并行的任务数。</p>
+<p>同样测试一下：</p>
+<ul>
+<li><p>一台双核计算机，make -j4：23分16秒</p>
+</li>
+<li><p>两台双核计算机，make -j4：16分40秒</p>
+</li>
+<li><p>两台双核计算机，make -j8：15分49秒</p>
+</li>
+</ul>
+<p>跟最开始用一台双核时的23分钟相比，还是快了不少的。如果有更多的计算机加入，也可以得到更好的效果。</p>
+<p>在编译过程中可以用distccmon-text来查看编译任务的分配情况。distcc也可以与ccache同时使用，通过设置一个环境变量就可以做到，非常方便。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h1><ul>
+<li><p>tmpfs： 解决IO瓶颈，充分利用本机内存资源</p>
+</li>
+<li><p>make -j： 充分利用本机计算资源</p>
+</li>
+<li><p>distcc： 利用多台计算机资源</p>
+</li>
+<li><p>ccache： 减少重复编译相同代码的时间</p>
+</li>
+</ul>
+<blockquote>
+<p>这些工具的好处都在于布署的成本相对较低，综合利用这些工具，就可以轻轻松松的节省相当可观的时间。</p>
+</blockquote>
+<p>上面介绍的都是这些工具最基本的用法，更多的用法可以参考它们各自的man page。</p>
+
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+            
+              <a href="/tags/Compile/" rel="tag"><i class="fa fa-tag"></i> Compile</a>
+            
+              <a href="/tags/Make/" rel="tag"><i class="fa fa-tag"></i> Make</a>
+            
+          </div>
+        
+
+        
+        
+        
+
+        
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2016/10/18/a_fish_flock_ai_plugin_for_ue4/" rel="next" title="一个基于虚幻4群聚鱼群AI插件">
+                  <i class="fa fa-chevron-left"></i> 
+                  <p class="post-nav-pre-next-title">
+                    一个基于虚幻4群聚鱼群AI插件
+                  </p> 
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2016/11/14/游戏网络开发一之TCPvsUDP/" rel="prev" title="游戏网络开发一之TCPvsUDP">
+                <p class="post-nav-pre-next-title">
+                    游戏网络开发一之TCPvsUDP
+                </p> 
+                <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+
+        
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  
+
+  <aside id="sidebar" class="sidebar">
+
+    
+      
+        <div id="sidebar-dimmer"></div>
+      
+    
+
+    <div class="sidebar-inner">
+    
+      <div class="sidebar-toggle-inside motion-element">
+        <div class="sidebar-toggle-line-wrap">
+          <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+        </div>
+      </div>
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <a href="/" class="site-author-image" rel="start" style="border:none">
+            <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Mike">
+          </a>
+          <p class="site-author-name" itemprop="name">Mike</p>
+           
+              <p class="site-description motion-element" itemprop="description">🚙 🚗 💨 It is recommended to use Chrome, Safari, or Edge to read this blog since this blog was developed on Edge (Chromium kernel version) and tested on Safari.</p>
+          
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">280</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">102</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+          <div class="site-state-item site-state-about">
+            <a href="/about/">
+              <span class="site-state-item-about fa fa-fw fa-user"></span>
+              <span class="site-state-item-name">about</span>
+            </a>
+          </div>
+          
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/no5ix" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://open.spotify.com/user/313duq77ekebrfyak3xijqewzss4?si=e7653b829a9747bf" target="_blank" title="Spotify">
+                  
+                    <i class="fa fa-fw fa-spotify"></i>
+                  
+                    
+                      Spotify
+                    
+                </a>
+              </span>
+            
+          
+          
+          <!-- 网易云音乐 -->
+            <!-- <div class="netease-cloud-music"> -->
+              <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=110 src="//music.163.com/outchain/player?type=0&id=992743594&auto=0&height=90"></iframe> -->
+            <!-- </div> -->
+          <!-- 网易云音乐 -->
+
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#tmpfs"><span class="nav-text">tmpfs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#make-j"><span class="nav-text">make -j</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ccache"><span class="nav-text">ccache</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#distcc"><span class="nav-text">distcc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mike</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <!--
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      
+        <span id="scrollpercent"><span>0</span>%</span>
+      
+    </div>
+    -->
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/mediumzoom/medium-zoom.js?v=1.1.0"></script>
+
+
+
+
+  
+
+
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    let db; // 全局数据库变量
+    var is_load_xml_finished = 0;
+    var keywords = [];
+    var curDate = new Date();
+    var xml_resp_cache = null;
+    var temp_keyword = "";
+
+    'use strict';
+
+    var content_id = isMobile() ? "local-search-result-mobile" : "local-search-result-pc";
+    var input_box = document.getElementById('local-search-input');
+    var resultContent = document.getElementById(content_id);
+    const searchButton = document.getElementById('search-button');
+    const closeButton = document.getElementById('local-search-close');
+
+    var str = "";
+
+    // 是否为第一个字母被键入的标志位
+    var first_char_flag = 0;
+
+    // 因为在移动设备上, 点击搜索之后会 scroll 到页面顶部, 所以需要记录之前的页面x, y坐标值, 以便于搜索完点击 close 按钮之后 scroll 回原来的页面坐标值.
+    var last_page_x = 0;
+    var last_page_y = 0;
+
+    var overlay = document.createElement("div");
+    overlay.classList.add("local-search-overlay");
+    document.body.appendChild(overlay);
+
+    function CloseLocalSearch(when_delete_all_on_mobile=false)
+    {
+        setTimeout(function() {  // 这个setTimeout的目的是为了解决当使用中文输入法输入英文的时候敲下enter键的那一瞬间发生从有文字到没文字又到有文字, 而下方window.scrollTo这个还没执行到, 会导致页面scroll乱滚以及velocity动画重复播放; 加了这个timeout之后就可以检测是否属于这种情况
+            if (temp_keyword.length > 0) {
+                return;
+            }
+            first_char_flag = 0;
+            $('#local-search-input').val('');
+            // $('#local-search-close').hide();
+            closeButton.classList.remove("show");
+
+            // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownOut', 200);
+            if (isMobile())
+            {
+              // $('body').scrollTop(last_page_y);  // scrollTop 有兼容性问题
+              // $('#' + content_id).hide();
+
+                $('#' + content_id).velocity('stop').velocity( 'transition.slideUpOut', 300);
+
+                if (!when_delete_all_on_mobile) {
+                    input_box.blur();
+                    // setTimeout(() => {
+                    //     closeButton.classList.remove("move");
+                    // }, 1000);
+                    input_box.classList.remove('expanded');
+                    document.body.style.overflow = ""; // 恢复body滚动
+                    overlay.classList.remove("show");
+                } else {
+                    return;
+                }
+                // const element = document.getElementById('local-search-result-mobile');
+                // let bottomY = element.offsetTop + element.offsetHeight;  // local search result底部相对于整个页面的 Y 坐标
+                // // console.log("bottttt= " + bottomY);
+                // if (bottomY == 0) {  // 说明 local search result底部 比当前页面还要长
+                //     scrollTo(last_page_x, last_page_y);
+                // } else {
+                //     // console.log("rrrrrrretrn " + bottomY);
+                //     // console.log("rrrrrrretrnyyy " + window.scrollY);
+                //     if (window.scrollY > bottomY) {  // 如果用户滚动到比 local search result的底部还要低, 那说明他不想回到他search之前的位置了
+                //         // console.log("4bottttt222= " + last_page_x);
+                //     } else {
+                //         // setTimeout(function() {
+                //             // scrollTo(last_page_x, last_page_y);
+                //             window.scrollTo({
+                //                 top: last_page_y,
+                //                 left: last_page_x,
+                //                 behavior: "smooth",
+                //                 duration: 150 // 滚动动画持续x毫秒
+                //             });
+                //         // }, 150);
+                //     }
+                // }
+                // last_page_x = 0;
+                // last_page_y = 0;
+            }
+            else
+            {
+                $('#' + content_id).attr("headroom_special_attr","true");   //headroom_special_attr是用来, 当页面滚动的时候local search的结果页面也会跟着一起被收起, 当不写这行代码的时候, 空的result会在页面往上滚的时候出现 ...
+                resultContent.classList.remove("smooth-transition");  // 这个是为了"当页面滚动的时候local search的结果页面也会跟着一起被收起"的时候有一个平滑滚动的动画, 这个不能直接写在css里, 不然会影响 velocity的动画
+
+                $('#' + content_id).velocity('stop').velocity( 'transition.slideUpOut', 800);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.bounceOut', 800);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.slideUpBigOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.bounceUpOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.expandOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.whirlOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.shrinkOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.swoopOut', 1000);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.flipBounceXOut', 600);
+                // $('#' + content_id).velocity('stop').velocity( 'transition.fadeOut', 600);
+            }
+        }, 150);
+    }
+
+    async function handleSearch()
+    {
+        if (keywords.length <= 0) {
+            return;
+        }
+        resultContent.innerHTML = "";
+    //   $('#local-search-close').show();
+    
+        closeButton.classList.add("show");
+
+        // 0x04. perform local searching
+        if (is_load_xml_finished == 0)
+        {
+            var local_search_tips = 
+                "<span class='local-search-empty'>" + "第一次搜索可能较慢, 先思考一个经典算法问题, 跳台阶:" + "</span>" +
+                "<span class='local-search-empty'>" + "一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个6级的台阶总共有多少种跳法?n级呢?" + "</span>";
+            var ProgressBar = 
+                "<div class='progress-bar'>" +
+                    "<div class='progress-bar-charge'></div>" +
+                "</div>";
+            resultContent.innerHTML = 
+                "<ul class='local-search-empty-ul'>" + 
+                local_search_tips +
+                ProgressBar;
+        }
+        else
+        {
+            // Retrieve the object from local storage
+            var xml_resp = await retrieve_search_xml()
+
+            xml_resp.forEach(function (data) {
+            var isMatch = true;
+            var content_index = [];
+            if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+            }
+            var is_encrypted = data.encrypted.trim() == '1'
+            var is_sensitive = CONFIG.local_search.sensitive_word && data_content.indexOf(CONFIG.local_search.sensitive_word) >= 0
+            var orig_data_title = data.title.trim();
+            var data_title = orig_data_title.toLowerCase();
+            var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+            var data_content = orig_data_content.toLowerCase();
+            var data_url = decodeURIComponent(data.url);
+            var index_title = -1;
+            var index_content = -1;
+            var first_occur = -1;
+            // only match artiles with not empty contents
+            if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                index_title = data_title.indexOf(keyword);
+                // index_content = (is_sensitive || is_encrypted) ? -1 : data_content.indexOf(keyword);  // 不能搜加密文章,
+                index_content = data_content.indexOf(keyword); //  这样可以搜加密了的文章, 但是搜索结果框不显示正文只显示标题
+
+                if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                } else {
+                    if (index_content < 0) {
+                    index_content = 0;
+                    }
+                    if (i == 0) {
+                    first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                }
+                });
+            } else {
+                isMatch = false;
+            }
+            // 0x05. show search results
+            if (isMatch) {
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                var match_content = "";
+                
+                const hostname = window.location.hostname;
+                if ((!is_sensitive && !is_encrypted) || (hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192")))
+                {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if (start < 0) {
+                    start = 0;
+                    }
+                    if (start == 0) {
+                    end = 100;
+                    }
+                    if (end > content.length) {
+                    end = content.length;
+                    }
+                    match_content = content.substr(start, end);
+                }
+                // highlight all keywords
+                var regS = "";
+                if (match_content != "")
+                {
+                    keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    });
+                }
+                else
+                {
+                    keywords.forEach(function (keyword) {
+                    regS = new RegExp(keyword, "gi");
+                    orig_data_title = orig_data_title.replace(regS, "<b class=\"search-keyword\">" + keyword + "</b>");
+                    });
+                }
+                str += "<li><a href='" + data_url + "' class='search-result-title' target='_blank'>" + orig_data_title + "</a>";
+                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+            }
+            });
+
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+            return resultContent.innerHTML = 
+                "<ul class='local-search-empty-ul'><span class='local-search-empty'>404.<span></ul>";
+            }
+            resultContent.innerHTML = str;
+      }
+    }
+
+    input_box.addEventListener('input', function () {
+        // 0x03. parse query to keywords list
+        str = '<ul class=\"search-result-list\">';
+        temp_keyword = this.value.trim();
+        if (temp_keyword.length <= 0) {
+            CloseLocalSearch(true);
+            return;
+        }
+
+        keywords = temp_keyword.toLowerCase().split(/[\s\-]+/);
+        handleSearch();
+
+        // 当用户键入第一个字母的时候的动画处理逻辑 : 
+        // 当 first_char_flag 为 0 的时候, 
+        // 要播放一个动画
+        if (first_char_flag == 0)
+        {
+            // $('body').scrollTop(0);
+            let duration = 600;
+            if (isMobile())
+            {
+                // if (window.scrollY != 0) {  // 加这个判断是为了防止 清空后再输入再点x没回原位
+                //     last_page_x = window.scrollX;
+                //     last_page_y = window.scrollY;
+                //     scrollTo(0,0);
+                // }
+              // $('body').scrollTop(0);
+            } else {
+                $('#' + content_id).removeAttr("headroom_special_attr");  // headroom_special_attr是用来 当页面滚动的时候local search的结果页面也会跟着一起被收起, 当不写这行代码的时候, 空的result会在页面往上滚的时候出现 ...
+                  setTimeout(()=>{
+                      resultContent.classList.add("smooth-transition"); // 这个是为了"当页面滚动的时候local search的结果页面也会跟着一起被收起"的时候有一个平滑滚动的动画, 这个不能直接写在css里, 不然会影响 velocity
+                  }, duration + 200); 
+            }
+            first_char_flag = 1;
+
+            if (isMobile()) {
+                $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', duration);
+            } else {
+                $('#' + content_id).velocity('stop').velocity('transition.slideDownIn', duration);
+                  // $('#' + content_id).velocity('stop').velocity('transition.bounceIn', 800);
+                //   $('.local-search-result-cls ul li').velocity('stop').velocity('transition.bounceUpIn', 1200);
+            }
+          // $('.local-search-result-cls ul li').velocity('stop').velocity('transition.slideDownBigIn', 1000);
+        } else {
+            // if (isMobile())
+            // {
+            //     const element = document.getElementById('local-search-result-mobile');
+            //     let bottomY = element.offsetTop + element.offsetHeight;  // local search result底部相对于整个页面的 Y 坐标
+            //     if (window.scrollY > bottomY) {  // 如果用户滚动到比 local search result的底部还要低
+            //         last_page_x = window.scrollX;
+            //         last_page_y = window.scrollY;
+            //         window.scrollTo({
+            //             top: 0,
+            //             left: 0,
+            //             behavior: "smooth",
+            //             duration: 150 // 滚动动画持续x毫秒
+            //         });
+            //     }
+            // }
+        }
+    });
+
+    // 这里要不要用 click 要用 pointerup, 不然 mac safari 触摸板 tap 得tap两次才能触发这里
+    $(document).on('pointerup', '#local-search-close', function(event) {
+        temp_keyword = "";
+        CloseLocalSearch();
+    });
+
+    input_box.addEventListener("focus", function() {  // when input get the focus
+        if (isMobile()) {
+            document.body.style.overflow = "hidden"; // 禁止body滚动
+            overlay.classList.add("show");
+        }
+    });
+
+    input_box.addEventListener("blur", function() {  // when input lose the focus
+        if (isMobile()) {
+            // console.log("输入框失去焦点");
+            // $('#local-search-input').val('');
+            // if (temp_keyword.length > 0) {
+            //     if (str.indexOf('<li>') === -1) {  // 说明local search 没搜到东西
+            //         window.scrollTo({
+            //             top: last_page_y,
+            //             left: last_page_x,
+            //             behavior: "smooth",
+            //             duration: 150 // 滚动动画持续x毫秒
+            //         });
+            //     }
+            //     // closeButton.classList.add("move");
+            //     // setTimeout(function() {
+            //     //     input_box.classList.remove('expanded');
+            //     // }, 450);
+            // } else {
+            //     window.scrollTo({  // 当失焦的时候且输入框没文字的时候就滚回原来的位置
+            //         top: last_page_y,
+            //         left: last_page_x,
+            //         behavior: "smooth",
+            //         duration: 150 // 滚动动画持续x毫秒
+            //     });
+            //     input_box.classList.remove('expanded');
+            // }
+            setTimeout(()=> {
+                searchButton.disabled = false;
+            }, 600);
+
+            // console.log("输入框失去焦点2: " + temp_keyword.length);
+            if (temp_keyword.length <= 0) {
+                document.body.style.overflow = ""; // 恢复body滚动
+                overlay.classList.remove("show");
+                input_box.classList.remove('expanded');
+            }
+        }
+    });
+
+    searchButton.addEventListener('click', function() {  // 这里要用click不要用 pointerup, 不然ios可能弹不出键盘
+        if (isMobile()) {
+            // 使输入框渐变显示
+            searchButton.disabled = true;  // 点击之后就禁用, 直到input失焦
+            input_box.focus();
+            // if (temp_keyword.length > 0) {
+            //     // closeButton.classList.remove("move");
+            //     // setTimeout(function() {
+            //         input_box.classList.add('expanded');
+            //         setTimeout(function() {
+            //             $('#local-search-input').val(temp_keyword);
+            //         }, 350);
+            //     // }, 450);
+            // } else {
+            //     // setTimeout(()=> {
+            //         input_box.classList.add('expanded');
+            //     // }, 80);
+            // }
+
+            input_box.classList.add('expanded');
+        }
+    });
+
+    // 你的代码在 document 上监听 click 事件，并检查点击的目标是否在 content_id 指定的元素内部。如果点击的目标不在该元素内，则执行 CloseLocalSearch()。
+    // $(document).click(function(event) {
+    //     if (isMobile()) {
+    //         return;
+    //     } else {
+    //         if (!$(event.target).closest('#' + content_id).length) {
+    //             temp_keyword = "";
+    //             CloseLocalSearch();
+    //         }
+    //     }
+    // });
+
+    $(document).keyup(function(event){
+      switch(event.keyCode) {
+        case 27:
+          // alert("ESC");
+          temp_keyword = "";
+          CloseLocalSearch();
+      }
+    });
+
+    function isMobile() {
+      // console.log(document.body.clientWidth);
+      return document.body.clientWidth < 768
+    }
+
+    function getTimestampAsSecond() {
+      // console.log(document.body.clientWidth);
+      return Math.floor(Date.now() / 1000);
+    }
+
+    {/* function store_search_xml(xmlResponse) {
+        var entries = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // Put the object into storage
+        localStorage.setItem('local_search_xml_data', JSON.stringify(entries));
+        localStorage.setItem('last_store_local_search_date', curDate.getDate());
+        is_load_xml_finished = 1;
+        console.log("[local search] - store search.xml finished.");
+    } */}
+
+    function ajax_store_search_xml(xmlTimestamp) {
+        console.log("[local search] - ajax downloading search.xml ...");
+        $.ajax({
+            url: "/search.xml",
+            dataType: "xml",
+            success: function (xmlResponse) {
+                setLocalSearchXMLData(xmlResponse, xmlTimestamp);
+                // 如果输入框有文字, 等待下载 xml完毕之后再弹出结果
+                if (temp_keyword.length > 0) {
+                    handleSearch();
+                    $('.local-search-result-cls ul li').velocity('stop').velocity('transition.swoopIn', 1200);
+                }
+            }
+        });
+    }
+
+    async function retrieve_search_xml() {
+        // // Retrieve the object from local storage
+        // var retrievedObject = localStorage.getItem('local_search_xml_data');
+        // var xml_resp = JSON.parse(retrievedObject)
+        // return xml_resp
+
+        if (xml_resp_cache) {
+          return xml_resp_cache;
+        }
+        // Retrieve the object from indexedDB
+        xml_resp_cache = await getLocalSearchXMLData();
+        return xml_resp_cache;
+    }
+
+    function openDatabase() {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open("myDatabase", 1); // 设置为版本号 1, 用indexedDB替代localStorage, 因为indexedDB可以存储大量数据（几百 MB 到几 GB）, 而localStorage只能5MB左右, 
+            request.onupgradeneeded = function(event) {
+                db = event.target.result;
+                if (!db.objectStoreNames.contains("searchData")) {
+                    const objectStore = db.createObjectStore("searchData", { keyPath: "id" });
+                    // 可以创建索引以便于查询
+                    objectStore.createIndex("xmlDataIndex", "xml_data", { unique: false });
+                }
+            };
+            request.onsuccess = function(event) {
+                db = event.target.result;
+                console.log("[local search] - Database opened successfully.");
+                resolve(db);
+            };
+            request.onerror = function(event) {
+                console.error("[local search] - Database open error:", event.target.error);
+                reject(event.target.error);
+            };
+        });
+    }
+
+    async function setLocalSearchXMLData(xmlResponse, xmlTimestamp) {
+        if (!db) {
+            await openDatabase();  // 确保数据库已打开
+        }
+        var transaction = db.transaction(["searchData"], "readwrite");
+        var objectStore = transaction.objectStore("searchData");
+
+        var xml_data = $("entry", xmlResponse).map(function () {
+          return {
+            title: $("title", this).text(),
+            content: $("content", this).text(),
+            url: $("url", this).text(),
+            encrypted: $("encrypted", this).text(),
+          };
+        }).get();
+        // 存储数据，主键为 "id"，这里我们将 "id" 设为 "local_search_xml_data"
+        var data = { id: "local_search_xml_data", xml_data: xml_data };
+
+        var request = objectStore.put(data);  // 使用 put 可以插入或者更新数据
+        request.onsuccess = function() {
+            console.log("[local search] - Data successfully stored in indexedDB.");
+            // localStorage.setItem('last_store_local_search_date', curDate.getDate());
+            localStorage.setItem('last_publish_timestamp', xmlTimestamp);
+            is_load_xml_finished = 1;
+        };
+        request.onerror = function(event) {
+            console.log("[local search] - Error storing data: ", event.target.error);
+        };
+    }
+
+    // 封装 IndexedDB 操作为 Promise
+    function getLocalSearchXMLData() {
+        return new Promise((resolve, reject) => {
+            if (!db) {
+                reject("[local search] - Database is not initialized.");
+                return;
+            }
+            var transaction = db.transaction(["searchData"], "readonly");
+            var objectStore = transaction.objectStore("searchData");
+            var request = objectStore.get("local_search_xml_data");  // 使用 id 获取数据
+            request.onsuccess = function(event) {
+                if (request.result) {
+                    // 数据存在，成功处理
+                    resolve(request.result.xml_data);  // 解析成功并返回结果
+                } else {
+                    // 数据未找到，返回失败
+                    reject("Data not found");  // 抛出错误
+                }
+            };
+            request.onerror = function(event) {
+                // 错误处理
+                console.log("[local search] - Error retrieving data: ", event.target.error);
+                reject(event.target.error);  // 抛出错误
+            };
+        });
+    }
+
+    // 使用 async/await 来调用这个函数
+    async function loadSearchData() {
+        try {
+            if (!db) {
+                await openDatabase();  // 确保数据库已打开
+            }
+            await getLocalSearchXMLData();  // 等待结果
+            is_load_xml_finished = 1;
+            console.log("[local search] - load search.xml finished.");
+            // console.log("Retrieved data: ", result);
+        } catch (error) {
+            // console.error("Error: ", error);
+            console.log("[local search] - load search.xml not found.");
+            ajax_get_new_search_xml_if_exist(true);
+        }
+    }
+
+    // 节省流量
+    function ajax_get_new_search_xml_if_exist(force=false) {
+        const hostname = window.location.hostname;
+        if (!(hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192"))) {
+            console.log("[local search] - ajax downloading publish_time.xml ...");
+            $.ajax({
+                url: "/publish_time.xml",  // 这个文件是github action里加上去的, 参见本项目 .github/workflows/pages.yml:151
+                dataType: "xml",
+                success: function (xmlResponse) {
+                    // 使用 jQuery 解析 XML 文档并获取时间戳
+                    const xmlTimestamp = $(xmlResponse).find('publish_timestamp').text(); // 提取 <timestamp> 的文本
+                    // 从 localStorage 获取存储的时间戳
+                    const storedTimestamp = localStorage.getItem('last_publish_timestamp') || 0;
+                    if (force) {
+                        ajax_store_search_xml(xmlTimestamp);
+                    } else {
+                        console.log('[local search] - ajax_get_new_search_xml_if_exist, xmlTimestamp: ' + xmlTimestamp + ", storedTimestamp: " + storedTimestamp);
+                        if (xmlTimestamp > storedTimestamp) {
+                            // download search.xml
+                            ajax_store_search_xml(xmlTimestamp);
+                        }
+                        else {
+                            // 调用异步函数
+                            loadSearchData();
+                        }
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('[local search] - ajax_get_new_search_xml_if_exist 请求失败: ' + error);
+                    ajax_store_search_xml(getTimestampAsSecond());
+                }
+            });
+        } else {
+            ajax_store_search_xml(getTimestampAsSecond());
+        }
+    }
+
+    // var local_search_xml_data = localStorage.getItem('local_search_xml_data');
+    // if (local_search_xml_data) {
+    //     is_load_xml_finished = 1;
+    //     console.log("[local search] - load search.xml finished.");
+    // }
+    // var last_store_local_search_date = localStorage.getItem('last_store_local_search_date');
+    // // 只有在 localStorage 没有 search.xml数据或者 距离上次使用local search已经超过一天了才去取search.xml
+    // // 节省流量
+    // if (last_store_local_search_date != curDate.getDate()) {
+    //     // download search.xml
+    //     ajax_store_search_xml();
+    // } else {
+    //     // 调用异步函数
+    //     loadSearchData();
+    // }
+
+    ajax_get_new_search_xml_if_exist();
+
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/lib/wobble_window/wobblewindow.js"> </script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+<script type="text/javascript" src="/js/src/headroom.js"></script> 
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
