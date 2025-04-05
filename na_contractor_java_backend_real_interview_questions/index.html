@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+
+<script>
+    (function(){
+        if('ees'){
+            let localStoragePasswdKey = 'OS interview notes' + '_last_passwd';
+            function checkPassword(password) {
+                password = password == null ? null : password.trim();
+                if (password !== 'ees') {
+                    if (password != null) {
+                        // 如果用户点击了确认而且密码错误的时候, 因为当password == null的时候说明用户点了取消
+                        alert('Error!');
+                    }
+                    if (history.length > 1) {
+                        history.back();
+                    } else {
+                        window.location.href = "about:blank";
+                    }
+                } else {
+                    localStorage.setItem(localStoragePasswdKey, password);
+                }
+            }
+
+            var password_verify_on_local = false;
+            const hostname = window.location.hostname;
+            if (password_verify_on_local || (!(hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname.startsWith("192")))) {
+                const lspk = localStorage.getItem(localStoragePasswdKey) || "";
+                if (lspk !== 'ees') {
+                    var password = prompt('Open Sesame');
+                    checkPassword(password);
+                }
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="noodle,Java,NA,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content=". . .">
+<meta name="keywords" content="noodle,Java,NA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OS interview notes">
+<meta property="og:url" content="https://hulinhong.com/na_contractor_java_backend_real_interview_questions/index.html">
+<meta property="og:site_name" content="🚙">
+<meta property="og:description" content=". . .">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2025-04-05T07:17:16.711Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OS interview notes">
+<meta name="twitter:description" content=". . .">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"scrollpercent":true,"onmobile":true,"dimmer":true,"body_content_height":0,"display_duration":150},
+    local_search: {"enable":true,"trigger":"auto","top_n_per_article":1},
+    fancybox: false,
+    mediumzoom: true,
+    darkmode_js: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"duration":188,"transition":{"header":"fadeIn","menu":"fadeIn","logo":"fadeIn","post_block_else":"fadeIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"fadeIn","footer":"fadeIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+
+  <title>OS interview notes | 🚙</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">🚙</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">💨 💨 💨</p>
+      
+  </div>
+
+  <div class="menu-item sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="menu-item site-search">
+    
+  
+  <div class="site-search-div">
+    <button class="search-icon" id="search-button">
+      <i class="fa fa-search"></i>
+    </button>
+    <input type="text" id="local-search-input" class="st-search-input">
+    <i id="local-search-close">×</i>
+  </div>
+
+
+<script type="text/javascript" id="local.search.active">
+    {/* var inputArea       = document.querySelector("#local-search-input");
+    inputArea.onclick   = function(){ getSearchFile(); this.focus(); }
+    inputArea.onkeydown = function(){ if(event.keyCode == 13) return false } */}
+</script>
+
+
+
+  </div>
+  <div id="local-search-result-pc" class="local-search-result-cls"></div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+       
+    </ul>
+  
+
+  
+    
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <div id="local-search-result-mobile" class="local-search-result-cls"></div>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hulinhong.com/na_contractor_java_backend_real_interview_questions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mike">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="🚙">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OS interview notes</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-19T02:45:09+00:00">
+                02-19-2019
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Noodle/" itemprop="url" rel="index">
+                    <span itemprop="name">Noodle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <div class="post-tags">
+              
+                <a href="/tags/noodle/" rel="tag"><i class="fa fa-tag"></i> noodle</a>
+              
+                <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+              
+                <a href="/tags/NA/" rel="tag"><i class="fa fa-tag"></i> NA</a>
+              
+            </div>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/na_fulltime_java_backend_real_interview_questions/" rel="next" title="QZ interview notes">
+                <i class="fa fa-chevron-left"></i> 
+                <p class="post-nav-pre-next-title">
+                  QZ interview notes
+                </p> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/na_kafka_notes/" rel="prev" title="Kafka notes">
+              <p class="post-nav-pre-next-title">
+                  Kafka notes
+              </p> 
+              <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+
+      
+      
+
+      
+        <p><strong>. . .</strong><a id="more"></a></p>
+<h1 id="concepts"><a href="#concepts" class="headerlink" title="concepts"></a>concepts</h1><h2 id="In-java-difference-between-controller-and-restcontroller"><a href="#In-java-difference-between-controller-and-restcontroller" class="headerlink" title="In java, difference between @controller and @restcontroller"></a>In java, difference between @controller and @restcontroller</h2><p>In Java, specifically in the Spring framework, both <code>@Controller</code> and <code>@RestController</code> are annotations used for<br>building web - related components. Here are the key differences between them:</p>
+<h3 id="1-Function-and-Purpose"><a href="#1-Function-and-Purpose" class="headerlink" title="1. Function and Purpose"></a>1. Function and Purpose</h3><ul>
+<li><strong><code>@Controller</code></strong><ul>
+<li>It is a stereotype annotation in Spring MVC. It is mainly used to mark a class as a Spring MVC controller. A<br>controller class typically handles HTTP requests, processes them, and then returns a view name. The view resolver<br>in Spring MVC will then use this view name to render an appropriate view (such as a JSP page, Thymeleaf template,<br>etc.) to the client.</li>
+</ul>
+</li>
+<li><strong><code>@RestController</code></strong><ul>
+<li>It is a combination of <code>@Controller</code> and <code>@ResponseBody</code>. This annotation is designed for building RESTful web<br>services. When a class is marked with <code>@RestController</code>, all the handler methods in this class will automatically<br>serialize the return value to the HTTP response body in a format like JSON or XML by default.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Return-Value-Handling"><a href="#2-Return-Value-Handling" class="headerlink" title="2. Return Value Handling"></a>2. Return Value Handling</h3><ul>
+<li><strong><code>@Controller</code></strong><ul>
+<li>By default, the return value of a method in a <code>@Controller</code> class is treated as a view name. For example:</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyViewController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/view"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">showView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"myView"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>- In this code, the method `showView` returns the string `&quot;myView&quot;`, and Spring MVC will look for a view with this name to render.
+</code></pre><ul>
+<li><strong><code>@RestController</code></strong><ul>
+<li>The return value of a method in a <code>@RestController</code> class is directly serialized and sent as the HTTP response<br>body. For example:</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyRestController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/data"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"This is some data"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>- When a client makes a request to `/data`, the string `&quot;This is some data&quot;` will be sent directly in the response body.
+</code></pre><h3 id="3-Usage-Scenarios"><a href="#3-Usage-Scenarios" class="headerlink" title="3. Usage Scenarios"></a>3. Usage Scenarios</h3><ul>
+<li><strong><code>@Controller</code></strong><ul>
+<li>It is suitable for traditional web applications where you need to render views based on user requests. For<br>example, an e - commerce website where you need to display product lists, user profiles, etc. in HTML pages.</li>
+</ul>
+</li>
+<li><strong><code>@RestController</code></strong><ul>
+<li>It is ideal for building RESTful APIs. These APIs can be consumed by various clients such as mobile applications,<br>single - page web applications, etc. For example, a backend API for a mobile banking application that provides<br>services like getting account balance, transaction history, etc.</li>
+</ul>
+</li>
+</ul>
+<h2 id="in-kafka-how-to-handle-schema-evolution"><a href="#in-kafka-how-to-handle-schema-evolution" class="headerlink" title="in kafka, how to handle schema evolution"></a>in kafka, how to handle schema evolution</h2><p>Here are several common methods to handle schema evolution in Apache Kafka:</p>
+<h3 id="1-Using-Schema-Registry"><a href="#1-Using-Schema-Registry" class="headerlink" title="1. Using Schema Registry"></a>1. Using Schema Registry</h3><h4 id="Avro-with-Confluent-Schema-Registry"><a href="#Avro-with-Confluent-Schema-Registry" class="headerlink" title="Avro with Confluent Schema Registry"></a>Avro with Confluent Schema Registry</h4><ul>
+<li><strong>Principle</strong><ul>
+<li>Confluent Schema Registry is a widely used tool for managing schemas in Kafka. It stores schemas in a central<br>repository and enforces compatibility rules between different versions of schemas. When using Avro serialization,<br>producers and consumers can interact with the Schema Registry to ensure that the data they produce and consume<br>adheres to the defined schemas.</li>
+</ul>
+</li>
+<li><strong>Steps</strong><ul>
+<li><strong>Producer side</strong>: When a producer sends data, it first checks if the schema of the data exists in the Schema<br>Registry. If not, it registers the new schema. The registry then assigns a unique ID to the schema. The producer<br>serializes the data using Avro and includes the schema ID in the message.</li>
+<li><strong>Consumer side</strong>: The consumer receives the message with the schema ID, fetches the corresponding schema from the<br>Schema Registry, and deserializes the data using that schema.</li>
+</ul>
+</li>
+<li><strong>Compatibility Modes</strong><ul>
+<li><strong>Backward compatibility</strong>: Newer versions of the schema can be read by older consumers. For example, adding a new<br>optional field to an Avro record is backward - compatible.</li>
+<li><strong>Forward compatibility</strong>: Older versions of the schema can be read by newer consumers. For example, removing a<br>non - required field is forward - compatible.</li>
+<li><strong>Full compatibility</strong>: It combines backward and forward compatibility.</li>
+</ul>
+</li>
+</ul>
+<h4 id="Protobuf-with-Schema-Registry"><a href="#Protobuf-with-Schema-Registry" class="headerlink" title="Protobuf with Schema Registry"></a>Protobuf with Schema Registry</h4><ul>
+<li>Similar to Avro, Protocol Buffers can also be used with a schema registry. Protobuf has its own serialization and<br>deserialization mechanisms, and the schema registry helps in managing different versions of Protobuf schemas.</li>
+</ul>
+<h3 id="2-Designing-Flexible-Schemas"><a href="#2-Designing-Flexible-Schemas" class="headerlink" title="2. Designing Flexible Schemas"></a>2. Designing Flexible Schemas</h3><h4 id="Use-Optional-Fields"><a href="#Use-Optional-Fields" class="headerlink" title="Use Optional Fields"></a>Use Optional Fields</h4><ul>
+<li>When defining your data schema, mark non - essential fields as optional. For example, in Avro, you can define a field<br>like this:</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"optionalField"</span>,</span><br><span class="line">    <span class="attr">"type"</span>: [</span><br><span class="line">        <span class="string">"null"</span>,</span><br><span class="line">        <span class="string">"string"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"default"</span>: <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>This allows you to add new fields in future schema versions without breaking existing consumers that may not expect<br>these new fields.</li>
+</ul>
+<h4 id="Avoid-Breaking-Changes"><a href="#Avoid-Breaking-Changes" class="headerlink" title="Avoid Breaking Changes"></a>Avoid Breaking Changes</h4><ul>
+<li>Do not remove or rename existing required fields. If you need to change the meaning of a field, it’s better to add a<br>new field and gradually deprecate the old one.</li>
+</ul>
+<h3 id="3-Versioning-in-the-Application-Code"><a href="#3-Versioning-in-the-Application-Code" class="headerlink" title="3. Versioning in the Application Code"></a>3. Versioning in the Application Code</h3><h4 id="Producer-Side-Versioning"><a href="#Producer-Side-Versioning" class="headerlink" title="Producer - Side Versioning"></a>Producer - Side Versioning</h4><ul>
+<li>The producer can explicitly include a version number in the message. For example, you can add a <code>version</code> field to<br>your data structure:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMessage</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> version;</span><br><span class="line">    <span class="keyword">private</span> String data;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Getters and setters</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>The producer can increment the version number when there is a schema change.</li>
+</ul>
+<h4 id="Consumer-Side-Version-Handling"><a href="#Consumer-Side-Version-Handling" class="headerlink" title="Consumer - Side Version Handling"></a>Consumer - Side Version Handling</h4><ul>
+<li>The consumer can check the version number in the message and handle the data differently based on the version. For<br>example:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(message.getVersion() ==<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="comment">// Handle data in version 1 format</span></span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(message.</span><br><span class="line"></span><br><span class="line">getVersion() ==<span class="number">2</span>)&#123;</span><br><span class="line">    <span class="comment">// Handle data in version 2 format</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-Using-Kafka-Connect-with-Schema-Evolution-Support"><a href="#4-Using-Kafka-Connect-with-Schema-Evolution-Support" class="headerlink" title="4. Using Kafka Connect with Schema Evolution Support"></a>4. Using Kafka Connect with Schema Evolution Support</h3><ul>
+<li>Kafka Connect is a tool for moving data between Kafka and other systems. Some connectors support schema evolution. For<br>example, the JDBC connector can handle changes in the database schema and propagate these changes to Kafka topics<br>while maintaining compatibility.</li>
+</ul>
+<p>在 Apache Kafka 中，处理模式演变（Schema Evolution）有以下几种常见方法：</p>
+<h3 id="1-使用模式注册表"><a href="#1-使用模式注册表" class="headerlink" title="1. 使用模式注册表"></a>1. 使用模式注册表</h3><h4 id="结合-Confluent-模式注册表使用-Avro"><a href="#结合-Confluent-模式注册表使用-Avro" class="headerlink" title="结合 Confluent 模式注册表使用 Avro"></a>结合 Confluent 模式注册表使用 Avro</h4><ul>
+<li><strong>原理</strong><ul>
+<li>Confluent 模式注册表是 Kafka 中广泛使用的管理模式的工具。它将模式存储在中央存储库中，并对不同版本的模式执行兼容性规则。在使用<br>Avro 序列化时，生产者和消费者可以与模式注册表交互，以确保它们生产和消费的数据符合定义的模式。</li>
+</ul>
+</li>
+<li><strong>步骤</strong><ul>
+<li><strong>生产者端</strong>：生产者发送数据时，首先检查数据的模式是否存在于模式注册表中。如果不存在，则注册新模式。注册表会为该模式分配一个唯一的<br>ID。生产者使用 Avro 对数据进行序列化，并在消息中包含模式 ID。</li>
+<li><strong>消费者端</strong>：消费者接收到包含模式 ID 的消息后，从模式注册表中获取相应的模式，并使用该模式对数据进行反序列化。</li>
+</ul>
+</li>
+<li><strong>兼容性模式</strong><ul>
+<li><strong>向后兼容</strong>：新模式可以被旧版本的消费者读取。例如，向 Avro 记录中添加一个新的可选字段就是向后兼容的。</li>
+<li><strong>向前兼容</strong>：旧模式可以被新版本的消费者读取。例如，移除一个非必需字段是向前兼容的。</li>
+<li><strong>完全兼容</strong>：同时具备向后兼容和向前兼容的特性。</li>
+</ul>
+</li>
+</ul>
+<h4 id="结合模式注册表使用-Protocol-Buffers（Protobuf）"><a href="#结合模式注册表使用-Protocol-Buffers（Protobuf）" class="headerlink" title="结合模式注册表使用 Protocol Buffers（Protobuf）"></a>结合模式注册表使用 Protocol Buffers（Protobuf）</h4><ul>
+<li>与 Avro 类似，Protocol Buffers 也可以与模式注册表结合使用。Protobuf 有自己的序列化和反序列化机制，模式注册表有助于管理不同版本的<br>Protobuf 模式。</li>
+</ul>
+<h3 id="2-设计灵活的模式"><a href="#2-设计灵活的模式" class="headerlink" title="2. 设计灵活的模式"></a>2. 设计灵活的模式</h3><h4 id="使用可选字段"><a href="#使用可选字段" class="headerlink" title="使用可选字段"></a>使用可选字段</h4><ul>
+<li>在定义数据模式时，将非必需字段标记为可选。例如，在 Avro 中可以这样定义一个字段：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"optionalField"</span>,</span><br><span class="line">    <span class="attr">"type"</span>: [</span><br><span class="line">        <span class="string">"null"</span>,</span><br><span class="line">        <span class="string">"string"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"default"</span>: <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这样，在未来的模式版本中添加新字段时，不会破坏可能不期望这些新字段的现有消费者。</li>
+</ul>
+<h4 id="避免重大更改"><a href="#避免重大更改" class="headerlink" title="避免重大更改"></a>避免重大更改</h4><ul>
+<li>不要移除或重命名现有的必需字段。如果需要更改字段的含义，最好添加一个新字段，并逐步弃用旧字段。</li>
+</ul>
+<h3 id="3-在应用代码中进行版本控制"><a href="#3-在应用代码中进行版本控制" class="headerlink" title="3. 在应用代码中进行版本控制"></a>3. 在应用代码中进行版本控制</h3><h4 id="生产者端版本控制"><a href="#生产者端版本控制" class="headerlink" title="生产者端版本控制"></a>生产者端版本控制</h4><ul>
+<li>生产者可以在消息中显式包含版本号。例如，可以在数据结构中添加一个 <code>version</code> 字段：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMessage</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> version;</span><br><span class="line">    <span class="keyword">private</span> String data;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Getters 和 setters</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>当模式发生变化时，生产者可以递增版本号。</li>
+</ul>
+<h4 id="消费者端版本处理"><a href="#消费者端版本处理" class="headerlink" title="消费者端版本处理"></a>消费者端版本处理</h4><ul>
+<li>消费者可以检查消息中的版本号，并根据版本不同对数据进行不同的处理。例如：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(message.getVersion() ==<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="comment">// 处理版本 1 格式的数据</span></span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(message.</span><br><span class="line"></span><br><span class="line">getVersion() ==<span class="number">2</span>)&#123;</span><br><span class="line">    <span class="comment">// 处理版本 2 格式的数据</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-使用支持模式演变的-Kafka-Connect"><a href="#4-使用支持模式演变的-Kafka-Connect" class="headerlink" title="4. 使用支持模式演变的 Kafka Connect"></a>4. 使用支持模式演变的 Kafka Connect</h3><ul>
+<li>Kafka Connect 是用于在 Kafka 和其他系统之间移动数据的工具。一些连接器支持模式演变。例如，JDBC 连接器可以处理数据库模式的更改，并将这些更改传播到<br>Kafka 主题，同时保持兼容性。</li>
+</ul>
+<h2 id="kafka-Exactly-one-semantics"><a href="#kafka-Exactly-one-semantics" class="headerlink" title="kafka Exactly one semantics"></a>kafka Exactly one semantics</h2><p>Kafka 提供三种消息传递语义，分别是最多一次（At most once）、至少一次（At least once）和精确一次（Exactly once），它们的区别如下：</p>
+<h3 id="最多一次（At-most-once）"><a href="#最多一次（At-most-once）" class="headerlink" title="最多一次（At most once）"></a>最多一次（At most once）</h3><ul>
+<li><strong>生产者</strong>：消息发送后，不管是否成功写入 Kafka 就继续发送下一条消息。如果发送失败，不会重试。比如网络抖动导致消息没发出去，生产者也不会重新发送。</li>
+<li><strong>消费者</strong>：消费消息前先提交偏移量，再处理消息。若处理过程中消费者崩溃，已提交偏移量的消息不会再次处理，可能造成消息丢失。</li>
+<li><strong>应用场景</strong>：适用于对数据丢失容忍度较高，对性能要求较高的场景，如实时日志收集，少量日志丢失不影响整体分析。</li>
+</ul>
+<h3 id="至少一次（At-least-once）"><a href="#至少一次（At-least-once）" class="headerlink" title="至少一次（At least once）"></a>至少一次（At least once）</h3><ul>
+<li><strong>生产者</strong>：消息发送失败会重试，保证消息至少被写入 Kafka 一次。但如果写入成功，而确认响应丢失，生产者重试会导致消息重复写入。</li>
+<li><strong>消费者</strong>：先处理消息，处理完成后再提交偏移量。若处理完消息还未提交偏移量时消费者崩溃，重启后会重新处理之前的消息，导致消息重复消费。</li>
+<li><strong>应用场景</strong>：适用于对数据丢失零容忍，但能接受数据重复的场景，如数据统计分析，重复数据可以通过去重处理。</li>
+</ul>
+<h3 id="精确一次（Exactly-once）"><a href="#精确一次（Exactly-once）" class="headerlink" title="精确一次（Exactly once）"></a>精确一次（Exactly once）</h3><ul>
+<li><strong>生产者</strong>：有幂等生产者和事务性生产者两种机制。幂等生产者借助 PID 和序列号避免同一分区内重复写入；事务性生产者保证跨分区消息发送的原子性，失败可回滚。</li>
+<li><strong>消费者</strong>：结合生产者事务操作与手动提交偏移量，在事务中处理消息并在完成后提交，故障时事务回滚，确保消息不重复不丢失。</li>
+<li><strong>应用场景</strong>：适用于对数据准确性要求极高的场景，如金融交易系统，每笔交易必须精确处理一次。</li>
+</ul>
+<h3 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h3><p>Exactly-once semantics means that each message is written to a Kafka topic and consumed and processed exactly once,<br>ensuring data consistency.</p>
+<h3 id="Challenges"><a href="#Challenges" class="headerlink" title="Challenges"></a>Challenges</h3><ul>
+<li><strong>Producer</strong>: Retries may lead to duplicate message writes due to the failure of receiving acknowledgments.</li>
+<li><strong>Consumer</strong>: Incorrect timing of offset commits may result in duplicate message processing or message loss.</li>
+</ul>
+<h3 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h3><ul>
+<li><strong>Producer</strong><ul>
+<li><strong>Idempotent Producer</strong>: Introduced since Kafka 0.11.0, it avoids duplicate writes by means of the Producer ID (<br>PID) and sequence numbers.</li>
+<li><strong>Transactional Producer</strong>: Ensures the atomicity of message sending across multiple partitions, and in case of<br>failure, the transaction can be rolled back.</li>
+</ul>
+</li>
+<li><strong>Consumer</strong>: Combine the producer’s transaction operations with manual offset commits. Process messages within a<br>transaction and commit the offset after the processing is completed. When a failure occurs, the transaction is rolled<br>back to ensure there are no message-related issues.</li>
+</ul>
+<h1 id="coding"><a href="#coding" class="headerlink" title="coding"></a>coding</h1><ul>
+<li>find kth element in an array</li>
+<li>find the middle node in a linked list</li>
+</ul>
+
+      
+
+
+      
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/noodle/" rel="tag"><i class="fa fa-tag"></i> noodle</a>
+            
+              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+            
+              <a href="/tags/NA/" rel="tag"><i class="fa fa-tag"></i> NA</a>
+            
+          </div>
+        
+
+        
+        
+        
+
+        
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/na_fulltime_java_backend_real_interview_questions/" rel="next" title="QZ interview notes">
+                  <i class="fa fa-chevron-left"></i> 
+                  <p class="post-nav-pre-next-title">
+                    QZ interview notes
+                  </p> 
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/na_kafka_notes/" rel="prev" title="Kafka notes">
+                <p class="post-nav-pre-next-title">
+                    Kafka notes
+                </p> 
+                <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+
+        
+        
+      </footer>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  
+
+  <aside id="sidebar" class="sidebar">
+
+    
+      
+        <div id="sidebar-dimmer"></div>
+      
+    
+
+    <div class="sidebar-inner">
+    
+      <div class="sidebar-toggle-inside motion-element">
+        <div class="sidebar-toggle-line-wrap">
+          <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+          <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+        </div>
+      </div>
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <a href="/" class="site-author-image" rel="start" style="border:none">
+            <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Mike">
+          </a>
+          <p class="site-author-name" itemprop="name">Mike</p>
+           
+              <p class="site-description motion-element" itemprop="description">🚙 🚗 💨 💨 If you want to create a blog like this, just follow my open-source project, "hexo-theme-neo", click the GitHub button below and check it out ^_^ . It is recommended to use Chrome, Safari, or Edge to read this blog since this blog was developed on Edge (Chromium kernel version) and tested on Safari.</p>
+          
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">283</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">105</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+          <div class="site-state-item site-state-about">
+            <a href="/about/">
+              <span class="site-state-item-about fa fa-fw fa-user"></span>
+              <span class="site-state-item-name">about</span>
+            </a>
+          </div>
+          
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/no5ix" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://open.spotify.com/user/313duq77ekebrfyak3xijqewzss4?si=e7653b829a9747bf" target="_blank" title="Spotify">
+                  
+                    <i class="fa fa-fw fa-spotify"></i>
+                  
+                    
+                      Spotify
+                    
+                </a>
+              </span>
+            
+          
+          
+          <!-- 网易云音乐 -->
+            <!-- <div class="netease-cloud-music"> -->
+              <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=110 src="//music.163.com/outchain/player?type=0&id=992743594&auto=0&height=90"></iframe> -->
+            <!-- </div> -->
+          <!-- 网易云音乐 -->
+
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#concepts"><span class="nav-text">concepts</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#In-java-difference-between-controller-and-restcontroller"><span class="nav-text">In java, difference between @controller and @restcontroller</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Function-and-Purpose"><span class="nav-text">1. Function and Purpose</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Return-Value-Handling"><span class="nav-text">2. Return Value Handling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Usage-Scenarios"><span class="nav-text">3. Usage Scenarios</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#in-kafka-how-to-handle-schema-evolution"><span class="nav-text">in kafka, how to handle schema evolution</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Using-Schema-Registry"><span class="nav-text">1. Using Schema Registry</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Avro-with-Confluent-Schema-Registry"><span class="nav-text">Avro with Confluent Schema Registry</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Protobuf-with-Schema-Registry"><span class="nav-text">Protobuf with Schema Registry</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Designing-Flexible-Schemas"><span class="nav-text">2. Designing Flexible Schemas</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Use-Optional-Fields"><span class="nav-text">Use Optional Fields</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Avoid-Breaking-Changes"><span class="nav-text">Avoid Breaking Changes</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Versioning-in-the-Application-Code"><span class="nav-text">3. Versioning in the Application Code</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Producer-Side-Versioning"><span class="nav-text">Producer - Side Versioning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Consumer-Side-Version-Handling"><span class="nav-text">Consumer - Side Version Handling</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Using-Kafka-Connect-with-Schema-Evolution-Support"><span class="nav-text">4. Using Kafka Connect with Schema Evolution Support</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-使用模式注册表"><span class="nav-text">1. 使用模式注册表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#结合-Confluent-模式注册表使用-Avro"><span class="nav-text">结合 Confluent 模式注册表使用 Avro</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结合模式注册表使用-Protocol-Buffers（Protobuf）"><span class="nav-text">结合模式注册表使用 Protocol Buffers（Protobuf）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-设计灵活的模式"><span class="nav-text">2. 设计灵活的模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用可选字段"><span class="nav-text">使用可选字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#避免重大更改"><span class="nav-text">避免重大更改</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-在应用代码中进行版本控制"><span class="nav-text">3. 在应用代码中进行版本控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生产者端版本控制"><span class="nav-text">生产者端版本控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#消费者端版本处理"><span class="nav-text">消费者端版本处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-使用支持模式演变的-Kafka-Connect"><span class="nav-text">4. 使用支持模式演变的 Kafka Connect</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kafka-Exactly-one-semantics"><span class="nav-text">kafka Exactly one semantics</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最多一次（At-most-once）"><span class="nav-text">最多一次（At most once）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#至少一次（At-least-once）"><span class="nav-text">至少一次（At least once）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#精确一次（Exactly-once）"><span class="nav-text">精确一次（Exactly once）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Concept"><span class="nav-text">Concept</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Challenges"><span class="nav-text">Challenges</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solutions"><span class="nav-text">Solutions</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#coding"><span class="nav-text">coding</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mike</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <!--
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      
+        <span id="scrollpercent"><span>0</span>%</span>
+      
+    </div>
+    -->
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/mediumzoom/medium-zoom.js?v=1.1.0"></script>
+
+
+
+
+  
+
+
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+    <script src="/js/src/local-search.js"></script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/lib/wobble_window/wobblewindow.js"> </script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+<script type="text/javascript" src="/js/src/headroom.js"></script> 
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/code-highlight-modification.js"></script>
